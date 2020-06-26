@@ -50,8 +50,9 @@ public class MelanieScript : MonoBehaviour
         GameObject room = new GameObject("Rooms", typeof(MeshFilter), typeof(MeshRenderer));
         Renderer rend = room.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Specular"));
-        rend.material.color = Color.blue;
         meshRoom = room.GetComponent<MeshFilter>().mesh;
+        Texture texture = Resources.Load("Textures") as Texture;
+        rend.material.mainTexture = texture;
 
         meshRoom.Clear();
 
@@ -94,12 +95,12 @@ public class MelanieScript : MonoBehaviour
         roomVertices.Add(new Vector3(40, 0, 50));
         roomVertices.Add(new Vector3(40, height, 50));
         roomVertices.Add(new Vector3(-10, height, 50));
-        // Vorderseite
+        // Rückseite
         roomVertices.Add(new Vector3(40, 0, 0));
         roomVertices.Add(new Vector3(40, 0, 50));
         roomVertices.Add(new Vector3(40, height, 50));
         roomVertices.Add(new Vector3(40, height, 0));
-        // Rückseite
+        // Vorderseite
         roomVertices.Add(new Vector3(39.5f, 0, 0));
         roomVertices.Add(new Vector3(39.5f, 0, 50));
         roomVertices.Add(new Vector3(39.5f, height, 50));
@@ -151,14 +152,14 @@ public class MelanieScript : MonoBehaviour
         roomTriangles.Add(20);
         roomTriangles.Add(22);
         roomTriangles.Add(23);
-        // Vorderseite -> 24 bis 27
+        // Rückseite -> 24 bis 27
         roomTriangles.Add(24);
         roomTriangles.Add(26);
         roomTriangles.Add(25);
         roomTriangles.Add(24);
         roomTriangles.Add(27);
         roomTriangles.Add(26);
-        // Rückseite -> 28 bis 31
+        // Vorderseite -> 28 bis 31
         roomTriangles.Add(28);
         roomTriangles.Add(29);
         roomTriangles.Add(30);
@@ -167,6 +168,49 @@ public class MelanieScript : MonoBehaviour
         roomTriangles.Add(31);
 
         meshRoom.triangles = roomTriangles.ToArray();
+
+        // Vorderseite
+        roomUvs.Add(new Vector2(0.25f, 0));
+        roomUvs.Add(new Vector2(0, 0));
+        roomUvs.Add(new Vector2(0, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        // Rückseite
+        roomUvs.Add(new Vector2(0.25f, 0));
+        roomUvs.Add(new Vector2(0, 0));
+        roomUvs.Add(new Vector2(0, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        // Vorderseite
+        roomUvs.Add(new Vector2(0.25f, 0));
+        roomUvs.Add(new Vector2(0, 0));
+        roomUvs.Add(new Vector2(0, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        // Rückseite
+        roomUvs.Add(new Vector2(0.25f, 0));
+        roomUvs.Add(new Vector2(0, 0));
+        roomUvs.Add(new Vector2(0, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        // Vorderseite
+        roomUvs.Add(new Vector2(0.25f, 0));
+        roomUvs.Add(new Vector2(0, 0));
+        roomUvs.Add(new Vector2(0, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        // Rückseite
+        roomUvs.Add(new Vector2(0.5f, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.5f));
+        roomUvs.Add(new Vector2(0.5f, 0.5f));
+        // Rückseite
+        roomUvs.Add(new Vector2(1, 0.75f));
+        roomUvs.Add(new Vector2(0.75f, 0.75f));
+        roomUvs.Add(new Vector2(0.75f, 1));
+        roomUvs.Add(new Vector2(1, 1));
+        // Vorderseite
+        roomUvs.Add(new Vector2(0.25f, 0));
+        roomUvs.Add(new Vector2(0, 0));
+        roomUvs.Add(new Vector2(0, 0.25f));
+        roomUvs.Add(new Vector2(0.25f, 0.25f));
+        
+        meshRoom.uv = roomUvs.ToArray();
 
         // berechnet Normalen automatisch
         meshRoom.RecalculateNormals();
