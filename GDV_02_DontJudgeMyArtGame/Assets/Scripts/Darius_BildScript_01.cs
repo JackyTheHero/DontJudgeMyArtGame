@@ -7,7 +7,7 @@ public class Darius_BildScript_01 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        createBild(0f, 0f);  
+        createBild(0f, 0f, 6, 5);  
         
     }
 
@@ -17,7 +17,7 @@ public class Darius_BildScript_01 : MonoBehaviour
         
     }
 
-    void createBild(float posX, float posZ){
+    void createBild(float posX, float posZ, int sizeX, int sizeY){
 
         //GameObject erzeugen
         GameObject bild = new GameObject();
@@ -29,7 +29,7 @@ public class Darius_BildScript_01 : MonoBehaviour
         Mesh bildflaeche = bild.GetComponent<MeshFilter>().mesh;
         
         //Arrays für Bildfläche
-        bildflaeche.vertices = new Vector3[] {new Vector3(0 + posX, 2, 0 + posZ), new Vector3(3 + posX, 2, 0 + posZ), new Vector3(3+ posX, 4, 0 + posZ), new Vector3(0 + posX, 4, 0 + posZ)};
+        bildflaeche.vertices = new Vector3[] {new Vector3(0 + posX, 2, 0 + posZ), new Vector3(sizeX + posX, 2, 0 + posZ), new Vector3(sizeX + posX, sizeY, 0 + posZ), new Vector3(0 + posX, sizeY, 0 + posZ)};
         bildflaeche.triangles = new int[] {3, 2, 1, 3, 1, 0};
 
         //Berechne uvs
