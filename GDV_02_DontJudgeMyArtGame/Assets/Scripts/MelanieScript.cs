@@ -62,7 +62,12 @@ public class MelanieScript : MonoBehaviour
         groundVertices.Add(new Vector3(-70, 0, 0));
         groundVertices.Add(new Vector3(-10 - wallThickness, 0, 0));
         groundVertices.Add(new Vector3(-70, 0, 80));
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 80));    
+        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 80));
+        // Raum 5 -> dunkelgrüner Raum
+        groundVertices.Add(new Vector3(42 + wallThickness, 0, -70 - wallThickness));
+        groundVertices.Add(new Vector3(-30 - wallThickness, 0, 0));
+        groundVertices.Add(new Vector3(-30 - wallThickness, 0, -70 - wallThickness));
+        groundVertices.Add(new Vector3(42 + wallThickness, 0, 0));    
 
         meshGround.vertices = groundVertices.ToArray();
 
@@ -94,6 +99,13 @@ public class MelanieScript : MonoBehaviour
         groundTriangles.Add(15);
         groundTriangles.Add(13);
         groundTriangles.Add(14);
+        // Raum 5 -> 16 bis 19
+        groundTriangles.Add(17);
+        groundTriangles.Add(16);
+        groundTriangles.Add(18);
+        groundTriangles.Add(19);
+        groundTriangles.Add(16);
+        groundTriangles.Add(17);
 
         meshGround.triangles = groundTriangles.ToArray();
 
@@ -114,6 +126,11 @@ public class MelanieScript : MonoBehaviour
         groundUvs.Add(new Vector2(1, 1));
         groundUvs.Add(new Vector2(1, 0));
         // Raum 4
+        groundUvs.Add(new Vector2(0, 1));
+        groundUvs.Add(new Vector2(0, 0));
+        groundUvs.Add(new Vector2(1, 1));
+        groundUvs.Add(new Vector2(1, 0));
+        // Raum 5
         groundUvs.Add(new Vector2(0, 1));
         groundUvs.Add(new Vector2(0, 0));
         groundUvs.Add(new Vector2(1, 1));
@@ -147,16 +164,21 @@ public class MelanieScript : MonoBehaviour
         List<Vector3> room1Normals = new List<Vector3>();
         List<Vector2> room1Uvs = new List<Vector2>();
 
-        // Rückseite
-        room1Vertices.Add(new Vector3(-12, 0, 0));
-        room1Vertices.Add(new Vector3(42, 0, 0));
-        room1Vertices.Add(new Vector3(42, height, 0));
-        room1Vertices.Add(new Vector3(-12, height, 0));
-        // Vorderseite
-        room1Vertices.Add(new Vector3(-12, 0, wallThickness));
-        room1Vertices.Add(new Vector3(42, 0, wallThickness));
+        // Wand über Türrahmen -> Eingang zu dunkelgrüner Wand
+        room1Vertices.Add(new Vector3(-12, height / doorwayFactor, wallThickness));
+        room1Vertices.Add(new Vector3(42, height / doorwayFactor, wallThickness));
         room1Vertices.Add(new Vector3(42, height, wallThickness));
         room1Vertices.Add(new Vector3(-12, height, wallThickness));
+        // Wand unter Türrahmen -> links
+        room1Vertices.Add(new Vector3(-12, 0, wallThickness));
+        room1Vertices.Add(new Vector3(5, 0, wallThickness));
+        room1Vertices.Add(new Vector3(5, height / doorwayFactor, wallThickness));
+        room1Vertices.Add(new Vector3(-12, height / doorwayFactor, wallThickness));
+        // Wand unter Türrahmen -> rechts
+        room1Vertices.Add(new Vector3(5 + doorwayThickness, 0, wallThickness));
+        room1Vertices.Add(new Vector3(42, 0, wallThickness));
+        room1Vertices.Add(new Vector3(42  , height / doorwayFactor, wallThickness));
+        room1Vertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, wallThickness));
         // Wand über Türrahmen -> Eingang zu dunkelblauer Wand
         room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 0 + wallThickness));
         room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 50));
@@ -212,99 +234,111 @@ public class MelanieScript : MonoBehaviour
 
         meshRoom1.vertices = room1Vertices.ToArray();
 
-        // Rückseite -> 0 bis 3
+        // Wand über Türrahmen -> 0 bis 3
         room1Triangles.Add(0);
-        room1Triangles.Add(2);
         room1Triangles.Add(1);
-        room1Triangles.Add(0);
-        room1Triangles.Add(3);
         room1Triangles.Add(2);
-        // Vorderseite -> 4 bis 7
+        room1Triangles.Add(0);
+        room1Triangles.Add(2);
+        room1Triangles.Add(3);
+        // Wand unter Türrahmen -> rechts -> 4 bis 7
+        room1Triangles.Add(6);
         room1Triangles.Add(4);
         room1Triangles.Add(5);
-        room1Triangles.Add(6);
         room1Triangles.Add(4);
         room1Triangles.Add(6);
         room1Triangles.Add(7);
-        // Wand über Türrahmen -> 8 bis 11
-        room1Triangles.Add(8);
+        // Wand unter Türrahmen -> links -> 8 bis 11
         room1Triangles.Add(10);
+        room1Triangles.Add(8);
         room1Triangles.Add(9);
         room1Triangles.Add(8);
-        room1Triangles.Add(11);
         room1Triangles.Add(10);
-        // Wand unter Türrahmen -> rechts -> 12 bis 15
+        room1Triangles.Add(11);
+        // Wand über Türrahmen -> 12 bis 15
         room1Triangles.Add(12);
         room1Triangles.Add(14);
         room1Triangles.Add(13);
         room1Triangles.Add(12);
         room1Triangles.Add(15);
         room1Triangles.Add(14);
-        // Wand unter Türrahmen -> links -> 16 bis 19
+        // Wand unter Türrahmen -> rechts -> 16 bis 19
         room1Triangles.Add(16);
         room1Triangles.Add(18);
         room1Triangles.Add(17);
         room1Triangles.Add(16);
         room1Triangles.Add(19);
         room1Triangles.Add(18);
-        // Wand über Türrahmen -> 12 bis 15
-        room1Triangles.Add(12 + 8);
-        room1Triangles.Add(14 + 8);
-        room1Triangles.Add(13 + 8);
-        room1Triangles.Add(12 + 8);
-        room1Triangles.Add(15 + 8);
-        room1Triangles.Add(14 + 8);
-        // Wand unter Türrahmen -> links -> 16 bis 19
-        room1Triangles.Add(16 + 8);
-        room1Triangles.Add(18 + 8);
-        room1Triangles.Add(17 + 8);
-        room1Triangles.Add(16 + 8);
-        room1Triangles.Add(19 + 8);
-        room1Triangles.Add(18 + 8);
-        // Wand unter Türrahmen -> rechts -> 20 bis 23
-        room1Triangles.Add(20 + 8);
-        room1Triangles.Add(22 + 8);
-        room1Triangles.Add(21 + 8);
-        room1Triangles.Add(20 + 8);
-        room1Triangles.Add(23 + 8);
-        room1Triangles.Add(22 + 8);
+        // Wand unter Türrahmen -> links -> 20 bis 23
+        room1Triangles.Add(20);
+        room1Triangles.Add(22);
+        room1Triangles.Add(21);
+        room1Triangles.Add(20);
+        room1Triangles.Add(23);
+        room1Triangles.Add(22);
         // Wand über Türrahmen -> 24 bis 27
-        room1Triangles.Add(24 + 8);
-        room1Triangles.Add(25 + 8);
-        room1Triangles.Add(26 + 8);
-        room1Triangles.Add(24 + 8);
-        room1Triangles.Add(26 + 8);
-        room1Triangles.Add(27 + 8);
-        // Wand unter Türrahmen -> rechts -> 28 bis 31
-        room1Triangles.Add(28 + 8);
-        room1Triangles.Add(29 + 8);
-        room1Triangles.Add(30 + 8);
-        room1Triangles.Add(28 + 8);
-        room1Triangles.Add(30 + 8);
-        room1Triangles.Add(31 + 8);
-        // Wand unter Türrahmen -> links -> 32 bis 35
-        room1Triangles.Add(32 + 8);
-        room1Triangles.Add(33 + 8);
-        room1Triangles.Add(34 + 8);
-        room1Triangles.Add(32 + 8);
-        room1Triangles.Add(34 + 8);
-        room1Triangles.Add(35 + 8);        
-        /*// Decke -> 36 bis 39
-        room1Triangles.Add(36 + 8);
-        room1Triangles.Add(37 + 8);
-        room1Triangles.Add(38 + 8);
-        room1Triangles.Add(36 + 8);
-        room1Triangles.Add(38 + 8);
-        room1Triangles.Add(39 + 8);*/
+        room1Triangles.Add(25);
+        room1Triangles.Add(24);
+        room1Triangles.Add(26);
+        room1Triangles.Add(24);
+        room1Triangles.Add(27);
+        room1Triangles.Add(26);
+        // Wand unter Türrahmen -> links -> 28 bis 31
+        room1Triangles.Add(30);
+        room1Triangles.Add(29);
+        room1Triangles.Add(28);
+        room1Triangles.Add(28);
+        room1Triangles.Add(31);
+        room1Triangles.Add(30);
+        // Wand unter Türrahmen -> rechts -> 32 bis 35
+        room1Triangles.Add(34);
+        room1Triangles.Add(33);
+        room1Triangles.Add(32);
+        room1Triangles.Add(32);
+        room1Triangles.Add(35);
+        room1Triangles.Add(34);
+        // Wand über Türrahmen -> 36 bis 39
+        room1Triangles.Add(36);
+        room1Triangles.Add(37);
+        room1Triangles.Add(38);
+        room1Triangles.Add(36);
+        room1Triangles.Add(38);
+        room1Triangles.Add(39);
+        // Wand unter Türrahmen -> rechts -> 40 bis 43
+        room1Triangles.Add(40);
+        room1Triangles.Add(41);
+        room1Triangles.Add(42);
+        room1Triangles.Add(40);
+        room1Triangles.Add(42);
+        room1Triangles.Add(43);
+        // Wand unter Türrahmen -> links -> 44 bis 47
+        room1Triangles.Add(44);
+        room1Triangles.Add(45);
+        room1Triangles.Add(46);
+        room1Triangles.Add(44);
+        room1Triangles.Add(46);
+        room1Triangles.Add(47);        
+        /*// Decke -> 48 bis 51
+        room1Triangles.Add(48);
+        room1Triangles.Add(49);
+        room1Triangles.Add(50);
+        room1Triangles.Add(48);
+        room1Triangles.Add(50);
+        room1Triangles.Add(51);*/
 
         meshRoom1.triangles = room1Triangles.ToArray();
 
-        // Rückseite
+        // Wand über Türrahmen
         room1Uvs.Add(new Vector2(1, 0));
         room1Uvs.Add(new Vector2(0, 0));
         room1Uvs.Add(new Vector2(0, 1));
         room1Uvs.Add(new Vector2(1, 1));
-        // Vorderseite
+        // Wand unter Türrahmen -> rechts
+        room1Uvs.Add(new Vector2(1, 0));
+        room1Uvs.Add(new Vector2(0, 0));
+        room1Uvs.Add(new Vector2(0, 1));
+        room1Uvs.Add(new Vector2(1, 1));
+        // Wand unter Türrahmen -> links
         room1Uvs.Add(new Vector2(1, 0));
         room1Uvs.Add(new Vector2(0, 0));
         room1Uvs.Add(new Vector2(0, 1));
@@ -773,6 +807,140 @@ public class MelanieScript : MonoBehaviour
         Rigidbody room4Body = room4.AddComponent<Rigidbody>();
         room4Body.isKinematic = true;
         meshRoom4 = room4Collider.sharedMesh;
+
+        // Room 5
+        Mesh meshRoom5 = new Mesh();
+        GameObject room5 = new GameObject("Room 5", typeof(MeshFilter), typeof(MeshRenderer));
+        Renderer rend5 = room5.GetComponent<Renderer>();
+        rend5.material = new Material(Shader.Find("Specular"));
+        meshRoom5 = room5.GetComponent<MeshFilter>().mesh;
+        Texture texture5 = Resources.Load("TextureDarkGreen") as Texture;
+        rend5.material.mainTexture = texture5;
+
+        meshRoom5.Clear();
+
+        List<Vector3> room5Vertices = new List<Vector3>();
+        List<int> room5Triangles = new List<int>();
+        List<Vector3> room5Normals = new List<Vector3>();
+        List<Vector2> room5Uvs = new List<Vector2>();
+
+        // Wand über Türrahmen
+        room5Vertices.Add(new Vector3(-30, height / doorwayFactor, 0));
+        room5Vertices.Add(new Vector3(42, height / doorwayFactor, 0));
+        room5Vertices.Add(new Vector3(42, height, 0));
+        room5Vertices.Add(new Vector3(-30, height, 0));
+        // Wand unter Türrahmen -> links
+        room5Vertices.Add(new Vector3(-30, 0, 0));
+        room5Vertices.Add(new Vector3(5, 0, 0));
+        room5Vertices.Add(new Vector3(5, height / doorwayFactor, 0));
+        room5Vertices.Add(new Vector3(-30, height / doorwayFactor, 0));
+        // Wand unter Türrahmen -> rechts
+        room5Vertices.Add(new Vector3(5 + doorwayThickness, 0, 0));
+        room5Vertices.Add(new Vector3(42, 0, 0));
+        room5Vertices.Add(new Vector3(42  , height / doorwayFactor, 0));
+        room5Vertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, 0));
+        // Vorderseite
+        room5Vertices.Add(new Vector3(-30 + wallThickness, 0, 0));
+        room5Vertices.Add(new Vector3(-30 + wallThickness, 0, -70));
+        room5Vertices.Add(new Vector3(-30 + wallThickness, height, 0));
+        room5Vertices.Add(new Vector3(-30 + wallThickness, height, -70));
+        // Vorderseite
+        room5Vertices.Add(new Vector3(-30, 0, -70 + wallThickness));
+        room5Vertices.Add(new Vector3(42, 0, -70 + wallThickness));
+        room5Vertices.Add(new Vector3(42, height, -70 + wallThickness));
+        room5Vertices.Add(new Vector3(-30, height, -70 + wallThickness));
+        // Vorderseite
+        room5Vertices.Add(new Vector3(42 - wallThickness, 0, 0 + wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, 0, -70 - wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, height, 0 + wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, height, -70 - wallThickness));
+
+        meshRoom5.vertices = room5Vertices.ToArray();
+        
+        // Wand über Türrahmen -> 0 bis 3
+        room5Triangles.Add(0);
+        room5Triangles.Add(2);
+        room5Triangles.Add(1);
+        room5Triangles.Add(0);
+        room5Triangles.Add(3);
+        room5Triangles.Add(2);
+        // Wand unter Türrahmen -> links -> 4 bis 7
+        room5Triangles.Add(4);
+        room5Triangles.Add(6);
+        room5Triangles.Add(5);
+        room5Triangles.Add(4);
+        room5Triangles.Add(7);
+        room5Triangles.Add(6);
+        // Wand unter Türrahmen -> rechts -> 8 bis 11
+        room5Triangles.Add(8);
+        room5Triangles.Add(10);
+        room5Triangles.Add(9);
+        room5Triangles.Add(8);
+        room5Triangles.Add(11);
+        room5Triangles.Add(10);
+        // Vorderseite -> 12 bis 15
+        room5Triangles.Add(12);
+        room5Triangles.Add(13);
+        room5Triangles.Add(14);
+        room5Triangles.Add(13);
+        room5Triangles.Add(15);
+        room5Triangles.Add(14);
+        // Vorderseite -> 16 bis 19
+        room5Triangles.Add(16);
+        room5Triangles.Add(17);
+        room5Triangles.Add(18);
+        room5Triangles.Add(16);
+        room5Triangles.Add(18);
+        room5Triangles.Add(19);
+        // Vorderseite -> 20 bis 23
+        room5Triangles.Add(21);
+        room5Triangles.Add(20);
+        room5Triangles.Add(22);
+        room5Triangles.Add(21);
+        room5Triangles.Add(22);
+        room5Triangles.Add(23);
+
+        meshRoom5.triangles = room5Triangles.ToArray();
+
+        // Wand über Türrahmen
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(0, 1));
+        room5Uvs.Add(new Vector2(1, 1));
+        // Wand unter Türrahmen -> links
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(0, 1));
+        room5Uvs.Add(new Vector2(1, 1));
+        // Wand unter Türrahmen -> rechts
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(0, 1));
+        room5Uvs.Add(new Vector2(1, 1));
+        // Vorderseite
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(0, 1));
+        room5Uvs.Add(new Vector2(1, 1));
+        // Vorderseite
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(0, 1));
+        room5Uvs.Add(new Vector2(1, 1));
+        // Vorderseite
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(0, 1));
+        room5Uvs.Add(new Vector2(1, 1));
+
+        meshRoom5.uv = room5Uvs.ToArray();
+
+        meshRoom5.RecalculateNormals();
+
+        MeshCollider room5Collider = room5.AddComponent<MeshCollider>();
+        Rigidbody room5Body = room5.AddComponent<Rigidbody>();
+        room5Body.isKinematic = true;
+        meshRoom5 = room5Collider.sharedMesh;
     }
 
     private void CreateDoorways() {
@@ -841,6 +1009,23 @@ public class MelanieScript : MonoBehaviour
         doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor,  20 + doorwayThickness));
         doorwayVertices.Add(new Vector3(-12, 0,  20 + doorwayThickness));
         doorwayVertices.Add(new Vector3(-12, height / doorwayFactor,  20 + doorwayThickness));
+
+        // Eingang grün zu dunkelgrün
+        // oben
+        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, 0 + wallThickness));
+        doorwayVertices.Add(new Vector3(5, height / doorwayFactor, 0 + wallThickness));
+        doorwayVertices.Add(new Vector3(5, height / doorwayFactor, 0));
+        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, 0));
+        // links
+        doorwayVertices.Add(new Vector3(5, 0,  0 + wallThickness));
+        doorwayVertices.Add(new Vector3(5, height / doorwayFactor,  0 + wallThickness));
+        doorwayVertices.Add(new Vector3(5, 0,  0));
+        doorwayVertices.Add(new Vector3(5, height / doorwayFactor,  0));
+        // rechts
+        doorwayVertices.Add(new Vector3(5 + doorwayThickness, 0,  0 + wallThickness));
+        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor,  0 + wallThickness));
+        doorwayVertices.Add(new Vector3(5 + doorwayThickness, 0,  0));
+        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor,  0));
 
         meshDoorway.vertices = doorwayVertices.ToArray();
 
@@ -913,6 +1098,29 @@ public class MelanieScript : MonoBehaviour
         doorwayTriangles.Add(34);
         doorwayTriangles.Add(35);
 
+        // Eingang grün zu dunkelgrün
+        // oben -> 36 bis 39
+        doorwayTriangles.Add(38);
+        doorwayTriangles.Add(36);
+        doorwayTriangles.Add(37);
+        doorwayTriangles.Add(36);
+        doorwayTriangles.Add(38);
+        doorwayTriangles.Add(39);
+        // links -> 40 bis 43
+        doorwayTriangles.Add(41);
+        doorwayTriangles.Add(40);
+        doorwayTriangles.Add(42);
+        doorwayTriangles.Add(41);
+        doorwayTriangles.Add(42);
+        doorwayTriangles.Add(43);
+        // rechts -> 44 bis 47
+        doorwayTriangles.Add(44);
+        doorwayTriangles.Add(45);
+        doorwayTriangles.Add(46);
+        doorwayTriangles.Add(45);
+        doorwayTriangles.Add(47);
+        doorwayTriangles.Add(46);
+
         meshDoorway.triangles = doorwayTriangles.ToArray();
 
         // Eingang grün zu lila
@@ -949,6 +1157,23 @@ public class MelanieScript : MonoBehaviour
         doorwayUvs.Add(new Vector2(0, 1));
         doorwayUvs.Add(new Vector2(1, 1));
         // Eingang grün zu dunkelblau
+        // oben
+        doorwayUvs.Add(new Vector2(1, 0));
+        doorwayUvs.Add(new Vector2(0, 0));
+        doorwayUvs.Add(new Vector2(0, 1));
+        doorwayUvs.Add(new Vector2(1, 1));
+        // links
+        doorwayUvs.Add(new Vector2(1, 0));
+        doorwayUvs.Add(new Vector2(0, 0));
+        doorwayUvs.Add(new Vector2(0, 1));
+        doorwayUvs.Add(new Vector2(1, 1));
+        // rechts
+        doorwayUvs.Add(new Vector2(1, 0));
+        doorwayUvs.Add(new Vector2(0, 0));
+        doorwayUvs.Add(new Vector2(0, 1));
+        doorwayUvs.Add(new Vector2(1, 1));
+
+        // Eingang grün zu dunkelgrün
         // oben
         doorwayUvs.Add(new Vector2(1, 0));
         doorwayUvs.Add(new Vector2(0, 0));
