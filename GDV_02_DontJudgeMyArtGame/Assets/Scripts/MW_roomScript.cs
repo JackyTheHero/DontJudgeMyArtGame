@@ -12,13 +12,22 @@ public class MW_roomScript : MonoBehaviour
     // Wie lang und breit sind die Durchgänge
     float doorwayThickness = 8.0f;
 
+    GameObject building;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Empty, an das alle Bestandteile des Raumaufbaus gehängt werden
+        building = new GameObject();
+        // Empty liegt auf Startposition des Spielers
+        building.transform.Translate(-82, 0, 41);
+        building.name = "Building";
+
         CreateGround();
         CreateFrontDoor();
         CreateRooms();
         CreateDoorways();
+
     }
 
     // Update is called once per frame
@@ -30,9 +39,10 @@ public class MW_roomScript : MonoBehaviour
     private void CreateGround() {
         Mesh meshGround = new Mesh();
         GameObject ground = new GameObject("Ground", typeof(MeshFilter), typeof(MeshRenderer));
+        ground.transform.parent = building.transform;
 
         Renderer rend = ground.GetComponent<Renderer>();
-        rend.material = new Material(Shader.Find("Specular"));
+        rend.material = new Material(Shader.Find("Standard"));
         Texture texture = Resources.Load("TextureLight") as Texture;
         rend.material.mainTexture = texture;
 
@@ -214,14 +224,17 @@ public class MW_roomScript : MonoBehaviour
         // MeshCollider erst hinzufügen, nachdem Mesh kreiert wurde, ansonsten macht der Collider gar nichts, da kein Mesh zugewiesen wird
         MeshCollider groundCollider = ground.AddComponent<MeshCollider>();
         meshGround = groundCollider.sharedMesh;
+
     }
 
     private void CreateRooms() {
         // Room 1
         Mesh meshRoom1 = new Mesh();
         GameObject room1 = new GameObject("Room 1", typeof(MeshFilter), typeof(MeshRenderer));
+        room1.transform.parent = building.transform;
+
         Renderer rend1 = room1.GetComponent<Renderer>();
-        rend1.material = new Material(Shader.Find("Specular"));
+        rend1.material = new Material(Shader.Find("Standard"));
         meshRoom1 = room1.GetComponent<MeshFilter>().mesh;
         Texture texture1 = Resources.Load("TextureGreen") as Texture;
         rend1.material.mainTexture = texture1;
@@ -478,8 +491,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 2
         Mesh meshRoom2 = new Mesh();
         GameObject room2 = new GameObject("Room 2", typeof(MeshFilter), typeof(MeshRenderer));
+        room2.transform.parent = building.transform;
+
         Renderer rend2 = room2.GetComponent<Renderer>();
-        rend2.material = new Material(Shader.Find("Specular"));
+        rend2.material = new Material(Shader.Find("Standard"));
         meshRoom2 = room2.GetComponent<MeshFilter>().mesh;
         Texture texture2 = Resources.Load("TexturePurple") as Texture;
         rend2.material.mainTexture = texture2;
@@ -680,8 +695,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 3
         Mesh meshRoom3 = new Mesh();
         GameObject room3 = new GameObject("Room 3", typeof(MeshFilter), typeof(MeshRenderer));
+        room3.transform.parent = building.transform;
+
         Renderer rend3 = room3.GetComponent<Renderer>();
-        rend3.material = new Material(Shader.Find("Specular"));
+        rend3.material = new Material(Shader.Find("Standard"));
         meshRoom3 = room3.GetComponent<MeshFilter>().mesh;
         Texture texture3 = Resources.Load("TextureBlue") as Texture;
         rend3.material.mainTexture = texture3;
@@ -709,20 +726,20 @@ public class MW_roomScript : MonoBehaviour
         room3Vertices.Add(new Vector3(42, height / doorwayFactor, 50));
         room3Vertices.Add(new Vector3(42, height / doorwayFactor, 20 + doorwayThickness));
         // Wand über Türrahmen
-        room3Vertices.Add(new Vector3(42, height / doorwayFactor, 50));
-        room3Vertices.Add(new Vector3(110 + wallThickness, height / doorwayFactor, 50));
-        room3Vertices.Add(new Vector3(42, height, 50));
-        room3Vertices.Add(new Vector3(110 + wallThickness, height, 50));
+        room3Vertices.Add(new Vector3(42, height / doorwayFactor, 48));
+        room3Vertices.Add(new Vector3(110 + wallThickness, height / doorwayFactor, 48));
+        room3Vertices.Add(new Vector3(42, height, 48));
+        room3Vertices.Add(new Vector3(110 + wallThickness, height, 48));
         // Wand unter Türrahmen -> rechts
-        room3Vertices.Add(new Vector3(95, 0, 50));
-        room3Vertices.Add(new Vector3(110 + wallThickness, 0, 50));
-        room3Vertices.Add(new Vector3(95, height / doorwayFactor, 50));
-        room3Vertices.Add(new Vector3(110 + wallThickness, height / doorwayFactor, 50));
+        room3Vertices.Add(new Vector3(95, 0, 48));
+        room3Vertices.Add(new Vector3(110 + wallThickness, 0, 48));
+        room3Vertices.Add(new Vector3(95, height / doorwayFactor, 48));
+        room3Vertices.Add(new Vector3(110 + wallThickness, height / doorwayFactor, 48));
         // Wand unter Türrahmen -> links
-        room3Vertices.Add(new Vector3(42, 0, 50));
-        room3Vertices.Add(new Vector3(95 - doorwayThickness, 0, 50));
-        room3Vertices.Add(new Vector3(42, height / doorwayFactor, 50));
-        room3Vertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 50));
+        room3Vertices.Add(new Vector3(42, 0, 48));
+        room3Vertices.Add(new Vector3(95 - doorwayThickness, 0, 48));
+        room3Vertices.Add(new Vector3(42, height / doorwayFactor, 48));
+        room3Vertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 48));
         // Wand über Türrahmen
         room3Vertices.Add(new Vector3(42, height / doorwayFactor, 0 + wallThickness));
         room3Vertices.Add(new Vector3(110 + wallThickness, height / doorwayFactor, 0 + wallThickness));
@@ -882,8 +899,10 @@ public class MW_roomScript : MonoBehaviour
         // Raum 4
         Mesh meshRoom4 = new Mesh();
         GameObject room4 = new GameObject("Room 4", typeof(MeshFilter), typeof(MeshRenderer));
+        room4.transform.parent = building.transform;
+
         Renderer rend4 = room4.GetComponent<Renderer>();
-        rend4.material = new Material(Shader.Find("Specular"));
+        rend4.material = new Material(Shader.Find("Standard"));
         meshRoom4 = room4.GetComponent<MeshFilter>().mesh;
         Texture texture4 = Resources.Load("TextureDarkBlue") as Texture;
         rend4.material.mainTexture = texture4;
@@ -946,10 +965,10 @@ public class MW_roomScript : MonoBehaviour
         room4Vertices.Add(new Vector3(-70 + wallThickness, height, 56));
         room4Vertices.Add(new Vector3(-95 + wallThickness, height, 56));
         // Wand über Eingangstür -> Tür 2 Einheiten höher als "normale" Durchgänge
-        room4Vertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + 2, 26));
-        room4Vertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + 2, 56));
-        room4Vertices.Add(new Vector3(-95 + wallThickness, height, 26));
-        room4Vertices.Add(new Vector3(-95 + wallThickness, height, 56));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + 2, 34));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + 2, 34 + doorwayThickness + 6));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height, 34));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height, 34 + doorwayThickness + 6));
         // Wand unter Eingangstür -> rechts
         room4Vertices.Add(new Vector3(-95 + wallThickness, 0, 26));
         room4Vertices.Add(new Vector3(-95 + wallThickness, 0, 34));
@@ -1144,18 +1163,23 @@ public class MW_roomScript : MonoBehaviour
         room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
         // Wand über Eingangstür
-        room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 0));
+        room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
+        /*// Wand über Eingangstür -> Tür 2 Einheiten höher als "normale" Durchgänge
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + 2, 26));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + 2, 56));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height, 26));
+        room4Vertices.Add(new Vector3(-95 + wallThickness, height, 56));*/
         // Wand unter Eingangstür -> links
-        room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 0));
+        room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
         // Wand unter Eingangstür -> rechts
-        room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 0));
+        room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
         // Wand über Türrahmen
@@ -1186,8 +1210,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 5
         Mesh meshRoom5 = new Mesh();
         GameObject room5 = new GameObject("Room 5", typeof(MeshFilter), typeof(MeshRenderer));
+        room5.transform.parent = building.transform;
+
         Renderer rend5 = room5.GetComponent<Renderer>();
-        rend5.material = new Material(Shader.Find("Specular"));
+        rend5.material = new Material(Shader.Find("Standard"));
         meshRoom5 = room5.GetComponent<MeshFilter>().mesh;
         Texture texture5 = Resources.Load("TextureDarkGreen") as Texture;
         rend5.material.mainTexture = texture5;
@@ -1388,8 +1414,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 6
         Mesh meshRoom6 = new Mesh();
         GameObject room6 = new GameObject("Room 6", typeof(MeshFilter), typeof(MeshRenderer));
+        room6.transform.parent = building.transform;
+
         Renderer rend6 = room6.GetComponent<Renderer>();
-        rend6.material = new Material(Shader.Find("Specular"));
+        rend6.material = new Material(Shader.Find("Standard"));
         meshRoom6 = room6.GetComponent<MeshFilter>().mesh;
         Texture texture6 = Resources.Load("TexturePurple") as Texture;
         rend6.material.mainTexture = texture6;
@@ -1556,8 +1584,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 7
         Mesh meshRoom7 = new Mesh();
         GameObject room7 = new GameObject("Room 7", typeof(MeshFilter), typeof(MeshRenderer));
+        room7.transform.parent = building.transform;
+
         Renderer rend7 = room7.GetComponent<Renderer>();
-        rend7.material = new Material(Shader.Find("Specular"));
+        rend7.material = new Material(Shader.Find("Standard"));
         meshRoom7 = room7.GetComponent<MeshFilter>().mesh;
         Texture texture7 = Resources.Load("TextureGreen") as Texture;
         rend7.material.mainTexture = texture7;
@@ -1724,8 +1754,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 8
         Mesh meshRoom8 = new Mesh();
         GameObject room8 = new GameObject("Room 8", typeof(MeshFilter), typeof(MeshRenderer));
+        room8.transform.parent = building.transform;
+
         Renderer rend8 = room8.GetComponent<Renderer>();
-        rend8.material = new Material(Shader.Find("Specular"));
+        rend8.material = new Material(Shader.Find("Standard"));
         meshRoom8 = room8.GetComponent<MeshFilter>().mesh;
         Texture texture8 = Resources.Load("TextureDarkGreen") as Texture;
         rend8.material.mainTexture = texture8;
@@ -1892,8 +1924,10 @@ public class MW_roomScript : MonoBehaviour
         // Room 9
         Mesh meshRoom9 = new Mesh();
         GameObject room9 = new GameObject("Room 9", typeof(MeshFilter), typeof(MeshRenderer));
+        room9.transform.parent = building.transform;
+
         Renderer rend9 = room9.GetComponent<Renderer>();
-        rend9.material = new Material(Shader.Find("Specular"));
+        rend9.material = new Material(Shader.Find("Standard"));
         meshRoom9 = room9.GetComponent<MeshFilter>().mesh;
         Texture texture9 = Resources.Load("TextureDarkBlue") as Texture;
         rend9.material.mainTexture = texture9;
@@ -2061,8 +2095,10 @@ public class MW_roomScript : MonoBehaviour
     private void CreateDoorways() {
         Mesh meshDoorway = new Mesh();
         GameObject doorway = new GameObject("Doorways", typeof(MeshFilter), typeof(MeshRenderer));
+        doorway.transform.parent = building.transform;
+
         Renderer rend = doorway.GetComponent<Renderer>();
-        rend.material = new Material(Shader.Find("Specular"));
+        rend.material = new Material(Shader.Find("Standard"));
         meshDoorway = doorway.GetComponent<MeshFilter>().mesh;
         Texture texture = Resources.Load("TextureLight") as Texture;
         rend.material.mainTexture = texture;
@@ -2774,9 +2810,10 @@ public class MW_roomScript : MonoBehaviour
     private void CreateFrontDoor() {
         Mesh meshDoor = new Mesh();
         GameObject door = new GameObject("Front Door", typeof(MeshFilter), typeof(MeshRenderer));
+        door.transform.parent = building.transform;
 
         Renderer rend = door.GetComponent<Renderer>();
-        rend.material = new Material(Shader.Find("Specular"));
+        rend.material = new Material(Shader.Find("Standard"));
         Texture texture = Resources.Load("FrontDoor") as Texture;
         rend.material.mainTexture = texture;
 

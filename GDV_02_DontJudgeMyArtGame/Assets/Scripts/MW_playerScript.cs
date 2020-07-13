@@ -25,33 +25,35 @@ public class MW_playerScript : MonoBehaviour
     // Update is called once per frame
     void Update () {
         // lastRotation = player.transform.rotation;
-        // float moveTime = 1.5f;
         // player.transform.rotation = Quaternion.Lerp(lastRotation, targetRotation, Time.time * moveTime);
+
+        float speed = 0.1f;
+        float mouseSpeed = 2.0f;
 
         // Mausbewegung nach links
         if(Input.GetAxis("Mouse X") < 0) {
-            player.transform.rotation *= Quaternion.AngleAxis(-2.0f, Vector3.up);
+            player.transform.rotation *= Quaternion.AngleAxis(-mouseSpeed, Vector3.up);
         }
         // Mausbewegung nach rechts
         if(Input.GetAxis("Mouse X") > 0) {
-            player.transform.rotation *= Quaternion.AngleAxis(2.0f, Vector3.up);
+            player.transform.rotation *= Quaternion.AngleAxis(mouseSpeed, Vector3.up);
         }
 
         // GetKey läuft kontinuierlich in jeweilige Richtung, solange Button gedrückt wird
         // GetKeyDown führt Aktion bei einem Tastendruck jeweils nur einmal aus
         if (Input.GetKey(KeyCode.W)) {
-            player.transform.position += player.transform.localRotation * new Vector3(0, 0, -0.1f);
+            player.transform.position += player.transform.localRotation * new Vector3(0, 0, -speed);
         }
         if (Input.GetKey(KeyCode.A)) {
-            player.transform.position += player.transform.localRotation * new Vector3(0.1f, 0, 0);
+            player.transform.position += player.transform.localRotation * new Vector3(speed, 0, 0);
             // Drehung ohne Maus um -90 Grad:
             // player.transform.rotation *= Quaternion.AngleAxis(-90.0f, Vector3.up);
         }
         if (Input.GetKey(KeyCode.S)) {
-            player.transform.position += player.transform.localRotation * new Vector3(0, 0, 0.1f);
+            player.transform.position += player.transform.localRotation * new Vector3(0, 0, speed);
         }
         if (Input.GetKey(KeyCode.D)) {
-            player.transform.position += player.transform.localRotation * new Vector3(-0.1f, 0, 0);
+            player.transform.position += player.transform.localRotation * new Vector3(-speed, 0, 0);
             // Drehung ohne Maus um 90 Grad:
             // player.transform.rotation *= Quaternion.AngleAxis(90.0f, Vector3.up);
         }
