@@ -5,6 +5,7 @@ using UnityEngine;
 public class Darius_BildScript_01 : MonoBehaviour
 {
 // Start is called before the first frame update
+
     void Start()
     {
         createBild(0f, 0f, 6f, 4f, 2f);  
@@ -59,27 +60,68 @@ public class Darius_BildScript_01 : MonoBehaviour
         
         //Arrays für Bildfläche
         rahmenflaeche.vertices = new Vector3[] {
+            new Vector3((0 - sizeX / 2) + posX - thick, height - thick, posZ - depth),
             new Vector3((0 - sizeX / 2) + posX - thick, height - thick, posZ - depth), 
+            new Vector3((0 - sizeX / 2) + posX - thick, height - thick, posZ - depth),  
+            new Vector3(sizeX / 2 + posX + thick, height - thick, posZ - depth),
             new Vector3(sizeX / 2 + posX + thick, height - thick, posZ - depth), 
-            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ - depth), 
+            new Vector3(sizeX / 2 + posX + thick, height - thick, posZ - depth),  
+            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ - depth),
+            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ - depth),
+            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ - depth),
             new Vector3((0 - sizeX / 2) + posX - thick, sizeY + height + thick, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX - thick, sizeY + height + thick, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX - thick, sizeY + height + thick, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX - thick, height - thick, posZ),
             new Vector3((0 - sizeX / 2) + posX - thick, height - thick, posZ), 
-            new Vector3(sizeX / 2 + posX + thick, height - thick, posZ), 
-            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ), 
+            new Vector3(sizeX / 2 + posX + thick, height - thick, posZ),
+            new Vector3(sizeX / 2 + posX + thick, height - thick, posZ),
+            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ),
+            new Vector3(sizeX / 2 + posX + thick, sizeY + height + thick, posZ),
+            new Vector3((0 - sizeX / 2) + posX - thick, sizeY + height + thick, posZ),
             new Vector3((0 - sizeX / 2) + posX - thick, sizeY + height + thick, posZ),
             new Vector3((0 - sizeX / 2) + posX, height, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX, height, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX, height, posZ - depth),
+            new Vector3(sizeX / 2 + posX, height, posZ - depth),
+            new Vector3(sizeX / 2 + posX, height, posZ - depth),
             new Vector3(sizeX / 2 + posX, height, posZ - depth), 
-            new Vector3(sizeX / 2 + posX, sizeY + height, posZ - depth), 
+            new Vector3(sizeX / 2 + posX, sizeY + height, posZ - depth),
+            new Vector3(sizeX / 2 + posX, sizeY + height, posZ - depth),
+            new Vector3(sizeX / 2 + posX, sizeY + height, posZ - depth),
             new Vector3((0 - sizeX / 2) + posX, sizeY + height, posZ - depth),
-            new Vector3((0 - sizeX / 2) + posX, height, posZ - abstand), 
+            new Vector3((0 - sizeX / 2) + posX, sizeY + height, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX, sizeY + height, posZ - depth),
+            new Vector3((0 - sizeX / 2) + posX, height, posZ - abstand),
+            new Vector3((0 - sizeX / 2) + posX, height, posZ - abstand),  
+            new Vector3(sizeX / 2 + posX, height, posZ - abstand), 
             new Vector3(sizeX / 2 + posX, height, posZ - abstand), 
             new Vector3(sizeX / 2 + posX, sizeY + height, posZ - abstand), 
+            new Vector3(sizeX / 2 + posX, sizeY + height, posZ - abstand), 
+            new Vector3((0 - sizeX / 2) + posX, sizeY + height, posZ - abstand),
             new Vector3((0 - sizeX / 2) + posX, sizeY + height, posZ - abstand)
         };
 
-        rahmenflaeche.triangles = new int[] {0,1,5,0,5,4, 0,4,7,0,7,3, 1,2,6,1,6,5, 2,3,7,2,7,6, 0,8,9,0,9,1, 0,3,11,0,11,8, 1,9,10,1,10,2, 10,11,3,10,3,2, 8,12,13,8,13,9, 8,11,15,8,15,12, 9,13,14,9,14,10, 14,15,11,14,11,10};
+        rahmenflaeche.triangles = new int[] {0,20,23,0,23,3, 3,23,26,3,26,6, 6,26,29,6,29,9, 0,9,29,0,29,20, 1,5,14,1,14,13, 4,8,16,4,16,15, 7,11,18,7,18,17, 10,2,12,10,12,19, 22,33,34,22,34,24, 25,35,36,25,36,27, 28,37,38,28,38,30, 21,31,39,21,39,32};
 
-        rahmenflaeche.uv = new Vector2[] {new Vector2(0,0), new Vector2(1,0), new Vector2(0,0), new Vector2(1,0), new Vector2(0,1), new Vector2(1,1), new Vector2(0,1), new Vector2(1,1), new Vector2(0,1), new Vector2(1,1), new Vector2(0,1), new Vector2(1,1), new Vector2(0,0), new Vector2(1,0), new Vector2(0,0), new Vector2(1,0)};
+        rahmenflaeche.uv = new Vector2[] {
+            new Vector2(0,0), new Vector2(0,0), new Vector2(0,0), 
+            new Vector2(1,0), new Vector2(1,0), new Vector2(1,0), 
+            new Vector2(0,0), new Vector2(0,0), new Vector2(0,0), 
+            new Vector2(1,0), new Vector2(1,0), new Vector2(1,0),
+            new Vector2(0,1), new Vector2(0,1),  
+            new Vector2(1,1), new Vector2(1,1), 
+            new Vector2(0,1), new Vector2(0,1), 
+            new Vector2(1,1), new Vector2(1,1), 
+            new Vector2(0,1), new Vector2(0,1), new Vector2(0,1),
+            new Vector2(1,1), new Vector2(1,1), new Vector2(1,1),
+            new Vector2(0,1), new Vector2(0,1), new Vector2(0,1),
+            new Vector2(1,1), new Vector2(1,1), new Vector2(1,1),
+            new Vector2(0,0), new Vector2(0,0),
+            new Vector2(1,0), new Vector2(1,0),
+            new Vector2(0,0), new Vector2(0,0), 
+            new Vector2(1,0), new Vector2(1,0)
+            };
 
         rahmenflaeche.RecalculateBounds();
 
