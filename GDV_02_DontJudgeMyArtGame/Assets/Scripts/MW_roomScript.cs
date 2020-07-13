@@ -19,7 +19,7 @@ public class MW_roomScript : MonoBehaviour
     {
         // Empty, an das alle Bestandteile des Raumaufbaus gehängt werden
         building = new GameObject();
-        // Empty liegt auf Startposition des Spielers
+        // Empty so verschieben, dass Spieler auf seiner Startposition steht
         building.transform.Translate(-82, 0, 41);
         building.name = "Building";
 
@@ -28,6 +28,8 @@ public class MW_roomScript : MonoBehaviour
         CreateRooms();
         CreateDoorways();
 
+        // Versetzt Empty auf den Ursprungsppunkt 0|0|0, wo auch Spieler starten soll
+        building.transform.Translate(82, 0, -41);
     }
 
     // Update is called once per frame
