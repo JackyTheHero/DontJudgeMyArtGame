@@ -53,19 +53,18 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> groundVertices = new List<Vector3>();
         List<int> groundTriangles = new List<int>();
-        List<Vector3> groundNormals = new List<Vector3>();
         List<Vector2> groundUvs = new List<Vector2>();
 
         // Raum 1 -> grüner Raum
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 0));
+        groundVertices.Add(new Vector3(-12, 0, 0));
         groundVertices.Add(new Vector3(42, 0, 0));
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 50));
+        groundVertices.Add(new Vector3(-12, 0, 50));
         groundVertices.Add(new Vector3(42, 0, 50));
         // Raum 2 -> lila Raum
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 50));
-        groundVertices.Add(new Vector3(60 + wallThickness, 0, 50));
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 130 + wallThickness));
-        groundVertices.Add(new Vector3(60 + wallThickness, 0, 130 + wallThickness));
+        groundVertices.Add(new Vector3(-12, 0, 50));
+        groundVertices.Add(new Vector3(60, 0, 50));
+        groundVertices.Add(new Vector3(-12, 0, 130 + wallThickness));
+        groundVertices.Add(new Vector3(60, 0, 130 + wallThickness));
         // Raum 3 -> blauer Raum
         groundVertices.Add(new Vector3(42, 0, 0));
         groundVertices.Add(new Vector3(110 + wallThickness, 0, 0));
@@ -73,9 +72,9 @@ public class MW_roomScript : MonoBehaviour
         groundVertices.Add(new Vector3(110 + wallThickness, 0, 50));
         // Raum 4 -> dunkelblauer Raum
         groundVertices.Add(new Vector3(-95, 0, 0));
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 0));
-        groundVertices.Add(new Vector3(-95, 0, 80 + wallThickness));
-        groundVertices.Add(new Vector3(-10 - wallThickness, 0, 80 + wallThickness));
+        groundVertices.Add(new Vector3(-12, 0, 0));
+        groundVertices.Add(new Vector3(-95, 0, 78 + wallThickness));
+        groundVertices.Add(new Vector3(-12, 0, 78 + wallThickness));
         // Raum 5 -> dunkelgrüner Raum
         groundVertices.Add(new Vector3(42, 0, -70 - wallThickness));
         groundVertices.Add(new Vector3(-30, 0, 0));
@@ -92,9 +91,9 @@ public class MW_roomScript : MonoBehaviour
         groundVertices.Add(new Vector3(-12, 0, 130 + wallThickness));
         groundVertices.Add(new Vector3(-70, 0, 130 + wallThickness));
         // Raum 8 -> dunkelgrüner Raum
-        groundVertices.Add(new Vector3(60 + wallThickness, 0, 48));
+        groundVertices.Add(new Vector3(60, 0, 48));
         groundVertices.Add(new Vector3(110 + wallThickness, 0, 48));
-        groundVertices.Add(new Vector3(60 + wallThickness, 0, 130 + wallThickness));
+        groundVertices.Add(new Vector3(60, 0, 130 + wallThickness));
         groundVertices.Add(new Vector3(110 + wallThickness, 0, 130 + wallThickness));
         // Raum 9 -> dunkelblauer Raum
         groundVertices.Add(new Vector3(42, 0, 0));
@@ -245,7 +244,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room1Vertices = new List<Vector3>();
         List<int> room1Triangles = new List<int>();
-        List<Vector3> room1Normals = new List<Vector3>();
         List<Vector2> room1Uvs = new List<Vector2>();
 
         // Wand über Türrahmen -> Eingang zu dunkelgrüner Wand
@@ -309,10 +307,10 @@ public class MW_roomScript : MonoBehaviour
         room1Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 50));
         room1Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 20 + doorwayThickness));                     
         /*// Decke
-        room1Vertices.Add(new Vector3(-12, height, 0));
-        room1Vertices.Add(new Vector3(42, height, 0));
-        room1Vertices.Add(new Vector3(-12, height, 50));
-        room1Vertices.Add(new Vector3(42, height, 50));*/
+        room1Vertices.Add(new Vector3(-12, 0, 0));
+        room1Vertices.Add(new Vector3(42, 0, 0));
+        room1Vertices.Add(new Vector3(-12, 0, 50));
+        room1Vertices.Add(new Vector3(42, 0, 50));*/
 
         // int countVertices = roomVertices.Count;
 
@@ -406,9 +404,9 @@ public class MW_roomScript : MonoBehaviour
         room1Triangles.Add(48);
         room1Triangles.Add(49);
         room1Triangles.Add(50);
-        room1Triangles.Add(48);
+        room1Triangles.Add(51);
         room1Triangles.Add(50);
-        room1Triangles.Add(51);*/
+        room1Triangles.Add(49);*/
 
         meshRoom1.triangles = room1Triangles.ToArray();
 
@@ -505,7 +503,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room2Vertices = new List<Vector3>();
         List<int> room2Triangles = new List<int>();
-        List<Vector3> room2Normals = new List<Vector3>();
         List<Vector2> room2Uvs = new List<Vector2>();
 
         // Wand über Türrahmen
@@ -557,7 +554,12 @@ public class MW_roomScript : MonoBehaviour
         room2Vertices.Add(new Vector3(-12 + wallThickness, 0, 100 + doorwayThickness));
         room2Vertices.Add(new Vector3(-12 + wallThickness, 0, 130));
         room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 100 + doorwayThickness));
-        room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 130)); 
+        room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 130));
+        /*// Decke
+        room2Vertices.Add(new Vector3(-12, 0, 50));
+        room2Vertices.Add(new Vector3(60, 0, 50));
+        room2Vertices.Add(new Vector3(-12, 0, 130 + wallThickness));
+        room2Vertices.Add(new Vector3(60, 0, 130 + wallThickness));*/
 
         meshRoom2.vertices = room2Vertices.ToArray();
 
@@ -631,6 +633,13 @@ public class MW_roomScript : MonoBehaviour
         room2Triangles.Add(37);
         room2Triangles.Add(38);
         room2Triangles.Add(39);
+        /*// Decke -> 40 bis 43
+        room2Triangles.Add(40);
+        room2Triangles.Add(41);
+        room2Triangles.Add(42);
+        room2Triangles.Add(43);
+        room2Triangles.Add(42);
+        room2Triangles.Add(41);*/
 
         meshRoom2.triangles = room2Triangles.ToArray();
 
@@ -684,6 +693,11 @@ public class MW_roomScript : MonoBehaviour
         room2Uvs.Add(new Vector2(0, 0));
         room2Uvs.Add(new Vector2(0.5f, 0.5f));
         room2Uvs.Add(new Vector2(0, 0.5f));
+        /*// Decke
+        room2Uvs.Add(new Vector2(0, 1));
+        room2Uvs.Add(new Vector2(0, 0));
+        room2Uvs.Add(new Vector2(1, 1));
+        room2Uvs.Add(new Vector2(1, 0));*/
 
         meshRoom2.uv = room2Uvs.ToArray();
 
@@ -709,7 +723,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room3Vertices = new List<Vector3>();
         List<int> room3Triangles = new List<int>();
-        List<Vector3> room3Normals = new List<Vector3>();
         List<Vector2> room3Uvs = new List<Vector2>();
 
         // Wand über Türrahmen -> Eingang zu grünem Raum
@@ -762,6 +775,11 @@ public class MW_roomScript : MonoBehaviour
         room3Vertices.Add(new Vector3(110, 0, 50));
         room3Vertices.Add(new Vector3(110, height, 50));
         room3Vertices.Add(new Vector3(110, height, 0));
+        /*// Decke
+        room3Vertices.Add(new Vector3(42, 0, 0));
+        room3Vertices.Add(new Vector3(110 + wallThickness, 0, 0));
+        room3Vertices.Add(new Vector3(42, 0, 50));
+        room3Vertices.Add(new Vector3(110 + wallThickness, 0, 50));*/
 
         meshRoom3.vertices = room3Vertices.ToArray();        
 
@@ -835,6 +853,13 @@ public class MW_roomScript : MonoBehaviour
         room3Triangles.Add(36);
         room3Triangles.Add(38);
         room3Triangles.Add(39);
+        /*// Decke -> 40 bis 43
+        room3Triangles.Add(40);
+        room3Triangles.Add(41);
+        room3Triangles.Add(42);
+        room3Triangles.Add(43);
+        room3Triangles.Add(42);
+        room3Triangles.Add(41);*/
 
         meshRoom3.triangles = room3Triangles.ToArray();
 
@@ -888,6 +913,11 @@ public class MW_roomScript : MonoBehaviour
         room3Uvs.Add(new Vector2(0, 0));
         room3Uvs.Add(new Vector2(0, 1));
         room3Uvs.Add(new Vector2(1, 1));
+        /*// Decke
+        room3Uvs.Add(new Vector2(0, 1));
+        room3Uvs.Add(new Vector2(0, 0));
+        room3Uvs.Add(new Vector2(1, 1));
+        room3Uvs.Add(new Vector2(1, 0));*/
 
         meshRoom3.uv = room3Uvs.ToArray();
 
@@ -906,14 +936,13 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend4 = room4.GetComponent<Renderer>();
         rend4.material = new Material(Shader.Find("Standard"));
         meshRoom4 = room4.GetComponent<MeshFilter>().mesh;
-        Texture texture4 = Resources.Load("TextureBlue") as Texture;
+        Texture texture4 = Resources.Load("TextureDarkBlue") as Texture;
         rend4.material.mainTexture = texture4;
 
         meshRoom4.Clear();
 
         List<Vector3> room4Vertices = new List<Vector3>();
         List<int> room4Triangles = new List<int>();
-        List<Vector3> room4Normals = new List<Vector3>();
         List<Vector2> room4Uvs = new List<Vector2>();
 
         // Wand über Türrahmen -> Eingang zu grüner Wand
@@ -986,6 +1015,11 @@ public class MW_roomScript : MonoBehaviour
         room4Vertices.Add(new Vector3(-70 + wallThickness, 0, 0 + wallThickness));
         room4Vertices.Add(new Vector3(-70 + wallThickness, height / doorwayFactor, 0 + wallThickness));
         room4Vertices.Add(new Vector3(-50 - doorwayThickness, height / doorwayFactor, 0 + wallThickness));
+        /*// Decke
+        room4Vertices.Add(new Vector3(-95, 0, 0));
+        room4Vertices.Add(new Vector3(-12, 0, 0));
+        room4Vertices.Add(new Vector3(-95, 0, 78 + wallThickness));
+        room4Vertices.Add(new Vector3(-12, 0, 78 + wallThickness));*/
 
         meshRoom4.vertices = room4Vertices.ToArray();
 
@@ -1087,6 +1121,13 @@ public class MW_roomScript : MonoBehaviour
         room4Triangles.Add(52);
         room4Triangles.Add(55);
         room4Triangles.Add(54);
+        /*// Decke -> 56 bis 59
+        room4Triangles.Add(56);
+        room4Triangles.Add(57);
+        room4Triangles.Add(58);
+        room4Triangles.Add(59);
+        room4Triangles.Add(58);
+        room4Triangles.Add(57);*/
 
         meshRoom4.triangles = room4Triangles.ToArray();
 
@@ -1160,6 +1201,11 @@ public class MW_roomScript : MonoBehaviour
         room4Uvs.Add(new Vector2(0, 0));
         room4Uvs.Add(new Vector2(0, 0.5f));
         room4Uvs.Add(new Vector2(0.5f, 0.5f));
+        /*// Decke
+        room4Uvs.Add(new Vector2(0, 1));
+        room4Uvs.Add(new Vector2(0, 0));
+        room4Uvs.Add(new Vector2(1, 1));
+        room4Uvs.Add(new Vector2(1, 0));*/
 
         meshRoom4.uv = room4Uvs.ToArray();
 
@@ -1185,7 +1231,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room5Vertices = new List<Vector3>();
         List<int> room5Triangles = new List<int>();
-        List<Vector3> room5Normals = new List<Vector3>();
         List<Vector2> room5Uvs = new List<Vector2>();
 
         // Wand über Türrahmen
@@ -1224,20 +1269,25 @@ public class MW_roomScript : MonoBehaviour
         room5Vertices.Add(new Vector3(42, height, -70 + wallThickness));
         room5Vertices.Add(new Vector3(-30, height, -70 + wallThickness));
         // Wand über Türrahmen
-        room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 0 + wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -70 - wallThickness));
-        room5Vertices.Add(new Vector3(42 - wallThickness, height, 0 + wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, height, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, height, -70 - wallThickness));
         // Wand unter Türrahmen -> rechts
-        room5Vertices.Add(new Vector3(42 - wallThickness, 0, 0 + wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, 0, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, -50));
-        room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 0 + wallThickness));
+        room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50));
         // Wand unter Türrahmen -> links
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, -50 - doorwayThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, -70 - wallThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50 - doorwayThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -70 - wallThickness));
+        /*// Decke
+        room5Vertices.Add(new Vector3(42, 0, -70 - wallThickness));
+        room5Vertices.Add(new Vector3(-30, 0, 0));
+        room5Vertices.Add(new Vector3(-30, 0, -70 - wallThickness));
+        room5Vertices.Add(new Vector3(42, 0, 0));*/
 
         meshRoom5.vertices = room5Vertices.ToArray();
         
@@ -1311,6 +1361,13 @@ public class MW_roomScript : MonoBehaviour
         room5Triangles.Add(37);
         room5Triangles.Add(38);
         room5Triangles.Add(39);
+        /*// Decke -> 40 bis 43
+        room5Triangles.Add(40);
+        room5Triangles.Add(43);
+        room5Triangles.Add(42);
+        room5Triangles.Add(43);
+        room5Triangles.Add(41);
+        room5Triangles.Add(42);*/
 
         meshRoom5.triangles = room5Triangles.ToArray();
 
@@ -1364,6 +1421,11 @@ public class MW_roomScript : MonoBehaviour
         room5Uvs.Add(new Vector2(0, 0));
         room5Uvs.Add(new Vector2(0.5f, 0.5f));
         room5Uvs.Add(new Vector2(0, 0.5f));
+        /*// Decke
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(0, 0));
+        room5Uvs.Add(new Vector2(1, 1));
+        room5Uvs.Add(new Vector2(0, 1));*/
 
         meshRoom5.uv = room5Uvs.ToArray();
 
@@ -1389,7 +1451,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room6Vertices = new List<Vector3>();
         List<int> room6Triangles = new List<int>();
-        List<Vector3> room6Normals = new List<Vector3>();
         List<Vector2> room6Uvs = new List<Vector2>();
 
         // Wand über Türrahmen
@@ -1432,6 +1493,11 @@ public class MW_roomScript : MonoBehaviour
         room6Vertices.Add(new Vector3(-70, 0, -70 + wallThickness));
         room6Vertices.Add(new Vector3(-70, height, -70 + wallThickness));
         room6Vertices.Add(new Vector3(-30, height, -70 + wallThickness));
+        /*// Decke
+        room6Vertices.Add(new Vector3(-30, 0, -70 - wallThickness));
+        room6Vertices.Add(new Vector3(-70, 0, 0));
+        room6Vertices.Add(new Vector3(-30, 0, 0));
+        room6Vertices.Add(new Vector3(-70, 0, -70 - wallThickness));*/
 
         meshRoom6.vertices = room6Vertices.ToArray();
 
@@ -1491,6 +1557,13 @@ public class MW_roomScript : MonoBehaviour
         room6Triangles.Add(30);
         room6Triangles.Add(29);
         room6Triangles.Add(31);
+        /*// Decke -> 32 bis 35
+        room6Triangles.Add(32);
+        room6Triangles.Add(34);
+        room6Triangles.Add(33);
+        room6Triangles.Add(33);
+        room6Triangles.Add(35);
+        room6Triangles.Add(32);*/
 
         meshRoom6.triangles = room6Triangles.ToArray();
 
@@ -1534,6 +1607,11 @@ public class MW_roomScript : MonoBehaviour
         room6Uvs.Add(new Vector2(0, 0));
         room6Uvs.Add(new Vector2(0, 1));
         room6Uvs.Add(new Vector2(1, 1));
+        /*// Decke
+        room6Uvs.Add(new Vector2(1, 0));
+        room6Uvs.Add(new Vector2(0, 1));
+        room6Uvs.Add(new Vector2(0, 0));
+        room6Uvs.Add(new Vector2(1, 1));*/
 
         meshRoom6.uv = room6Uvs.ToArray();
 
@@ -1559,7 +1637,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room7Vertices = new List<Vector3>();
         List<int> room7Triangles = new List<int>();
-        List<Vector3> room7Normals = new List<Vector3>();
         List<Vector2> room7Uvs = new List<Vector2>();
 
         // Wand über Türrahmen -> Eingang lila zu grün
@@ -1602,6 +1679,11 @@ public class MW_roomScript : MonoBehaviour
         room7Vertices.Add(new Vector3(-70 + wallThickness, 0, 130));
         room7Vertices.Add(new Vector3(-70 + wallThickness, height, 78 + wallThickness));
         room7Vertices.Add(new Vector3(-70 + wallThickness, height, 130));
+        /*// Decke
+        room7Vertices.Add(new Vector3(-12, 0, 78 + wallThickness));
+        room7Vertices.Add(new Vector3(-70, 0, 78 + wallThickness));
+        room7Vertices.Add(new Vector3(-12, 0, 130 + wallThickness));
+        room7Vertices.Add(new Vector3(-70, 0, 130 + wallThickness));*/
 
         meshRoom7.vertices = room7Vertices.ToArray();
 
@@ -1661,6 +1743,13 @@ public class MW_roomScript : MonoBehaviour
         room7Triangles.Add(28);
         room7Triangles.Add(30);
         room7Triangles.Add(31);
+        /*// Decke -> 32 bis 35
+        room7Triangles.Add(32);
+        room7Triangles.Add(34);
+        room7Triangles.Add(33);
+        room7Triangles.Add(35);
+        room7Triangles.Add(33);
+        room7Triangles.Add(34);*/
 
         meshRoom7.triangles = room7Triangles.ToArray();
 
@@ -1704,6 +1793,11 @@ public class MW_roomScript : MonoBehaviour
         room7Uvs.Add(new Vector2(0, 0));
         room7Uvs.Add(new Vector2(1, 1));
         room7Uvs.Add(new Vector2(0, 1));
+        /*// Decke
+        room7Uvs.Add(new Vector2(0, 1));
+        room7Uvs.Add(new Vector2(0, 0));
+        room7Uvs.Add(new Vector2(1, 1));
+        room7Uvs.Add(new Vector2(1, 0));*/
 
         meshRoom7.uv = room7Uvs.ToArray();
 
@@ -1729,7 +1823,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room8Vertices = new List<Vector3>();
         List<int> room8Triangles = new List<int>();
-        List<Vector3> room8Normals = new List<Vector3>();
         List<Vector2> room8Uvs = new List<Vector2>();
 
         // Wand über Türrahmen
@@ -1772,6 +1865,11 @@ public class MW_roomScript : MonoBehaviour
         room8Vertices.Add(new Vector3(110, 0, 130));
         room8Vertices.Add(new Vector3(60, height, 130));
         room8Vertices.Add(new Vector3(110, height, 130));
+        /*// Decke
+        room8Vertices.Add(new Vector3(60, 0, 48));
+        room8Vertices.Add(new Vector3(110 + wallThickness, 0, 48));
+        room8Vertices.Add(new Vector3(60, 0, 130 + wallThickness));
+        room8Vertices.Add(new Vector3(110 + wallThickness, 0, 130 + wallThickness));*/
 
         meshRoom8.vertices = room8Vertices.ToArray();
 
@@ -1831,6 +1929,13 @@ public class MW_roomScript : MonoBehaviour
         room8Triangles.Add(28);
         room8Triangles.Add(30);
         room8Triangles.Add(31);
+        /*// Decke -> 32 bis 35
+        room8Triangles.Add(32);
+        room8Triangles.Add(35);
+        room8Triangles.Add(34);
+        room8Triangles.Add(32);
+        room8Triangles.Add(33);
+        room8Triangles.Add(35);*/
 
         meshRoom8.triangles = room8Triangles.ToArray();
 
@@ -1874,6 +1979,11 @@ public class MW_roomScript : MonoBehaviour
         room8Uvs.Add(new Vector2(0, 0));
         room8Uvs.Add(new Vector2(1, 1));
         room8Uvs.Add(new Vector2(0, 1));
+        /*// Decke
+        room8Uvs.Add(new Vector2(0, 1));
+        room8Uvs.Add(new Vector2(0, 0));
+        room8Uvs.Add(new Vector2(1, 1));
+        room8Uvs.Add(new Vector2(1, 0));*/
 
         meshRoom8.uv = room8Uvs.ToArray();
 
@@ -1899,7 +2009,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> room9Vertices = new List<Vector3>();
         List<int> room9Triangles = new List<int>();
-        List<Vector3> room9Normals = new List<Vector3>();
         List<Vector2> room9Uvs = new List<Vector2>();
 
         // Wand über Türrahmen
@@ -1942,6 +2051,11 @@ public class MW_roomScript : MonoBehaviour
         room9Vertices.Add(new Vector3(110, 0, -70 - wallThickness));
         room9Vertices.Add(new Vector3(110, height, 0 + wallThickness));
         room9Vertices.Add(new Vector3(110, height, -70 - wallThickness));
+        /*// Decke
+        room9Vertices.Add(new Vector3(42, 0, 0));
+        room9Vertices.Add(new Vector3(42, 0, -70 - wallThickness));
+        room9Vertices.Add(new Vector3(110 + wallThickness, 0, -70 - wallThickness));
+        room9Vertices.Add(new Vector3(110 + wallThickness, 0, 0));*/
 
         meshRoom9.vertices = room9Vertices.ToArray();
 
@@ -2001,6 +2115,13 @@ public class MW_roomScript : MonoBehaviour
         room9Triangles.Add(28);
         room9Triangles.Add(30);
         room9Triangles.Add(31);
+        /*// Decke -> 32 bis 35
+        room9Triangles.Add(32);
+        room9Triangles.Add(33);
+        room9Triangles.Add(34);
+        room9Triangles.Add(32);
+        room9Triangles.Add(34);
+        room9Triangles.Add(35);*/
 
         meshRoom9.triangles = room9Triangles.ToArray();
 
@@ -2044,6 +2165,11 @@ public class MW_roomScript : MonoBehaviour
         room9Uvs.Add(new Vector2(0, 0));
         room9Uvs.Add(new Vector2(1, 1));
         room9Uvs.Add(new Vector2(0, 1));
+        /*// Decke
+        room9Uvs.Add(new Vector2(1, 0));
+        room9Uvs.Add(new Vector2(0, 0));
+        room9Uvs.Add(new Vector2(0, 1));
+        room9Uvs.Add(new Vector2(1, 1));*/
 
         meshRoom9.uv = room9Uvs.ToArray();
 
@@ -2070,7 +2196,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> doorwayVertices = new List<Vector3>();
         List<int> doorwayTriangles = new List<int>();
-        List<Vector3> doorwayNormals = new List<Vector3>();
         List<Vector2> doorwayUvs = new List<Vector2>();
 
         // Eingang grün zu lila
@@ -2373,12 +2498,12 @@ public class MW_roomScript : MonoBehaviour
 
         // Eingang dunkelblau zu lila
         // oben -> 48 bis 51
-        doorwayTriangles.Add(50);
+        doorwayTriangles.Add(51);
         doorwayTriangles.Add(49);
         doorwayTriangles.Add(48);
         doorwayTriangles.Add(49);
-        doorwayTriangles.Add(50);
         doorwayTriangles.Add(51);
+        doorwayTriangles.Add(50);
         // links -> 52 bis 55
         doorwayTriangles.Add(53);
         doorwayTriangles.Add(52);
@@ -2786,7 +2911,6 @@ public class MW_roomScript : MonoBehaviour
 
         List<Vector3> doorVertices = new List<Vector3>();
         List<int> doorTriangles = new List<int>();
-        List<Vector3> doorNormals = new List<Vector3>();
         List<Vector2> doorUvs = new List<Vector2>();
 
         // Wie weit reicht Eingangstür in Szene hinein, sodass sie ein wenig Tiefe besitzt
@@ -2799,30 +2923,30 @@ public class MW_roomScript : MonoBehaviour
         float doorThickness = 8.0f;
 
         // Eingangstür
-        // Tür 6 Einheiten breiter als "normale" Durchgänge
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 34 + doorwayThickness + doorThickness));
-        // Tür 2 Einheiten höher als "normale" Durchgänge
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 34 + doorwayThickness + doorThickness));
+        // 26 + ((30 - doorwayThickness - doorThickness) / 2)) und 26 + ((30 + doorwayThickness + doorThickness) / 2)) sorgen dafür, dass ...
+        // ... die Tür immer in der Mitte des Raumes steht, auch wenn man die Variable doorThickness ändert
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
 
         // Seite oben
-        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 34 + doorwayThickness + doorThickness));
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 34 + doorwayThickness + doorThickness));
+        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
 
         // Seite rechts
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 34 + doorwayThickness + doorThickness));
-        doorVertices.Add(new Vector3(-95 + wallThickness, 0, 34 + doorwayThickness + doorThickness));
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 34 + doorwayThickness + doorThickness));
-        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 34 + doorwayThickness + doorThickness));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness, 0, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 26 + ((30 + doorwayThickness + doorThickness) / 2)));
 
         // Seite links
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness, 0, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 34));
-        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 34));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, 0, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness, 0, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness + doorDepth, height / doorwayFactor + doorHeight, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
+        doorVertices.Add(new Vector3(-95 + wallThickness, height / doorwayFactor + doorHeight, 26 + ((30 - doorwayThickness - doorThickness) / 2)));
         
         meshDoor.vertices = doorVertices.ToArray();
 

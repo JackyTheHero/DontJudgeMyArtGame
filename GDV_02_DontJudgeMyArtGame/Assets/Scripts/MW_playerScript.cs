@@ -15,8 +15,8 @@ public class MW_playerScript : MonoBehaviour
         // Kamera folgt player
         Camera.main.transform.position = player.transform.position;
         Camera.main.transform.parent = player.transform;
-        Camera.main.transform.Translate(0, 3.8f, -6.0f);
-        Camera.main.transform.Rotate(8.0f, 0, 0);
+        Camera.main.transform.Translate(0, 8.0f, -10.0f);
+        Camera.main.transform.Rotate(15.0f, 0, 0);
     }
 
     // Quaternion lastRotation;
