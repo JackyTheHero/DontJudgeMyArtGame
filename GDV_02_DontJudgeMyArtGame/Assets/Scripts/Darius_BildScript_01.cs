@@ -8,7 +8,10 @@ public class Darius_BildScript_01 : MonoBehaviour
 
     void Start()
     {
-        createBild(0f, 0f, 6f, 4f, 2f);  
+        createBild(35f, 37f, 6f, 4f, 2f, 0f); 
+        createBild(63f, 37f, 6f, 4f, 2f, 0f);
+        createBild(35f, 39f, 6f, 4f, 2f, 180f);
+        createBild(14f, 50f, 6f, 4f, 2f, 270f);
         
     }
 
@@ -18,7 +21,7 @@ public class Darius_BildScript_01 : MonoBehaviour
         
     }
 
-    void createBild(float posX, float posZ, float sizeX, float sizeY, float height){
+    void createBild(float posX, float posZ, float sizeX, float sizeY, float height, float rotation){
 
         float thick = 0.3f;
         float depth = 0.3f;
@@ -131,5 +134,15 @@ public class Darius_BildScript_01 : MonoBehaviour
         rendR.material.mainTexture = Resources.Load("holz") as Texture;
 
         rahmenflaeche.RecalculateNormals();
+
+        GameObject gemaelde = new GameObject();
+
+        gemaelde.transform.Translate(posX, 0, posZ);
+
+        bild.transform.parent = gemaelde.transform;
+        rahmen.transform.parent = gemaelde.transform;
+
+        gemaelde.transform.Rotate(0, rotation, 0);
+
     }
 }
