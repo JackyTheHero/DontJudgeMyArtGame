@@ -56,50 +56,50 @@ public class MW_roomScript : MonoBehaviour
         List<Vector2> groundUvs = new List<Vector2>();
 
         // Raum 1 -> grüner Raum
-        groundVertices.Add(new Vector3(-12, 0, 0));
-        groundVertices.Add(new Vector3(42, 0, 0));
-        groundVertices.Add(new Vector3(-12, 0, 50));
-        groundVertices.Add(new Vector3(42, 0, 50));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 50 - wallThickness / 2));
         // Raum 2 -> lila Raum
-        groundVertices.Add(new Vector3(-12, 0, 50));
-        groundVertices.Add(new Vector3(60, 0, 50));
-        groundVertices.Add(new Vector3(-12, 0, 130 + wallThickness));
-        groundVertices.Add(new Vector3(60, 0, 130 + wallThickness));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 130 + wallThickness / 2));
+        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 130 + wallThickness / 2));
         // Raum 3 -> blauer Raum
-        groundVertices.Add(new Vector3(42, 0, 0));
-        groundVertices.Add(new Vector3(110 + wallThickness, 0, 0));
-        groundVertices.Add(new Vector3(42, 0, 50));
-        groundVertices.Add(new Vector3(110 + wallThickness, 0, 50));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(110 + wallThickness  /2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 50 - wallThickness / 2));
+        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 50 - wallThickness / 2));
         // Raum 4 -> dunkelblauer Raum
-        groundVertices.Add(new Vector3(-95, 0, 0));
-        groundVertices.Add(new Vector3(-12, 0, 0));
-        groundVertices.Add(new Vector3(-95, 0, 78 + wallThickness));
-        groundVertices.Add(new Vector3(-12, 0, 78 + wallThickness));
+        groundVertices.Add(new Vector3(-95 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-95 - wallThickness / 2, 0, 78 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));
         // Raum 5 -> dunkelgrüner Raum
-        groundVertices.Add(new Vector3(42, 0, -70 - wallThickness));
-        groundVertices.Add(new Vector3(-30, 0, 0));
-        groundVertices.Add(new Vector3(-30, 0, -70 - wallThickness));
-        groundVertices.Add(new Vector3(42, 0, 0));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, -70 - wallThickness / 2));
+        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 - wallThickness / 2));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
         // Raum 6 -> lila Raum
-        groundVertices.Add(new Vector3(-30, 0, -70 - wallThickness));
-        groundVertices.Add(new Vector3(-70, 0, 0));
-        groundVertices.Add(new Vector3(-30, 0, 0));
-        groundVertices.Add(new Vector3(-70, 0, -70 - wallThickness));
+        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, -70 + wallThickness / 2));
         // Raum 7 -> grüner Raum
-        groundVertices.Add(new Vector3(-12, 0, 78 + wallThickness));
-        groundVertices.Add(new Vector3(-70, 0, 78 + wallThickness));
-        groundVertices.Add(new Vector3(-12, 0, 130 + wallThickness));
-        groundVertices.Add(new Vector3(-70, 0, 130 + wallThickness));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-70 - wallThickness / 2, 0, 78 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 130 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-70 - wallThickness / 2, 0, 130 + wallThickness / 2));
         // Raum 8 -> dunkelgrüner Raum
-        groundVertices.Add(new Vector3(60, 0, 48));
-        groundVertices.Add(new Vector3(110 + wallThickness, 0, 48));
-        groundVertices.Add(new Vector3(60, 0, 130 + wallThickness));
-        groundVertices.Add(new Vector3(110 + wallThickness, 0, 130 + wallThickness));
+        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 130 + wallThickness / 2));
+        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 130 + wallThickness / 2));
         // Raum 9 -> dunkelblauer Raum
-        groundVertices.Add(new Vector3(42, 0, 0));
-        groundVertices.Add(new Vector3(42, 0, -70 - wallThickness));
-        groundVertices.Add(new Vector3(110 + wallThickness, 0, -70 - wallThickness));
-        groundVertices.Add(new Vector3(110 + wallThickness, 0, 0));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, -70 - wallThickness / 2));
+        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, -70 - wallThickness / 2));
+        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 0 + wallThickness / 2));
         
         meshGround.vertices = groundVertices.ToArray();
 
@@ -307,10 +307,10 @@ public class MW_roomScript : MonoBehaviour
         room1Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 50));
         room1Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 20 + doorwayThickness));                     
         /*// Decke
-        room1Vertices.Add(new Vector3(-12, 0, 0));
-        room1Vertices.Add(new Vector3(42, 0, 0));
-        room1Vertices.Add(new Vector3(-12, 0, 50));
-        room1Vertices.Add(new Vector3(42, 0, 50));*/
+        room1Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        room1Vertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        room1Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        room1Vertices.Add(new Vector3(42 - wallThickness / 2, 0, 50 - wallThickness / 2));*/
 
         // int countVertices = roomVertices.Count;
 
@@ -556,10 +556,10 @@ public class MW_roomScript : MonoBehaviour
         room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 100 + doorwayThickness));
         room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 130));
         /*// Decke
-        room2Vertices.Add(new Vector3(-12, 0, 50));
-        room2Vertices.Add(new Vector3(60, 0, 50));
-        room2Vertices.Add(new Vector3(-12, 0, 130 + wallThickness));
-        room2Vertices.Add(new Vector3(60, 0, 130 + wallThickness));*/
+        room2Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        room2Vertices.Add(new Vector3(60 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        room2Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 130 - wallThickness / 2));
+        room2Vertices.Add(new Vector3(60 + wallThickness / 2, 0, 130 - wallThickness / 2));*/
 
         meshRoom2.vertices = room2Vertices.ToArray();
 
@@ -776,10 +776,10 @@ public class MW_roomScript : MonoBehaviour
         room3Vertices.Add(new Vector3(110, height, 50));
         room3Vertices.Add(new Vector3(110, height, 0));
         /*// Decke
-        room3Vertices.Add(new Vector3(42, 0, 0));
-        room3Vertices.Add(new Vector3(110 + wallThickness, 0, 0));
-        room3Vertices.Add(new Vector3(42, 0, 50));
-        room3Vertices.Add(new Vector3(110 + wallThickness, 0, 50));*/
+        room3Vertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        room3Vertices.Add(new Vector3(110 + wallThickness  /2, 0, 0 + wallThickness / 2));
+        room3Vertices.Add(new Vector3(42 - wallThickness / 2, 0, 50 - wallThickness / 2));
+        room3Vertices.Add(new Vector3(110 + wallThickness / 2, 0, 50 - wallThickness / 2));*/
 
         meshRoom3.vertices = room3Vertices.ToArray();        
 
@@ -1016,10 +1016,10 @@ public class MW_roomScript : MonoBehaviour
         room4Vertices.Add(new Vector3(-70 + wallThickness, height / doorwayFactor, 0 + wallThickness));
         room4Vertices.Add(new Vector3(-50 - doorwayThickness, height / doorwayFactor, 0 + wallThickness));
         /*// Decke
-        room4Vertices.Add(new Vector3(-95, 0, 0));
-        room4Vertices.Add(new Vector3(-12, 0, 0));
-        room4Vertices.Add(new Vector3(-95, 0, 78 + wallThickness));
-        room4Vertices.Add(new Vector3(-12, 0, 78 + wallThickness));*/
+        room4Vertices.Add(new Vector3(-95 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        room4Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        room4Vertices.Add(new Vector3(-95 - wallThickness / 2, 0, 78 + wallThickness / 2));
+        room4Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));*/
 
         meshRoom4.vertices = room4Vertices.ToArray();
 
@@ -1284,10 +1284,10 @@ public class MW_roomScript : MonoBehaviour
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50 - doorwayThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -70 - wallThickness));
         /*// Decke
-        room5Vertices.Add(new Vector3(42, 0, -70 - wallThickness));
-        room5Vertices.Add(new Vector3(-30, 0, 0));
-        room5Vertices.Add(new Vector3(-30, 0, -70 - wallThickness));
-        room5Vertices.Add(new Vector3(42, 0, 0));*/
+        room5Vertices.Add(new Vector3(42 - wallThickness / 2, 0, -70 - wallThickness / 2));
+        room5Vertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        room5Vertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 - wallThickness / 2));
+        room5Vertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));*/
 
         meshRoom5.vertices = room5Vertices.ToArray();
         
@@ -1494,10 +1494,10 @@ public class MW_roomScript : MonoBehaviour
         room6Vertices.Add(new Vector3(-70, height, -70 + wallThickness));
         room6Vertices.Add(new Vector3(-30, height, -70 + wallThickness));
         /*// Decke
-        room6Vertices.Add(new Vector3(-30, 0, -70 - wallThickness));
-        room6Vertices.Add(new Vector3(-70, 0, 0));
-        room6Vertices.Add(new Vector3(-30, 0, 0));
-        room6Vertices.Add(new Vector3(-70, 0, -70 - wallThickness));*/
+        room6Vertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 + wallThickness / 2));
+        room6Vertices.Add(new Vector3(-70 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        room6Vertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        room6Vertices.Add(new Vector3(-70 + wallThickness / 2, 0, -70 + wallThickness / 2));*/
 
         meshRoom6.vertices = room6Vertices.ToArray();
 
@@ -1680,10 +1680,10 @@ public class MW_roomScript : MonoBehaviour
         room7Vertices.Add(new Vector3(-70 + wallThickness, height, 78 + wallThickness));
         room7Vertices.Add(new Vector3(-70 + wallThickness, height, 130));
         /*// Decke
-        room7Vertices.Add(new Vector3(-12, 0, 78 + wallThickness));
-        room7Vertices.Add(new Vector3(-70, 0, 78 + wallThickness));
-        room7Vertices.Add(new Vector3(-12, 0, 130 + wallThickness));
-        room7Vertices.Add(new Vector3(-70, 0, 130 + wallThickness));*/
+        room7Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));
+        room7Vertices.Add(new Vector3(-70 - wallThickness / 2, 0, 78 + wallThickness / 2));
+        room7Vertices.Add(new Vector3(-12 + wallThickness / 2, 0, 130 + wallThickness / 2));
+        room7Vertices.Add(new Vector3(-70 - wallThickness / 2, 0, 130 + wallThickness / 2));*/
 
         meshRoom7.vertices = room7Vertices.ToArray();
 
@@ -1866,10 +1866,10 @@ public class MW_roomScript : MonoBehaviour
         room8Vertices.Add(new Vector3(60, height, 130));
         room8Vertices.Add(new Vector3(110, height, 130));
         /*// Decke
-        room8Vertices.Add(new Vector3(60, 0, 48));
-        room8Vertices.Add(new Vector3(110 + wallThickness, 0, 48));
-        room8Vertices.Add(new Vector3(60, 0, 130 + wallThickness));
-        room8Vertices.Add(new Vector3(110 + wallThickness, 0, 130 + wallThickness));*/
+        room8Vertices.Add(new Vector3(60 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        room8Vertices.Add(new Vector3(110 + wallThickness / 2, 0, 50 - wallThickness / 2));
+        room8Vertices.Add(new Vector3(60 + wallThickness / 2, 0, 130 + wallThickness / 2));
+        room8Vertices.Add(new Vector3(110 + wallThickness / 2, 0, 130 + wallThickness / 2));*/
 
         meshRoom8.vertices = room8Vertices.ToArray();
 
@@ -2052,10 +2052,10 @@ public class MW_roomScript : MonoBehaviour
         room9Vertices.Add(new Vector3(110, height, 0 + wallThickness));
         room9Vertices.Add(new Vector3(110, height, -70 - wallThickness));
         /*// Decke
-        room9Vertices.Add(new Vector3(42, 0, 0));
-        room9Vertices.Add(new Vector3(42, 0, -70 - wallThickness));
-        room9Vertices.Add(new Vector3(110 + wallThickness, 0, -70 - wallThickness));
-        room9Vertices.Add(new Vector3(110 + wallThickness, 0, 0));*/
+        room9Vertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
+        room9Vertices.Add(new Vector3(42 - wallThickness / 2, 0, -70 - wallThickness / 2));
+        room9Vertices.Add(new Vector3(110 + wallThickness / 2, 0, -70 - wallThickness / 2));
+        room9Vertices.Add(new Vector3(110 + wallThickness / 2, 0, 0 + wallThickness / 2));*/
 
         meshRoom9.vertices = room9Vertices.ToArray();
 
@@ -3020,4 +3020,5 @@ public class MW_roomScript : MonoBehaviour
         MeshCollider doorCollider = door.AddComponent<MeshCollider>();
         meshDoor = doorCollider.sharedMesh;
     }
+
 }

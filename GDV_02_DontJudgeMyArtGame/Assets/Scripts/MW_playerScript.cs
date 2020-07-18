@@ -6,6 +6,10 @@ public class MW_playerScript : MonoBehaviour
 {
     public GameObject player;
 
+
+    float speed = 0.1f;
+    float slowSpeed = 0.03f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +31,17 @@ public class MW_playerScript : MonoBehaviour
         // lastRotation = player.transform.rotation;
         // player.transform.rotation = Quaternion.Lerp(lastRotation, targetRotation, Time.time * moveTime);
 
-        float speed = 0.1f;
+        
         float mouseSpeed = 2.0f;
+
+        // slowMode wird aktiviert, wenn Shift gedrückt wird (links oder rechts)
+        var slowMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        // langsameres Laufen mit Strg
+        // var slowMode = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+
+        // wenn slowMode aktiv ist, nutze slowSpeed, ansonsten "normalen" speed
+        // player läuft also bei gedrückter Shift-Taste langsamer
+        var speed = slowMode ? this.slowSpeed : this.speed;
 
         // Mausbewegung nach links
         if(Input.GetAxis("Mouse X") < 0) {
@@ -46,16 +59,14 @@ public class MW_playerScript : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A)) {
             player.transform.position += player.transform.localRotation * new Vector3(speed, 0, 0);
-            // Drehung ohne Maus um -90 Grad:
-            // player.transform.rotation *= Quaternion.AngleAxis(-90.0f, Vector3.up);
+            // player.transform.rotation *= Quaternion.AngleAxis(-speed * 10, Vector3.up);
         }
         if (Input.GetKey(KeyCode.S)) {
             player.transform.position += player.transform.localRotation * new Vector3(0, 0, speed);
         }
         if (Input.GetKey(KeyCode.D)) {
             player.transform.position += player.transform.localRotation * new Vector3(-speed, 0, 0);
-            // Drehung ohne Maus um 90 Grad:
-            // player.transform.rotation *= Quaternion.AngleAxis(90.0f, Vector3.up);
+            // player.transform.rotation *= Quaternion.AngleAxis(speed * 150, Vector3.up);
         }
     }
      
