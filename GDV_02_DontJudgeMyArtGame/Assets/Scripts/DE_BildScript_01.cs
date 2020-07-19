@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Darius_BildScript_01 : MonoBehaviour
+public class DE_BildScript_01 : MonoBehaviour
 {
 // Start is called before the first frame update
 
@@ -30,6 +30,8 @@ public class Darius_BildScript_01 : MonoBehaviour
         //GameObject erzeugen
         GameObject bild = new GameObject();
 
+        bild.name = "Bild";
+
         bild.AddComponent<MeshFilter>();
         bild.AddComponent<MeshRenderer>();
 
@@ -53,6 +55,8 @@ public class Darius_BildScript_01 : MonoBehaviour
 
         //GameObject erzeugen
         GameObject rahmen = new GameObject();
+
+        rahmen.name = "Rahmen";
 
         rahmen.AddComponent<MeshFilter>();
         rahmen.AddComponent<MeshRenderer>();
@@ -136,6 +140,8 @@ public class Darius_BildScript_01 : MonoBehaviour
         rahmenflaeche.RecalculateNormals();
 
         GameObject gemaelde = new GameObject();
+
+        gemaelde.name = "Gemälde";
 
         gemaelde.transform.Translate(posX, 0, posZ);
 
