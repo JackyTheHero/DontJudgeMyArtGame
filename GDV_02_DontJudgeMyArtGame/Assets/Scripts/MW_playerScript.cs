@@ -54,6 +54,14 @@ public class MW_playerScript : MonoBehaviour
         // player läuft also bei gedrückter Shift-Taste langsamer
         var speed = slowMode ? this.slowSpeed : this.speed;
 
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
+        // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+
         // ohne freeLookCamera
         // Mausbewegung nach links
         /*if(Input.GetAxis("Mouse X") < 0) {
@@ -68,35 +76,27 @@ public class MW_playerScript : MonoBehaviour
         // GetKeyDown führt Aktion bei einem Tastendruck jeweils nur einmal aus
         if (Input.GetKey(KeyCode.W) && keyLocked == false) {
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera
-            player.transform.forward = -GameObject.Find("Main Camera").transform.forward;
-            // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
-            player.transform.Rotate(23.66f, player.transform.position.y, 0);
+            player.transform.forward = -camForward;
             player.transform.position += player.transform.localRotation * new Vector3(0, 0, -speed);
             keyLocked = true;
             // player.transform.rotation = Quaternion.LookRotation(-player.transform.position);
         }
         if (Input.GetKey(KeyCode.A)) {
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera
-            player.transform.forward = GameObject.Find("Main Camera").transform.right;
-            // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
-            // player.transform.Rotate(23.66f, player.transform.position.y, 0);
+            player.transform.forward = camRight;
             player.transform.position += player.transform.localRotation * new Vector3(0, 0, -speed);
             // player.transform.rotation = Quaternion.LookRotation(-player.transform.position);
         }
         if (Input.GetKey(KeyCode.S) && keyLocked == false) {
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera
-            player.transform.forward = GameObject.Find("Main Camera").transform.forward;
-            // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
-            player.transform.Rotate(-23.66f, player.transform.position.y, 0);
+            player.transform.forward = camForward;
             player.transform.position += player.transform.localRotation * new Vector3(0, 0, -speed);
             keyLocked = true;
             // player.transform.rotation = Quaternion.LookRotation(player.transform.position);
         }
         if (Input.GetKey(KeyCode.D)) {
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera
-            player.transform.forward = -GameObject.Find("Main Camera").transform.right;
-            // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
-            // player.transform.Rotate(23.66f, player.transform.position.y, 0);
+            player.transform.forward = -camRight;
             player.transform.position += player.transform.localRotation * new Vector3(0, 0, -speed);
             // player.transform.rotation = Quaternion.LookRotation(player.transform.position);
         }
