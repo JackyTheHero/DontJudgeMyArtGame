@@ -35,16 +35,79 @@ public class MW_playerScript : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
-        // lastRotation = player.transform.rotation;
-        // player.transform.rotation = Quaternion.Lerp(lastRotation, targetRotation, Time.time * moveTime);
+        // Funktion, die die Blickrichtung des Players je nach Tastendruck und Kameraposititon ändert
+        Rotation();
 
-        freeLookCamera();
+        // Funktion, die den Player bei Tastendruck in die jeweilige Blickrichtung laufen lässt
+        Move();
 
-        // Blockiere S, wenn W gedrückt wird - und umgekehrt
-        bool keyLocked = false;
+        // Funktion, die Steuerung der Kamera nach links und rechts ermöglicht ...
+        // ... zusätzlich kann man die Kamera um den Player um 360 Grad herumdrehen, wenn dieser an einer Stelle steht
+        freeLookCamera();        
+    }
+
+    // Funktion, die die Blickrichtung des Players je nach Tastendruck und Kameraposititon ändert
+    void Rotation() {
+        // Richtung, in die Player sich drehen soll, soll hier nach Tastendruck gespeichert werden
+        // Zuweisung der momentanten Blickrichtung des Players
+        Vector3 targetDirection = player.transform.forward;
+
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
+        // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
         
-        // float mouseSpeed = 2.0f;
+        // GetKey läuft kontinuierlich in jeweilige Richtung, solange Button gedrückt wird
+        // GetKeyDown führt Aktion bei einem Tastendruck jeweils nur einmal aus
+        if (Input.GetKey(KeyCode.W)) {
+            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
+            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
+            targetDirection += -camForward;
+            player.transform.forward = targetDirection;
+            // rotation = Quaternion.LookRotation(targetPosition * speed * Time.deltaTime);
+            // player.transform.rotation = Quaternion.LookRotation(-player.transform.position);
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
+            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
+            targetDirection += camRight;
+            player.transform.forward = targetDirection;
+            // rotation = Quaternion.LookRotation(targetPosition * speed * Time.deltaTime);
+            // player.transform.rotation = Quaternion.LookRotation(-player.transform.position);
+        }
 
+        if (Input.GetKey(KeyCode.S)) {
+            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
+            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
+            targetDirection += camForward;
+            player.transform.forward = targetDirection;
+            // rotation = Quaternion.LookRotation(targetPosition * speed * Time.deltaTime);
+            // player.transform.rotation = Quaternion.LookRotation(player.transform.position);
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
+            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
+            targetDirection += -camRight;
+            player.transform.forward = targetDirection;
+            //rotation = Quaternion.LookRotation(targetPosition * speed * Time.deltaTime);
+            // player.transform.rotation = Quaternion.LookRotation(player.transform.position);
+        }
+        // player.transform.forward = Vector3.Lerp(lastPosition, targetPosition, 0.5f * Time.deltaTime);
+        // player.transform.forward = Vector3.MoveTowards(lastPosition, targetPosition, 5 * Time.time);
+        // float singleStep = 5.0f;
+
+        // player.transform.rotation = rotation;
+        // player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rotation, 50f * Time.deltaTime);
+        // Rotate the forward vector towards the target direction by one step
+        // Vector3 newDirection = Vector3.RotateTowards(lastPosition, targetPosition, singleStep, 5000000f);
+        // player.transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+
+    // Funktion, die den Player bei Tastendruck in die jeweilige Blickrichtung laufen lässt
+    void Move() {
         // slowMode wird aktiviert, wenn Shift gedrückt wird (links oder rechts)
         var slowMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         // langsameres Laufen mit Strg
@@ -54,58 +117,13 @@ public class MW_playerScript : MonoBehaviour
         // player läuft also bei gedrückter Shift-Taste langsamer
         var speed = slowMode ? this.slowSpeed : this.speed;
 
-        Vector3 camForward = Camera.main.transform.forward;
-        Vector3 camRight = Camera.main.transform.right;
-        // da Kamera nicht exakt geradeaus schaut, muss Player-Position nachjustiert werden
-        camForward.y = 0;
-        camRight.y = 0;
-        camForward = camForward.normalized;
-        camRight = camRight.normalized;
-
-        // ohne freeLookCamera
-        // Mausbewegung nach links
-        /*if(Input.GetAxis("Mouse X") < 0) {
-            player.transform.rotation *= Quaternion.AngleAxis(-mouseSpeed, Vector3.up);
-        }
-        // Mausbewegung nach rechts
-        if(Input.GetAxis("Mouse X") > 0) {
-            player.transform.rotation *= Quaternion.AngleAxis(mouseSpeed, Vector3.up);
-        }*/
-
-        // GetKey läuft kontinuierlich in jeweilige Richtung, solange Button gedrückt wird
-        // GetKeyDown führt Aktion bei einem Tastendruck jeweils nur einmal aus
-        if (Input.GetKey(KeyCode.W) && keyLocked == false) {
-            keyLocked = true;
-            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
-            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
-            player.transform.forward += -camForward;
-            // player.transform.rotation = Quaternion.LookRotation(-player.transform.position);
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
-            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
-            player.transform.forward += camRight;
-            // player.transform.rotation = Quaternion.LookRotation(-player.transform.position);
-        }
-
-        if (Input.GetKey(KeyCode.S) && keyLocked == false) {
-            keyLocked = true;
-            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
-            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
-            player.transform.forward += camForward;
-            // player.transform.rotation = Quaternion.LookRotation(player.transform.position);
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
-            // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
-            player.transform.forward += -camRight;
-            // player.transform.rotation = Quaternion.LookRotation(player.transform.position);
-        }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
             player.transform.position += player.transform.localRotation * new Vector3(0, 0, -speed);
         }
     }
 
+    // Funktion, die Steuerung der Kamera nach links und rechts ermöglicht ...
+    // ... zusätzlich kann man die Kamera um den Spieler um 360 Grad herumdrehen, wenn dieser an einer Stelle steht
     void freeLookCamera() {
         float mouseSpeed = 2.0f;
        
