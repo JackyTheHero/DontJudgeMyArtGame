@@ -5,12 +5,12 @@ using UnityEngine;
 public class MW_roomScript : MonoBehaviour
 {
     // Variable für Höhe und Dicke der Wand, sodass sie später leichter dnymaisch geändert werden können
-    float height = 12.0f;
+    float height = 25.0f;
     float wallThickness = 2.0f;
     // Wie hoch sind die Durchgänge in Relation zur Wandhöhe? -> height / doorwayFactor
-    float doorwayFactor = 2.0f;
+    float doorwayFactor = 3.0f;
     // Wie lang und breit sind die Durchgänge
-    float doorwayThickness = 8.0f;
+    float doorwayThickness = 10.0f;
 
     GameObject building;
 
@@ -2175,7 +2175,7 @@ public class MW_roomScript : MonoBehaviour
 
         meshRoom9.RecalculateNormals();
 
-        MeshCollider room9Collider = room8.AddComponent<MeshCollider>();
+        MeshCollider room9Collider = room9.AddComponent<MeshCollider>();
         Rigidbody room9Body = room9.AddComponent<Rigidbody>();
         room9Body.isKinematic = true;
         meshRoom9 = room9Collider.sharedMesh;
