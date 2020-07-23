@@ -27,6 +27,7 @@ public class MW_roomScript : MonoBehaviour
         CreateFrontDoor();
         CreateRooms();
         CreateDoorways();
+        CreateDividingWall();
 
         // Versetzt Empty auf den Ursprungsppunkt 0|0|0, wo auch Spieler starten soll
         building.transform.Translate(82, 0, -41);
@@ -2920,7 +2921,7 @@ public class MW_roomScript : MonoBehaviour
         float doorHeight = 4.0f;
 
         // Wie viel breiter ist Eingangstür im Vergleich zu den "normalen" Durchgängen
-        float doorThickness = 8.0f;
+        float doorThickness = 6.0f;
 
         // Eingangstür
         // 26 + ((30 - doorwayThickness - doorThickness) / 2)) und 26 + ((30 + doorwayThickness + doorThickness) / 2)) sorgen dafür, dass ...
@@ -3021,4 +3022,241 @@ public class MW_roomScript : MonoBehaviour
         meshDoor = doorCollider.sharedMesh;
     }
 
+    public void CreateDividingWall() {
+        Mesh meshWall1 = new Mesh();
+        GameObject wall1 = new GameObject("Dividing Wall Purple (1)", typeof(MeshFilter), typeof(MeshRenderer));
+
+        Renderer rend1 = wall1.GetComponent<Renderer>();
+        rend1.material = new Material(Shader.Find("Standard"));
+        Texture texture1 = Resources.Load("TexturePurple") as Texture;
+        rend1.material.mainTexture = texture1;
+
+        meshWall1 = wall1.GetComponent<MeshFilter>().mesh;
+        meshWall1.Clear();
+
+        List<Vector3> wall1Vertices = new List<Vector3>();
+        List<int> wall1Triangles = new List<int>();
+        List<Vector2> wall1Uvs = new List<Vector2>();
+
+        // Seite
+        wall1Vertices.Add(new Vector3(-0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, height, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(-0.5f, 0, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, 0, 29 - wallThickness));
+        // Seite
+        wall1Vertices.Add(new Vector3(0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(0.5f, height, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(0.5f, 0, -27));
+        wall1Vertices.Add(new Vector3(0.5f, 0, 29 - wallThickness));
+        // zwischen den Seiten
+        wall1Vertices.Add(new Vector3(-0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, 0, -27));
+        wall1Vertices.Add(new Vector3(0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(0.5f, 0, -27));
+        // oben
+        wall1Vertices.Add(new Vector3(-0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, height, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(0.5f, height, 29 - wallThickness));
+
+        meshWall1.vertices = wall1Vertices.ToArray();
+
+        // Seite -> 0 bis 3
+        wall1Triangles.Add(1);
+        wall1Triangles.Add(0);
+        wall1Triangles.Add(2);
+        wall1Triangles.Add(3);
+        wall1Triangles.Add(1);
+        wall1Triangles.Add(2);
+
+        // Seite -> 4 bis 7
+        wall1Triangles.Add(4);
+        wall1Triangles.Add(5);
+        wall1Triangles.Add(6);
+        wall1Triangles.Add(7);
+        wall1Triangles.Add(6);
+        wall1Triangles.Add(5);
+
+        // zwischen den Seiten -> 8 bis 11
+        wall1Triangles.Add(9);
+        wall1Triangles.Add(8);
+        wall1Triangles.Add(10);
+        wall1Triangles.Add(11);
+        wall1Triangles.Add(9);
+        wall1Triangles.Add(10);
+
+        // oben -> 12 bis 15
+        wall1Triangles.Add(12);
+        wall1Triangles.Add(13);
+        wall1Triangles.Add(14);
+        wall1Triangles.Add(15);
+        wall1Triangles.Add(14);
+        wall1Triangles.Add(13);
+
+        meshWall1.triangles = wall1Triangles.ToArray();
+
+        // Seite
+        wall1Uvs.Add(new Vector2(1, 1));
+        wall1Uvs.Add(new Vector2(0, 1));
+        wall1Uvs.Add(new Vector2(1, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
+        // Seite
+        wall1Uvs.Add(new Vector2(1, 1));
+        wall1Uvs.Add(new Vector2(0, 1));
+        wall1Uvs.Add(new Vector2(1, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
+        // zwischen den Seiten
+        wall1Uvs.Add(new Vector2(0, 1));
+        wall1Uvs.Add(new Vector2(0, 0));
+        wall1Uvs.Add(new Vector2(1, 1));
+        wall1Uvs.Add(new Vector2(1, 0));
+        // oben
+        wall1Uvs.Add(new Vector2(0, 0));
+        wall1Uvs.Add(new Vector2(1, 0));
+        wall1Uvs.Add(new Vector2(0, 1));
+        wall1Uvs.Add(new Vector2(1, 1));
+        
+        meshWall1.uv = wall1Uvs.ToArray();
+
+        meshWall1.RecalculateNormals();
+
+        wall1.transform.position = new Vector3(119, 0, 62);
+
+        MeshCollider wall1Collider = wall1.AddComponent<MeshCollider>();
+        Rigidbody wall1Body = wall1.AddComponent<Rigidbody>();
+        wall1Body.isKinematic = true;
+        meshWall1 = wall1Collider.sharedMesh;
+
+        // erstelle separates GameObject für wall2, um es Instantiate direkt zuzuweisen -> um wall2 selbst benennen zu können
+        GameObject wall2;
+        // nimm wall1 und kopiere es -> setze es dann an andere Position
+        Vector3 newPosition = new Vector3(95, 0, 62);
+        wall2 = Instantiate(wall1, newPosition, wall1.transform.rotation);
+        wall2.name = "Dividing Wall Purple (2)";
+
+        /* DUNKELBLAUE WAND */
+
+        Mesh meshwall3 = new Mesh();
+        GameObject wall3 = new GameObject("Dividing Wall Blue", typeof(MeshFilter), typeof(MeshRenderer));
+
+        Renderer rend2 = wall3.GetComponent<Renderer>();
+        rend2.material = new Material(Shader.Find("Standard"));
+        Texture texture2 = Resources.Load("TextureDarkBlue") as Texture;
+        rend2.material.mainTexture = texture2;
+
+        meshwall3 = wall3.GetComponent<MeshFilter>().mesh;
+        meshwall3.Clear();
+
+        List<Vector3> wall3Vertices = new List<Vector3>();
+        List<int> wall3Triangles = new List<int>();
+        List<Vector2> wall3Uvs = new List<Vector2>();
+
+        // Seite
+        wall3Vertices.Add(new Vector3(-0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(-0.5f, 0, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, 0, 19 - wallThickness));
+        // Seite
+        wall3Vertices.Add(new Vector3(0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, 0, -17));
+        wall3Vertices.Add(new Vector3(0.5f, 0, 19 - wallThickness));
+        // zwischen den Seiten
+        wall3Vertices.Add(new Vector3(-0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, 0, -17));
+        wall3Vertices.Add(new Vector3(0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(0.5f, 0, -17));
+        // zwischen den Seiten
+        wall3Vertices.Add(new Vector3(-0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(-0.5f, 0, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, 0, 19 - wallThickness));
+        // oben
+        wall3Vertices.Add(new Vector3(-0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(0.5f, height, 19 - wallThickness));
+
+        meshwall3.vertices = wall3Vertices.ToArray();
+
+        // Seite -> 0 bis 3
+        wall3Triangles.Add(1);
+        wall3Triangles.Add(0);
+        wall3Triangles.Add(2);
+        wall3Triangles.Add(3);
+        wall3Triangles.Add(1);
+        wall3Triangles.Add(2);
+
+        // Seite -> 4 bis 7
+        wall3Triangles.Add(4);
+        wall3Triangles.Add(5);
+        wall3Triangles.Add(6);
+        wall3Triangles.Add(7);
+        wall3Triangles.Add(6);
+        wall3Triangles.Add(5);
+
+        // zwischen den Seiten -> 8 bis 11
+        wall3Triangles.Add(9);
+        wall3Triangles.Add(8);
+        wall3Triangles.Add(10);
+        wall3Triangles.Add(11);
+        wall3Triangles.Add(9);
+        wall3Triangles.Add(10);
+
+        // zwischen den Seiten -> 12 bis 15
+        wall3Triangles.Add(12);
+        wall3Triangles.Add(13);
+        wall3Triangles.Add(14);
+        wall3Triangles.Add(15);
+        wall3Triangles.Add(14);
+        wall3Triangles.Add(13);
+
+        // oben -> 16 bis 19
+        wall3Triangles.Add(16);
+        wall3Triangles.Add(17);
+        wall3Triangles.Add(18);
+        wall3Triangles.Add(19);
+        wall3Triangles.Add(18);
+        wall3Triangles.Add(17);
+
+        meshwall3.triangles = wall3Triangles.ToArray();
+
+        // Seite
+        wall3Uvs.Add(new Vector2(1, 1));
+        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(1, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        // Seite
+        wall3Uvs.Add(new Vector2(1, 1));
+        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(1, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        // zwischen den Seiten
+        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(1, 1));
+        wall3Uvs.Add(new Vector2(1, 0));
+        // zwischen den Seiten
+        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(1, 1));
+        wall3Uvs.Add(new Vector2(1, 0));
+        // oben
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(1, 0));
+        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(1, 1));
+        
+        meshwall3.uv = wall3Uvs.ToArray();
+
+        meshwall3.RecalculateNormals();
+
+        wall3.transform.position = new Vector3(158, 0, -75);
+        wall3.transform.Rotate(0, 90, 0);
+
+        MeshCollider wall3Collider = wall3.AddComponent<MeshCollider>();
+        Rigidbody wall3Body = wall3.AddComponent<Rigidbody>();
+        wall3Body.isKinematic = true;
+        meshwall3 = wall3Collider.sharedMesh;
+    }
 }
