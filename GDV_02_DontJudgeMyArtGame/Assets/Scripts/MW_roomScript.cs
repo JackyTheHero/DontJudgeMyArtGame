@@ -5,10 +5,10 @@ using UnityEngine;
 public class MW_roomScript : MonoBehaviour
 {
     // Variable für Höhe und Dicke der Wand, sodass sie später leichter dnymaisch geändert werden können
-    float height = 25.0f;
+    float height = 45.0f;
     float wallThickness = 2.0f;
     // Wie hoch sind die Durchgänge in Relation zur Wandhöhe? -> height / doorwayFactor
-    float doorwayFactor = 3.0f;
+    float doorwayFactor = 4.0f;
     // Wie lang und breit sind die Durchgänge
     float doorwayThickness = 10.0f;
 

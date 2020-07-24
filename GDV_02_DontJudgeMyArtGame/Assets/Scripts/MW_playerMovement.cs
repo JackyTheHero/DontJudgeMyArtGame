@@ -24,14 +24,14 @@ public class MW_playerMovement : MonoBehaviour
         // Setze Anfangssicht der Kamera in Relation zum Spieler
         // da Spieler zu Beginn auf 0|0|0 steht, kann mit festen Werten gearbeitet werden, anstelle bspw. this.transform.position.x - 10.0f
         // nur in Start() setzen, da sich cameraView in Update fortlaufend ändert
-        cameraView = new Vector3(-10.0f, 8.0f, 0);
+        cameraView = new Vector3(-10, 8, 0);
 
         // addiere Kameraposition mit cameraView, damit Kamera immer gleichen Abstand zum Player aufweist
         Camera.main.transform.position = this.transform.position + cameraView;
         // Kamera sieht immer zum Player
         Camera.main.transform.LookAt(this.transform.position);
         // Verändere Rotation der Kamera, sodass eine bessere Kamerasicht entsteht -> ansonsten zu viel Fokus auf Player durch Transform.LookAt(target)
-        Camera.main.transform.Rotate(-15.0f, 0, 0);
+        Camera.main.transform.Rotate(-25, 0, 0);
     }
 
     // Update is called once per frame
@@ -47,6 +47,7 @@ public class MW_playerMovement : MonoBehaviour
 
             // Funktion, die Steuerung der Kamera nach links und rechts ermöglicht ...
             // ... zusätzlich kann man die Kamera um den Player um 360 Grad herumdrehen, wenn dieser an einer Stelle steht
+            // ... limitierte Bewegung nach oben und unten
             freeLookCamera();
         }  
     }
@@ -114,16 +115,27 @@ public class MW_playerMovement : MonoBehaviour
     // ... zusätzlich kann man die Kamera um den Spieler um 360 Grad herumdrehen, wenn dieser an einer Stelle steht
     void freeLookCamera() {
         float mouseSpeed = 3.0f;
+        /*float minYAngle = 8.0f;
+        float maxYAngle = 8.0f;
+
+        float minXAngle = 10.0f;
+        float maxXAngle = 10.0f;*/
        
-       // Drehung um y-Achse (Vector3.up) in Relation zur Drehbewegung der Maus -> Input.GetAxis("Mouse X")
-       // mit mouseSpeed multiplizieren, da Bewegung sonst sehr langsam ist
-       // Rotation (Quaternion.AngleAxis()) mit cameraView multiplizieren, sodass cameraView neue Position der Kamera speichert
-        cameraView = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * mouseSpeed, Vector3.up) * cameraView;
+        // Drehung um y-Achse (Vector3.up) in Relation zur Drehbewegung der Maus -> Input.GetAxis("Mouse X")
+        // mit mouseSpeed multiplizieren, da Bewegung sonst sehr langsam ist
+        // Rotation (Quaternion.AngleAxis()) mit cameraView multiplizieren, sodass cameraView neue Position der Kamera speichert
+        cameraView = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * mouseSpeed, Vector3.up) * cameraView; // Drehung links/rechts
+
+        // Kamerabewegung nach oben und unten
+        //Camera.main.transform.rotation = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * mouseSpeed, Vector3.forward); // Drehung oben/unten
+        //cameraView.y = Mathf.Clamp(cameraView.y, minXAngle, maxXAngle);
+        // cameraView.y = Mathf.Clamp(cameraView.x, minYAngle, maxYAngle);
+
         // addiere Kameraposition mit cameraView, damit Kamera immer gleichen Abstand zum Player aufweist
         Camera.main.transform.position = this.transform.position + cameraView;
         // Kamera sieht immer zum Player
         Camera.main.transform.LookAt(this.transform.position);
         // Verändere Rotation der Kamera, sodass eine bessere Kamerasicht entsteht -> ansonsten zu viel Fokus auf Player durch Transform.LookAt(target)
-        Camera.main.transform.Rotate(-15.0f, 0, 0);
+        Camera.main.transform.Rotate(-25, 0, 0);
     }
 }
