@@ -46,7 +46,7 @@ public class MW_roomScript : MonoBehaviour
 
         Renderer rend = ground.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Standard"));
-        Texture texture = Resources.Load("TextureLight") as Texture;
+        Texture texture = Resources.Load("WoodGround") as Texture;
         rend.material.mainTexture = texture;
 
         meshGround = ground.GetComponent<MeshFilter>().mesh;
@@ -2190,7 +2190,7 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend = doorway.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Standard"));
         meshDoorway = doorway.GetComponent<MeshFilter>().mesh;
-        Texture texture = Resources.Load("TextureLight") as Texture;
+        Texture texture = Resources.Load("WoodGround") as Texture;
         rend.material.mainTexture = texture;
 
         meshDoorway.Clear();
