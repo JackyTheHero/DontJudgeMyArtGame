@@ -14,6 +14,8 @@ public class MW_roomScript : MonoBehaviour
 
     GameObject building;
 
+    public Material woodMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +48,9 @@ public class MW_roomScript : MonoBehaviour
 
         Renderer rend = ground.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Standard"));
-        Texture texture = Resources.Load("WoodGround") as Texture;
-        rend.material.mainTexture = texture;
+        // Material hinzufügen, das in der UI erstellt wurde (Assets -> Create -> Material)
+        // unter Albedo schließlich die Textur auswählen
+        ground.GetComponent<Renderer>().material = woodMaterial;
 
         meshGround = ground.GetComponent<MeshFilter>().mesh;
         meshGround.Clear();
