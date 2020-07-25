@@ -3239,7 +3239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312291a2fcf1f2d4491e26368c723811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodMaterial: {fileID: 2100000, guid: 07bf168059b3e6742a8831b646a3254a, type: 2}
+  woodGround: {fileID: 2100000, guid: 07bf168059b3e6742a8831b646a3254a, type: 2}
+  woodDoorway: {fileID: 2100000, guid: 2cab0f22e2f192743b3475a162a37266, type: 2}
 --- !u!4 &1002221902
 Transform:
   m_ObjectHideFlags: 0

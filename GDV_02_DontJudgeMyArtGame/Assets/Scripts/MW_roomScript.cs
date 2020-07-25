@@ -14,7 +14,8 @@ public class MW_roomScript : MonoBehaviour
 
     GameObject building;
 
-    public Material woodMaterial;
+    public Material woodGround;
+    public Material woodDoorway;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +51,7 @@ public class MW_roomScript : MonoBehaviour
         rend.material = new Material(Shader.Find("Standard"));
         // Material hinzufügen, das in der UI erstellt wurde (Assets -> Create -> Material)
         // unter Albedo schließlich die Textur auswählen
-        ground.GetComponent<Renderer>().material = woodMaterial;
+        ground.GetComponent<Renderer>().material = woodGround;
 
         meshGround = ground.GetComponent<MeshFilter>().mesh;
         meshGround.Clear();
@@ -195,9 +196,9 @@ public class MW_roomScript : MonoBehaviour
         groundUvs.Add(new Vector2(1, 1));
         groundUvs.Add(new Vector2(1, 0));
         // Raum 5
-        groundUvs.Add(new Vector2(1, 0));
-        groundUvs.Add(new Vector2(0, 0));
         groundUvs.Add(new Vector2(1, 1));
+        groundUvs.Add(new Vector2(0, 0));
+        groundUvs.Add(new Vector2(1, 0));
         groundUvs.Add(new Vector2(0, 1));
         // Raum 6
         groundUvs.Add(new Vector2(1, 0));
@@ -2193,8 +2194,9 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend = doorway.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Standard"));
         meshDoorway = doorway.GetComponent<MeshFilter>().mesh;
-        Texture texture = Resources.Load("WoodGround") as Texture;
-        rend.material.mainTexture = texture;
+        /*Texture texture = Resources.Load("WoodGround") as Texture;
+        rend.material.mainTexture = texture;*/
+        doorway.GetComponent<Renderer>().material = woodDoorway;
 
         meshDoorway.Clear();
 
