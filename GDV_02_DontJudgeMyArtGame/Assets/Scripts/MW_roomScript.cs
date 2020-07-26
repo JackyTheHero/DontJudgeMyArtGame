@@ -2194,9 +2194,9 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend = doorway.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Standard"));
         meshDoorway = doorway.GetComponent<MeshFilter>().mesh;
-        /*Texture texture = Resources.Load("WoodGround") as Texture;
-        rend.material.mainTexture = texture;*/
-        doorway.GetComponent<Renderer>().material = woodDoorway;
+        Texture texture = Resources.Load("WoodDoorway") as Texture;
+        rend.material.mainTexture = texture;
+        // doorway.GetComponent<Renderer>().material = woodDoorway;
 
         meshDoorway.Clear();
 
