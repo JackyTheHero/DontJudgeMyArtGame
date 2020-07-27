@@ -312,7 +312,7 @@ public class JH_propScript : MonoBehaviour
 
         GameObject benchTwo = Instantiate(bench);
         benchTwo.name = "benchTwo";
-        benchTwo.transform.Translate(16.5f, 0f, 26f);
+        benchTwo.transform.Translate(17.5f, 0f, 26f);
         benchTwo.transform.Rotate(new Vector3(0,90,0));
 
         GameObject benchThree = Instantiate(bench);
