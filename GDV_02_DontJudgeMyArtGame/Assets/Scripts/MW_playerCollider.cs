@@ -62,10 +62,14 @@ public class MW_playerCollider : MonoBehaviour
         style.normal.textColor = Color.red;
         // collectedItems wird in triggerEnter (Skript am Schlangenkopf) deklariert und hochgezählt
         if (isInRange == true) {
-            GUI.Label(new Rect(10, 0, 0, 0), "Drücke E, um das Fenster zu löschen", style);
+            GUI.Label(new Rect((Screen.width) / 2 - (Screen.width) / 4,
+                                (Screen.height) / 2 - (Screen.height) / 8,
+                                (Screen.width) / 4,
+                                (Screen.height) / 4),
+                                "Drücke E, um das Fenster zu löschen", style);
         }
         if (isInRange == false) {
-            GUI.Label(new Rect(10, 0, 0, 0), "", style);
+            GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
     }
 }
