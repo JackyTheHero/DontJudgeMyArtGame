@@ -7,7 +7,7 @@ public class MW_playerCollider : MonoBehaviour
     // speichere in dieser Variablen, ob ein interagierbares Gameobject in der Nähe ist
     bool isInRange = false;
 
-    // speichere das GameObject, das ein OnTriggerEnter mit dem Player hat
+    // speichere hier das GameObject, das ein OnTriggerEnter mit dem Player hat
     GameObject inFocus;
 
     // Keyboard wird bei Start der Szene gesperrt, da Player aus einer gewissen Höhe auf den Boden fällt ...
@@ -22,8 +22,11 @@ public class MW_playerCollider : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+        // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste E gelöscht werden
         if (isInRange == true && Input.GetKeyDown(KeyCode.E)) {
+            // lösche GameObject, das im Fokus steht
             Destroy(inFocus);
+            // isInRange wird wieder auf false gesetzt, da das GameObject nicht mehr existiert
             isInRange = false;
         }
     }
@@ -39,17 +42,26 @@ public class MW_playerCollider : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.gameObject.name == "Fenster (1)") {
-            Debug.Log(this.name + "is able to interact with" + other.gameObject.name);
-            isInRange = true;
-            inFocus = other.gameObject;
+        // prüfe zunächst, ob der Name des GameObjects größer oder gleich 7 ist, da Fenster 7 Zeichen besitzt
+        if (other.gameObject.name.Length >= 7) {
+            // prüfe, ob die ersten 7 Zeichen des Namens "Fenster" ergeben -> wenn ja, wird es erlaubt, das Bild zu löschen
+            if (other.gameObject.name.Substring(0, 7) == "Fenster") {
+                Debug.Log(this.name + "is able to interact with " + other.gameObject.name);
+                isInRange = true;
+                // speichere das GameObject, das zum Löschen freigegeben wird, im Gameobject inFocus
+                inFocus = other.gameObject;
+            }
         }
     }
 
     void OnTriggerExit(Collider other) {
-        if (other.gameObject.name == "Fenster (1)") {
-            Debug.Log(this.name + "is no longer able to interact with" + other.gameObject.name);
-            isInRange = false;
+        // prüfe zunächst, ob der Name des GameObjects größer oder gleich 7 ist, da Fenster 7 Zeichen besitzt
+        if (other.gameObject.name.Length >= 7) {
+            // prüfe, ob die ersten 7 Zeichen des Namens "Fenster" ergeben -> wenn ja, wird es nun nicht mehr erlaubt, das Bild zu löschen
+            if (other.gameObject.name.Substring(0, 7) == "Fenster") {
+                Debug.Log(this.name + "is no longer able to interact with " + other.gameObject.name);
+                isInRange = false;
+            }
         }
     }
 
