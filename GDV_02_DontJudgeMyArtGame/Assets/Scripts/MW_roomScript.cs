@@ -3028,6 +3028,8 @@ public class MW_roomScript : MonoBehaviour
     }
 
     public void CreateDividingWall() {
+        float wallFactor = 3.75f;
+
         Mesh meshWall1 = new Mesh();
         GameObject wall1 = new GameObject("Dividing Wall Purple (1)", typeof(MeshFilter), typeof(MeshRenderer));
 
@@ -3044,25 +3046,25 @@ public class MW_roomScript : MonoBehaviour
         List<Vector2> wall1Uvs = new List<Vector2>();
 
         // Seite
-        wall1Vertices.Add(new Vector3(-0.5f, height, -27));
-        wall1Vertices.Add(new Vector3(-0.5f, height, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(-0.5f, height / wallFactor, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, height / wallFactor, 29 - wallThickness));
         wall1Vertices.Add(new Vector3(-0.5f, 0, -27));
         wall1Vertices.Add(new Vector3(-0.5f, 0, 29 - wallThickness));
         // Seite
-        wall1Vertices.Add(new Vector3(0.5f, height, -27));
-        wall1Vertices.Add(new Vector3(0.5f, height, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(0.5f, height / wallFactor, -27));
+        wall1Vertices.Add(new Vector3(0.5f, height / wallFactor, 29 - wallThickness));
         wall1Vertices.Add(new Vector3(0.5f, 0, -27));
         wall1Vertices.Add(new Vector3(0.5f, 0, 29 - wallThickness));
         // zwischen den Seiten
-        wall1Vertices.Add(new Vector3(-0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, height / wallFactor, -27));
         wall1Vertices.Add(new Vector3(-0.5f, 0, -27));
-        wall1Vertices.Add(new Vector3(0.5f, height, -27));
+        wall1Vertices.Add(new Vector3(0.5f, height / wallFactor, -27));
         wall1Vertices.Add(new Vector3(0.5f, 0, -27));
         // oben
-        wall1Vertices.Add(new Vector3(-0.5f, height, -27));
-        wall1Vertices.Add(new Vector3(-0.5f, height, 29 - wallThickness));
-        wall1Vertices.Add(new Vector3(0.5f, height, -27));
-        wall1Vertices.Add(new Vector3(0.5f, height, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(-0.5f, height / wallFactor, -27));
+        wall1Vertices.Add(new Vector3(-0.5f, height / wallFactor, 29 - wallThickness));
+        wall1Vertices.Add(new Vector3(0.5f, height / wallFactor, -27));
+        wall1Vertices.Add(new Vector3(0.5f, height / wallFactor, 29 - wallThickness));
 
         meshWall1.vertices = wall1Vertices.ToArray();
 
@@ -3157,30 +3159,30 @@ public class MW_roomScript : MonoBehaviour
         List<Vector2> wall3Uvs = new List<Vector2>();
 
         // Seite
-        wall3Vertices.Add(new Vector3(-0.5f, height, -17));
-        wall3Vertices.Add(new Vector3(-0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(-0.5f, height / wallFactor, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, height / wallFactor, 19 - wallThickness));
         wall3Vertices.Add(new Vector3(-0.5f, 0, -17));
         wall3Vertices.Add(new Vector3(-0.5f, 0, 19 - wallThickness));
         // Seite
-        wall3Vertices.Add(new Vector3(0.5f, height, -17));
-        wall3Vertices.Add(new Vector3(0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, height / wallFactor, -17));
+        wall3Vertices.Add(new Vector3(0.5f, height / wallFactor, 19 - wallThickness));
         wall3Vertices.Add(new Vector3(0.5f, 0, -17));
         wall3Vertices.Add(new Vector3(0.5f, 0, 19 - wallThickness));
         // zwischen den Seiten
-        wall3Vertices.Add(new Vector3(-0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, height / wallFactor, -17));
         wall3Vertices.Add(new Vector3(-0.5f, 0, -17));
-        wall3Vertices.Add(new Vector3(0.5f, height, -17));
+        wall3Vertices.Add(new Vector3(0.5f, height / wallFactor, -17));
         wall3Vertices.Add(new Vector3(0.5f, 0, -17));
         // zwischen den Seiten
-        wall3Vertices.Add(new Vector3(-0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(-0.5f, height / wallFactor, 19 - wallThickness));
         wall3Vertices.Add(new Vector3(-0.5f, 0, 19 - wallThickness));
-        wall3Vertices.Add(new Vector3(0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, height / wallFactor, 19 - wallThickness));
         wall3Vertices.Add(new Vector3(0.5f, 0, 19 - wallThickness));
         // oben
-        wall3Vertices.Add(new Vector3(-0.5f, height, -17));
-        wall3Vertices.Add(new Vector3(-0.5f, height, 19 - wallThickness));
-        wall3Vertices.Add(new Vector3(0.5f, height, -17));
-        wall3Vertices.Add(new Vector3(0.5f, height, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(-0.5f, height / wallFactor, -17));
+        wall3Vertices.Add(new Vector3(-0.5f, height / wallFactor, 19 - wallThickness));
+        wall3Vertices.Add(new Vector3(0.5f, height / wallFactor, -17));
+        wall3Vertices.Add(new Vector3(0.5f, height / wallFactor, 19 - wallThickness));
 
         meshwall3.vertices = wall3Vertices.ToArray();
 
