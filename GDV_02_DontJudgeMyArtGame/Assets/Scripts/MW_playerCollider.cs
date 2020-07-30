@@ -13,11 +13,13 @@ public class MW_playerCollider : MonoBehaviour
     // Keyboard wird bei Start der Szene gesperrt, da Player aus einer gewissen Höhe auf den Boden fällt ...
     // ... während dieses Falles soll sich der Player nicht bewegen können
     public static bool keyboardEnabled = false;
+    // Rigidbody des Players
+    public Rigidbody playerRig;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     // Update is called once per frame
@@ -33,10 +35,13 @@ public class MW_playerCollider : MonoBehaviour
 
     void OnCollisionEnter(Collision other) {
         // gib folgende Zeile für alle Kollisionen aus
-        Debug.Log(this.name + " has an OnCollisionEnter with " + other.gameObject.name);
+        // Debug.Log(this.name + " has an OnCollisionEnter with " + other.gameObject.name);
 
         // wenn Player mit dem Boden kollidiert und somit der Fall beendet ist, wird Tasteneingabe freigegeben
         if (other.gameObject.name == "Ground") {
+            // Rigidbody des Players erhält position und rotation constraints, sodass er sich auf diesen Achsen nicht verändert
+            // constraint für position y wird hier erst eingefügt, da Player zuvor auf dem Boden aufgekommen sein muss
+            playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
             keyboardEnabled = true;
         }
     }
@@ -46,7 +51,7 @@ public class MW_playerCollider : MonoBehaviour
         if (other.gameObject.name.Length >= 7) {
             // prüfe, ob die ersten 7 Zeichen des Namens "Fenster" ergeben -> wenn ja, wird es erlaubt, das Bild zu löschen
             if (other.gameObject.name.Substring(0, 7) == "Fenster") {
-                Debug.Log(this.name + "is able to interact with " + other.gameObject.name);
+                // Debug.Log(this.name + "is able to interact with " + other.gameObject.name);
                 isInRange = true;
                 // speichere das GameObject, das zum Löschen freigegeben wird, im Gameobject inFocus
                 inFocus = other.gameObject;
@@ -59,7 +64,7 @@ public class MW_playerCollider : MonoBehaviour
         if (other.gameObject.name.Length >= 7) {
             // prüfe, ob die ersten 7 Zeichen des Namens "Fenster" ergeben -> wenn ja, wird es nun nicht mehr erlaubt, das Bild zu löschen
             if (other.gameObject.name.Substring(0, 7) == "Fenster") {
-                Debug.Log(this.name + "is no longer able to interact with " + other.gameObject.name);
+                // Debug.Log(this.name + "is no longer able to interact with " + other.gameObject.name);
                 isInRange = false;
             }
         }

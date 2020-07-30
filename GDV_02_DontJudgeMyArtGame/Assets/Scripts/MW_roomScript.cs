@@ -15,7 +15,6 @@ public class MW_roomScript : MonoBehaviour
     GameObject building;
 
     public Material woodGround;
-    public Material woodDoorway;
 
     // Start is called before the first frame update
     void Start()

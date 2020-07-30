@@ -2427,6 +2427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0792152279c9d0d4c958bbfaf7db684c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRig: {fileID: 892580095}
 --- !u!65 &892580094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2454,7 +2455,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &892580096
 MonoBehaviour:

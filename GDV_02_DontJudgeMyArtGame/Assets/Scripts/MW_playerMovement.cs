@@ -79,19 +79,21 @@ public class MW_playerMovement : MonoBehaviour
             // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
             targetDirection += camRight;
             this.transform.forward = targetDirection;
+            // this.transform.Rotate(0, -90, 0);
         }
-
         if (Input.GetKey(KeyCode.S)) {
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
             // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
             targetDirection += camForward;
             this.transform.forward = targetDirection;
+            // this.transform.Rotate(0, 180, 0);
         }
         if (Input.GetKey(KeyCode.D)) {
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
             // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
             targetDirection += -camRight;
             this.transform.forward = targetDirection;
+            // this.transform.Rotate(0, 90, 0);
         }
     }
 
