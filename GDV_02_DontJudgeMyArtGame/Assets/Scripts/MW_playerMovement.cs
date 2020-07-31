@@ -142,7 +142,7 @@ public class MW_playerMovement : MonoBehaviour
                 Quaternion rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
                 this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotation, 0.1f);
         }
-        if (Input.GetKey(KeyCode.D)|| Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S)){
+        if (Input.GetKey(KeyCode.D)){
             // Setze Blickrichtung des Players auf Blickrichtung der Kamera und addiere vorheriges Player-Forward ...
             // ... sodass die Mitte zwischen zwei Vektoren als Blickrichtung dient, wenn zwei Tasten gedrückt werden
             // lookDirection += -camRight;
