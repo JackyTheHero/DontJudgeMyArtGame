@@ -41,6 +41,8 @@ public class MW_roomScript : MonoBehaviour
         
     }
 
+
+    /* FUNKTION, DIE BODEN ERSTELLT */
     private void CreateGround() {
         Mesh meshGround = new Mesh();
         GameObject ground = new GameObject("Ground", typeof(MeshFilter), typeof(MeshRenderer));
@@ -58,6 +60,8 @@ public class MW_roomScript : MonoBehaviour
         List<Vector3> groundVertices = new List<Vector3>();
         List<int> groundTriangles = new List<int>();
         List<Vector2> groundUvs = new List<Vector2>();
+
+        /* wallThickness / 2 -> sodass ein Boden immer bis zur Hälfte des Türrahmens geht */
 
         // Raum 1 -> grüner Raum
         groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
@@ -85,10 +89,10 @@ public class MW_roomScript : MonoBehaviour
         groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 - wallThickness / 2));
         groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
         // Raum 6 -> lila Raum
-        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 - wallThickness / 2));
         groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, 0 + wallThickness / 2));
         groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, -70 + wallThickness / 2));
+        groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, -70 - wallThickness / 2));
         // Raum 7 -> grüner Raum
         groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));
         groundVertices.Add(new Vector3(-70 - wallThickness / 2, 0, 78 + wallThickness / 2));
@@ -232,6 +236,8 @@ public class MW_roomScript : MonoBehaviour
 
     }
 
+
+    /* FUNKTION, DIE RÄUME ERSTELLT */
     private void CreateRooms() {
         // Room 1
         Mesh meshRoom1 = new Mesh();
@@ -2185,6 +2191,8 @@ public class MW_roomScript : MonoBehaviour
         meshRoom9 = room9Collider.sharedMesh;
     }
 
+
+    /* FUNKTION, DIE TÜRRAHMEN ERSTELLT */
     private void CreateDoorways() {
         Mesh meshDoorway = new Mesh();
         GameObject doorway = new GameObject("Doorways", typeof(MeshFilter), typeof(MeshRenderer));
@@ -2901,6 +2909,8 @@ public class MW_roomScript : MonoBehaviour
         meshDoorway = doorwayCollider.sharedMesh;
     }
 
+
+    /* FUNKTION, DIE EINGANGSTÜR ERSTELLT */
     private void CreateFrontDoor() {
         Mesh meshDoor = new Mesh();
         GameObject door = new GameObject("Front Door", typeof(MeshFilter), typeof(MeshRenderer));
@@ -3026,6 +3036,8 @@ public class MW_roomScript : MonoBehaviour
         meshDoor = doorCollider.sharedMesh;
     }
 
+
+    /* FUNKTION, DIE ZWISCHENWÄNDE ERSTELLT */
     public void CreateDividingWall() {
         float wallFactor = 3.75f;
 
