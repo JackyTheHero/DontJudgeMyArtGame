@@ -28,7 +28,7 @@ public class MW_roomScript : MonoBehaviour
         // Empty, an das alle Bestandteile des Raumaufbaus gehängt werden
         building = new GameObject();
         // Empty so verschieben, dass Spieler auf seiner Startposition steht
-        // building.transform.Translate(-82, 0, 41);
+        building.transform.Translate(-82, 0, 41);
         building.name = "Building";
 
         CreateGround();
@@ -38,7 +38,7 @@ public class MW_roomScript : MonoBehaviour
         CreateDividingWall();
 
         // Versetzt Empty auf den Ursprungsppunkt 0|0|0, wo auch Spieler starten soll
-        // building.transform.Translate(82, 0, -41);
+        building.transform.Translate(82, 0, -41);
     }
 
     // Update is called once per frame
@@ -1589,35 +1589,35 @@ public class MW_roomScript : MonoBehaviour
         meshRoom6.triangles = room6Triangles.ToArray();
 
         // Wand über Türrahmen
-        room6Uvs.Add(new Vector2(1, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 1));
+        room6Uvs.Add(new Vector2(1, wallAboveUV));
+        room6Uvs.Add(new Vector2(0, wallAboveUV));
+        room6Uvs.Add(new Vector2(0, 1));
         room6Uvs.Add(new Vector2(1, 1));
         // Wand unter Türrahmen -> rechts
-        room6Uvs.Add(new Vector2(0.5f, 0));
-        room6Uvs.Add(new Vector2(0, 0));
-        room6Uvs.Add(new Vector2(0, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 0.5f));
+        room6Uvs.Add(new Vector2(1, 0));
+        room6Uvs.Add(new Vector2(1.0f - (20.0f / 40.0f), 0));
+        room6Uvs.Add(new Vector2(1.0f - (20.0f / 40.0f), wallAboveUV));
+        room6Uvs.Add(new Vector2(1, wallAboveUV));
         // Wand unter Türrahmen -> links
-        room6Uvs.Add(new Vector2(0.5f, 0));
+        room6Uvs.Add(new Vector2((70.0f - 50.0f - doorwayThickness) / 40.0f, 0));
         room6Uvs.Add(new Vector2(0, 0));
-        room6Uvs.Add(new Vector2(0, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 0.5f));
+        room6Uvs.Add(new Vector2(0, wallAboveUV));
+        room6Uvs.Add(new Vector2((70.0f - 50.0f - doorwayThickness) / 40.0f, wallAboveUV));
         // Wand über Türrahmen
-        room6Uvs.Add(new Vector2(1, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 1));
+        room6Uvs.Add(new Vector2(0, wallAboveUV));
+        room6Uvs.Add(new Vector2(1, wallAboveUV));
         room6Uvs.Add(new Vector2(1, 1));
+        room6Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> links
-        room6Uvs.Add(new Vector2(0.5f, 0));
         room6Uvs.Add(new Vector2(0, 0));
-        room6Uvs.Add(new Vector2(0, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 0.5f));
+        room6Uvs.Add(new Vector2(30.0f / 72.0f, 0));
+        room6Uvs.Add(new Vector2(30.0f / 72.0f, wallAboveUV));
+        room6Uvs.Add(new Vector2(0, wallAboveUV));
         // Wand unter Türrahmen -> rechts
-        room6Uvs.Add(new Vector2(0.5f, 0));
-        room6Uvs.Add(new Vector2(0, 0));
-        room6Uvs.Add(new Vector2(0, 0.5f));
-        room6Uvs.Add(new Vector2(0.5f, 0.5f));
+        room6Uvs.Add(new Vector2(1.0f - ((72.0f - 30.0f - doorwayThickness) / 72.0f), 0));
+        room6Uvs.Add(new Vector2(1, 0));
+        room6Uvs.Add(new Vector2(1, wallAboveUV));
+        room6Uvs.Add(new Vector2(1.0f - ((72.0f - 30.0f - doorwayThickness) / 72.0f), wallAboveUV));
         // Vorderseite
         room6Uvs.Add(new Vector2(1, 0));
         room6Uvs.Add(new Vector2(0, 0));
@@ -3051,13 +3051,15 @@ public class MW_roomScript : MonoBehaviour
     /* FUNKTION, DIE ZWISCHENWÄNDE ERSTELLT */
     public void CreateDividingWall() {
         float wallFactor = 3.75f;
+        float upUV = (height / wallFactor) / height;
 
         Mesh meshWall1 = new Mesh();
         GameObject wall1 = new GameObject("Dividing Wall Purple (1)", typeof(MeshFilter), typeof(MeshRenderer));
 
         Renderer rend1 = wall1.GetComponent<Renderer>();
         rend1.material = new Material(Shader.Find("Standard"));
-        Texture texture1 = Resources.Load("TexturePurple") as Texture;
+        // Texture texture1 = Resources.Load("TexturePurple") as Texture;
+        Texture texture1 = Resources.Load("StripeTest") as Texture;
         rend1.material.mainTexture = texture1;
 
         meshWall1 = wall1.GetComponent<MeshFilter>().mesh;
@@ -3125,25 +3127,25 @@ public class MW_roomScript : MonoBehaviour
         meshWall1.triangles = wall1Triangles.ToArray();
 
         // Seite
-        wall1Uvs.Add(new Vector2(1, 1));
-        wall1Uvs.Add(new Vector2(0, 1));
-        wall1Uvs.Add(new Vector2(1, 0));
+        wall1Uvs.Add(new Vector2(54.0f / 80.0f, upUV));
+        wall1Uvs.Add(new Vector2(0, upUV));
+        wall1Uvs.Add(new Vector2(54.0f / 80.0f, 0));
         wall1Uvs.Add(new Vector2(0, 0));
         // Seite
-        wall1Uvs.Add(new Vector2(1, 1));
-        wall1Uvs.Add(new Vector2(0, 1));
-        wall1Uvs.Add(new Vector2(1, 0));
+        wall1Uvs.Add(new Vector2(54.0f / 80.0f, upUV));
+        wall1Uvs.Add(new Vector2(0, upUV));
+        wall1Uvs.Add(new Vector2(54.0f / 80.0f, 0));
         wall1Uvs.Add(new Vector2(0, 0));
         // zwischen den Seiten
-        wall1Uvs.Add(new Vector2(0, 1));
+        wall1Uvs.Add(new Vector2(0, upUV));
         wall1Uvs.Add(new Vector2(0, 0));
-        wall1Uvs.Add(new Vector2(1, 1));
-        wall1Uvs.Add(new Vector2(1, 0));
+        wall1Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
+        wall1Uvs.Add(new Vector2(1.0f / 80.0f, 0));
         // oben
+        wall1Uvs.Add(new Vector2(0, upUV));
         wall1Uvs.Add(new Vector2(0, 0));
-        wall1Uvs.Add(new Vector2(1, 0));
-        wall1Uvs.Add(new Vector2(0, 1));
-        wall1Uvs.Add(new Vector2(1, 1));
+        wall1Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
+        wall1Uvs.Add(new Vector2(1.0f / 80.0f, 0));
         
         meshWall1.uv = wall1Uvs.ToArray();
 
@@ -3170,7 +3172,8 @@ public class MW_roomScript : MonoBehaviour
 
         Renderer rend2 = wall3.GetComponent<Renderer>();
         rend2.material = new Material(Shader.Find("Standard"));
-        Texture texture2 = Resources.Load("TextureDarkBlue") as Texture;
+        // Texture texture2 = Resources.Load("TextureDarkBlue") as Texture;
+        Texture texture2 = Resources.Load("StripeTest") as Texture;
         rend2.material.mainTexture = texture2;
 
         meshwall3 = wall3.GetComponent<MeshFilter>().mesh;
@@ -3251,30 +3254,30 @@ public class MW_roomScript : MonoBehaviour
         meshwall3.triangles = wall3Triangles.ToArray();
 
         // Seite
-        wall3Uvs.Add(new Vector2(1, 1));
-        wall3Uvs.Add(new Vector2(0, 1));
-        wall3Uvs.Add(new Vector2(1, 0));
-        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), 0));
+        wall3Uvs.Add(new Vector2(18.0f / 70.0f, 0));
+        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), upUV));
+        wall3Uvs.Add(new Vector2(18.0f / 70.0f, upUV));
         // Seite
-        wall3Uvs.Add(new Vector2(1, 1));
-        wall3Uvs.Add(new Vector2(0, 1));
-        wall3Uvs.Add(new Vector2(1, 0));
-        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), 0));
+        wall3Uvs.Add(new Vector2(18.0f / 70.0f, 0));
+        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), upUV));
+        wall3Uvs.Add(new Vector2(18.0f / 70.0f, upUV));
         // zwischen den Seiten
-        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(0, upUV));
         wall3Uvs.Add(new Vector2(0, 0));
-        wall3Uvs.Add(new Vector2(1, 1));
-        wall3Uvs.Add(new Vector2(1, 0));
+        wall3Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
+        wall3Uvs.Add(new Vector2(1.0f / 80.0f, 0));
         // zwischen den Seiten
-        wall3Uvs.Add(new Vector2(0, 1));
+        wall3Uvs.Add(new Vector2(0, upUV));
         wall3Uvs.Add(new Vector2(0, 0));
-        wall3Uvs.Add(new Vector2(1, 1));
-        wall3Uvs.Add(new Vector2(1, 0));
+        wall3Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
+        wall3Uvs.Add(new Vector2(1.0f / 80.0f, 0));
         // oben
+        wall3Uvs.Add(new Vector2(0, upUV));
         wall3Uvs.Add(new Vector2(0, 0));
-        wall3Uvs.Add(new Vector2(1, 0));
-        wall3Uvs.Add(new Vector2(0, 1));
-        wall3Uvs.Add(new Vector2(1, 1));
+        wall3Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
+        wall3Uvs.Add(new Vector2(1.0f / 80.0f, 0));
         
         meshwall3.uv = wall3Uvs.ToArray();
 
