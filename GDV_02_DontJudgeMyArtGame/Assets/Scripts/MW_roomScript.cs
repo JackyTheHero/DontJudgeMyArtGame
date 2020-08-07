@@ -28,7 +28,7 @@ public class MW_roomScript : MonoBehaviour
         // Empty, an das alle Bestandteile des Raumaufbaus gehängt werden
         building = new GameObject();
         // Empty so verschieben, dass Spieler auf seiner Startposition steht
-        building.transform.Translate(-82, 0, 41);
+        // building.transform.Translate(-82, 0, 41);
         building.name = "Building";
 
         CreateGround();
@@ -38,7 +38,7 @@ public class MW_roomScript : MonoBehaviour
         CreateDividingWall();
 
         // Versetzt Empty auf den Ursprungsppunkt 0|0|0, wo auch Spieler starten soll
-        building.transform.Translate(82, 0, -41);
+        // building.transform.Translate(82, 0, -41);
     }
 
     // Update is called once per frame
@@ -253,7 +253,8 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend1 = room1.GetComponent<Renderer>();
         rend1.material = new Material(Shader.Find("Standard"));
         meshRoom1 = room1.GetComponent<MeshFilter>().mesh;
-        Texture texture1 = Resources.Load("TextureGreen") as Texture;
+        // Texture texture1 = Resources.Load("TextureGreen") as Texture;
+        Texture texture1 = Resources.Load("StripeTest") as Texture;
         rend1.material.mainTexture = texture1;
 
         meshRoom1.Clear();
@@ -512,7 +513,8 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend2 = room2.GetComponent<Renderer>();
         rend2.material = new Material(Shader.Find("Standard"));
         meshRoom2 = room2.GetComponent<MeshFilter>().mesh;
-        Texture texture2 = Resources.Load("TexturePurple") as Texture;
+        // Texture texture2 = Resources.Load("TexturePurple") as Texture;
+        Texture texture2 = Resources.Load("StripeTest") as Texture;
         rend2.material.mainTexture = texture2;
 
         meshRoom2.Clear();
@@ -881,50 +883,50 @@ public class MW_roomScript : MonoBehaviour
         meshRoom3.triangles = room3Triangles.ToArray();
 
         // Wand über Türrahmen
-        room3Uvs.Add(new Vector2(1, 0));
-        room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0, 1));
+        room3Uvs.Add(new Vector2(0, wallAboveUV));
+        room3Uvs.Add(new Vector2(1, wallAboveUV));
         room3Uvs.Add(new Vector2(1, 1));
+        room3Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> links
-        room3Uvs.Add(new Vector2(1, 0));
         room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0, 1));
-        room3Uvs.Add(new Vector2(1, 1));
+        room3Uvs.Add(new Vector2(18.0f / 48.0f, 0));
+        room3Uvs.Add(new Vector2(18.0f / 48.0f, wallAboveUV));
+        room3Uvs.Add(new Vector2(0, wallAboveUV));
         // Wand unter Türrahmen -> rechts
+        room3Uvs.Add(new Vector2(1.0f - ((50.0f - 20.0f - doorwayThickness) / 48.0f), 0));
         room3Uvs.Add(new Vector2(1, 0));
-        room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0, 1));
-        room3Uvs.Add(new Vector2(1, 1));
+        room3Uvs.Add(new Vector2(1, wallAboveUV));
+        room3Uvs.Add(new Vector2(1.0f - ((50.0f - 20.0f - doorwayThickness) / 48.0f), wallAboveUV));
         // Wand über Türrahmen
-        room3Uvs.Add(new Vector2(1, 0.5f));
-        room3Uvs.Add(new Vector2(0.5f, 0.5f));
+        room3Uvs.Add(new Vector2(0, wallAboveUV));
+        room3Uvs.Add(new Vector2(1, wallAboveUV));
+        room3Uvs.Add(new Vector2(0, 1));
         room3Uvs.Add(new Vector2(1, 1));
-        room3Uvs.Add(new Vector2(0.5f, 1));
         // Wand unter Türrahmen -> rechts
-        room3Uvs.Add(new Vector2(0.5f, 0));
-        room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0.5f, 0.5f));
-        room3Uvs.Add(new Vector2(0, 0.5f));
+        room3Uvs.Add(new Vector2(1.0f - (17.0f / 70.0f), 0));
+        room3Uvs.Add(new Vector2(1, 0));
+        room3Uvs.Add(new Vector2(1.0f - (17.0f / 70.0f), wallAboveUV));
+        room3Uvs.Add(new Vector2(1, wallAboveUV));
         // Wand unter Türrahmen -> links
-        room3Uvs.Add(new Vector2(0.5f, 0));
         room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0.5f, 0.5f));
-        room3Uvs.Add(new Vector2(0, 0.5f));
+        room3Uvs.Add(new Vector2((95.0f - 42.0f - doorwayThickness) / 70.0f, 0));
+        room3Uvs.Add(new Vector2(0, wallAboveUV));
+        room3Uvs.Add(new Vector2((95.0f - 42.0f - doorwayThickness) / 70.0f, wallAboveUV));
         // Wand über Türrahmen
-        room3Uvs.Add(new Vector2(1, 0.5f));
-        room3Uvs.Add(new Vector2(0.5f, 0.5f));
+        room3Uvs.Add(new Vector2(1, wallAboveUV));
+        room3Uvs.Add(new Vector2(0, wallAboveUV));
         room3Uvs.Add(new Vector2(1, 1));
-        room3Uvs.Add(new Vector2(0.5f, 1));
+        room3Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> rechts
-        room3Uvs.Add(new Vector2(0.5f, 0));
-        room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0.5f, 0.5f));
-        room3Uvs.Add(new Vector2(0, 0.5f));
+        room3Uvs.Add(new Vector2(1, 0));
+        room3Uvs.Add(new Vector2(1.0f - ((95.0f - 42.0f - doorwayThickness) / 70.0f), 0));
+        room3Uvs.Add(new Vector2(1, wallAboveUV));
+        room3Uvs.Add(new Vector2(1.0f - ((95.0f - 42.0f - doorwayThickness) / 70.0f), wallAboveUV));
         // Wand unter Türrahmen -> links
-        room3Uvs.Add(new Vector2(0.5f, 0));
+        room3Uvs.Add(new Vector2(17.0f / 70.0f, 0));
         room3Uvs.Add(new Vector2(0, 0));
-        room3Uvs.Add(new Vector2(0.5f, 0.5f));
-        room3Uvs.Add(new Vector2(0, 0.5f));
+        room3Uvs.Add(new Vector2(17.0f / 70.0f, wallAboveUV));
+        room3Uvs.Add(new Vector2(0, wallAboveUV));
         // Vorderseite
         room3Uvs.Add(new Vector2(1, 0));
         room3Uvs.Add(new Vector2(0, 0));
@@ -953,7 +955,8 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend4 = room4.GetComponent<Renderer>();
         rend4.material = new Material(Shader.Find("Standard"));
         meshRoom4 = room4.GetComponent<MeshFilter>().mesh;
-        Texture texture4 = Resources.Load("TextureDarkBlue") as Texture;
+        // Texture texture4 = Resources.Load("TextureDarkBlue") as Texture;
+        Texture texture4 = Resources.Load("StripeTest") as Texture;
         rend4.material.mainTexture = texture4;
 
         meshRoom4.Clear();
@@ -982,12 +985,12 @@ public class MW_roomScript : MonoBehaviour
         room4Vertices.Add(new Vector3(-70 + wallThickness, height / doorwayFactor, 78));
         room4Vertices.Add(new Vector3(-70 + wallThickness, height, 78));
         room4Vertices.Add(new Vector3(-12, height, 78));
-        // Wand über Türrahmen -> rechts
+        // Wand über Türrahmen -> links
         room4Vertices.Add(new Vector3(-30 - doorwayThickness, 0, 78));
         room4Vertices.Add(new Vector3(-70 + wallThickness, 0, 78));
         room4Vertices.Add(new Vector3(-70 + wallThickness, height / doorwayFactor, 78));
         room4Vertices.Add(new Vector3(-30 - doorwayThickness, height / doorwayFactor, 78));
-        // Wand über Türrahmen -> links
+        // Wand über Türrahmen -> rechts
         room4Vertices.Add(new Vector3(-12, 0, 78));
         room4Vertices.Add(new Vector3(-30, 0, 78));
         room4Vertices.Add(new Vector3(-30, height / doorwayFactor, 78));
@@ -1068,14 +1071,14 @@ public class MW_roomScript : MonoBehaviour
         room4Triangles.Add(12);
         room4Triangles.Add(14);
         room4Triangles.Add(15);
-        // Wand über Türrahmen -> rechts -> 16 bis 19
+        // Wand über Türrahmen -> links -> 16 bis 19
         room4Triangles.Add(16);
         room4Triangles.Add(17);
         room4Triangles.Add(18);
         room4Triangles.Add(16);
         room4Triangles.Add(18);
         room4Triangles.Add(19);
-        // Wand über Türrahmen -> links -> 20 bis 23
+        // Wand über Türrahmen -> rechts -> 20 bis 23
         room4Triangles.Add(20);
         room4Triangles.Add(21);
         room4Triangles.Add(22);
@@ -1149,35 +1152,35 @@ public class MW_roomScript : MonoBehaviour
         meshRoom4.triangles = room4Triangles.ToArray();
 
         // Wand über Türrahmen
-        room4Uvs.Add(new Vector2(1, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 1));
+        room4Uvs.Add(new Vector2(1, wallAboveUV));
+        room4Uvs.Add(new Vector2(0, wallAboveUV));
+        room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
         // Wand unter Türrahmen -> rechts
-        room4Uvs.Add(new Vector2(0.5f, 0));
-        room4Uvs.Add(new Vector2(0, 0));
-        room4Uvs.Add(new Vector2(0, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
+        room4Uvs.Add(new Vector2(1, 0));
+        room4Uvs.Add(new Vector2(1.0f - (18.0f / 76.0f), 0));
+        room4Uvs.Add(new Vector2(1.0f - (18.0f / 76.0f), wallAboveUV));
+        room4Uvs.Add(new Vector2(1, wallAboveUV));
         // Wand unter Türrahmen -> links
-        room4Uvs.Add(new Vector2(0.5f, 0));
+        room4Uvs.Add(new Vector2((78.0f - 20.0f - doorwayThickness) / 76.0f, 0));
         room4Uvs.Add(new Vector2(0, 0));
-        room4Uvs.Add(new Vector2(0, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
+        room4Uvs.Add(new Vector2(0, wallAboveUV));
+        room4Uvs.Add(new Vector2((78.0f - 20.0f - doorwayThickness) / 76.0f, wallAboveUV));
         // Wand über Türrahmen
-        room4Uvs.Add(new Vector2(1, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 1));
+        room4Uvs.Add(new Vector2(1, wallAboveUV));
+        room4Uvs.Add(new Vector2(0, wallAboveUV));
+        room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
-        // Wand unter Türrahmen -> rechts
-        room4Uvs.Add(new Vector2(0.5f, 0));
-        room4Uvs.Add(new Vector2(0, 0));
-        room4Uvs.Add(new Vector2(0, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
         // Wand unter Türrahmen -> links
-        room4Uvs.Add(new Vector2(0.5f, 0));
+        room4Uvs.Add(new Vector2((68.0f - 30.0f - doorwayThickness) / 56.0f, 0));
         room4Uvs.Add(new Vector2(0, 0));
-        room4Uvs.Add(new Vector2(0, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
+        room4Uvs.Add(new Vector2(0, wallAboveUV));
+        room4Uvs.Add(new Vector2((68.0f - 30.0f - doorwayThickness) / 56.0f, wallAboveUV));
+        // Wand unter Türrahmen -> rechts
+        room4Uvs.Add(new Vector2(1, 0));
+        room4Uvs.Add(new Vector2(1.0f - (18.0f / 56.0f), 0));
+        room4Uvs.Add(new Vector2(1.0f - (18.0f / 56.0f), wallAboveUV));
+        room4Uvs.Add(new Vector2(1, wallAboveUV));
         // Vorderseite -> zu Eingangstür -> links
         room4Uvs.Add(new Vector2(1, 0));
         room4Uvs.Add(new Vector2(0, 0));
@@ -1204,20 +1207,20 @@ public class MW_roomScript : MonoBehaviour
         room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(1, 1));
         // Wand über Türrahmen
-        room4Uvs.Add(new Vector2(1, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 1));
+        room4Uvs.Add(new Vector2(0, wallAboveUV));
+        room4Uvs.Add(new Vector2(1, wallAboveUV));
         room4Uvs.Add(new Vector2(1, 1));
+        room4Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> links
-        room4Uvs.Add(new Vector2(0.5f, 0));
         room4Uvs.Add(new Vector2(0, 0));
-        room4Uvs.Add(new Vector2(0, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
+        room4Uvs.Add(new Vector2(38.0f / 56.0f, 0));
+        room4Uvs.Add(new Vector2(38.0f / 56.0f, wallAboveUV));
+        room4Uvs.Add(new Vector2(0, wallAboveUV));
         // Wand unter Türrahmen -> rechts
-        room4Uvs.Add(new Vector2(0.5f, 0));
-        room4Uvs.Add(new Vector2(0, 0));
-        room4Uvs.Add(new Vector2(0, 0.5f));
-        room4Uvs.Add(new Vector2(0.5f, 0.5f));
+        room4Uvs.Add(new Vector2(1.0f - ((68.0f - 50.0f - doorwayThickness) / 56.0f), 0));
+        room4Uvs.Add(new Vector2(1, 0));
+        room4Uvs.Add(new Vector2(1, wallAboveUV));
+        room4Uvs.Add(new Vector2(1.0f - ((68.0f - 50.0f - doorwayThickness) / 56.0f), wallAboveUV));
         /*// Decke
         room4Uvs.Add(new Vector2(0, 1));
         room4Uvs.Add(new Vector2(0, 0));
@@ -1241,7 +1244,8 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend5 = room5.GetComponent<Renderer>();
         rend5.material = new Material(Shader.Find("Standard"));
         meshRoom5 = room5.GetComponent<MeshFilter>().mesh;
-        Texture texture5 = Resources.Load("TextureDarkGreen") as Texture;
+        // Texture texture5 = Resources.Load("TextureDarkGreen") as Texture;
+        Texture texture5 = Resources.Load("StripeTest") as Texture;
         rend5.material.mainTexture = texture5;
 
         meshRoom5.Clear();
@@ -1290,12 +1294,12 @@ public class MW_roomScript : MonoBehaviour
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -70 - wallThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, height, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, height, -70 - wallThickness));
-        // Wand unter Türrahmen -> rechts
+        // Wand unter Türrahmen -> links
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, -50));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 0));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50));
-        // Wand unter Türrahmen -> links
+        // Wand unter Türrahmen -> rechts
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, -50 - doorwayThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, 0, -70 - wallThickness));
         room5Vertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50 - doorwayThickness));
@@ -1364,14 +1368,14 @@ public class MW_roomScript : MonoBehaviour
         room5Triangles.Add(29);
         room5Triangles.Add(30);
         room5Triangles.Add(31);
-        // Wand unter Türrahmen -> rechts -> 32 bis 35
+        // Wand unter Türrahmen -> links -> 32 bis 35
         room5Triangles.Add(33);
         room5Triangles.Add(32);
         room5Triangles.Add(34);
         room5Triangles.Add(33);
         room5Triangles.Add(34);
         room5Triangles.Add(35);
-        // Wand unter Türrahmen -> links -> 36 bis 39
+        // Wand unter Türrahmen -> rechts -> 36 bis 39
         room5Triangles.Add(37);
         room5Triangles.Add(36);
         room5Triangles.Add(38);
@@ -1389,55 +1393,55 @@ public class MW_roomScript : MonoBehaviour
         meshRoom5.triangles = room5Triangles.ToArray();
 
         // Wand über Türrahmen
-        room5Uvs.Add(new Vector2(1, 0.5f));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
-        room5Uvs.Add(new Vector2(0.5f, 1));
+        room5Uvs.Add(new Vector2(0, wallAboveUV));
+        room5Uvs.Add(new Vector2(1, wallAboveUV));
         room5Uvs.Add(new Vector2(1, 1));
+        room5Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> links
-        room5Uvs.Add(new Vector2(0.5f, 0));
         room5Uvs.Add(new Vector2(0, 0));
-        room5Uvs.Add(new Vector2(0, 0.5f));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
+        room5Uvs.Add(new Vector2(35.0f / 72.0f, 0));
+        room5Uvs.Add(new Vector2(35.0f / 72.0f, wallAboveUV));
+        room5Uvs.Add(new Vector2(0, wallAboveUV));
         // Wand unter Türrahmen -> rechts
-        room5Uvs.Add(new Vector2(0.5f, 0));
-        room5Uvs.Add(new Vector2(0, 0));
-        room5Uvs.Add(new Vector2(0, 0.5f));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
+        room5Uvs.Add(new Vector2(1.0f - ((42.0f - 5.0f - doorwayThickness) / 72.0f), 0));
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(1, wallAboveUV));
+        room5Uvs.Add(new Vector2(1.0f - ((42.0f - 5.0f - doorwayThickness) / 72.0f), wallAboveUV));
         // Wand über Türrahmen
-        room5Uvs.Add(new Vector2(1, 0.5f));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
+        room5Uvs.Add(new Vector2(1, wallAboveUV));
+        room5Uvs.Add(new Vector2(0, wallAboveUV));
         room5Uvs.Add(new Vector2(1, 1));
-        room5Uvs.Add(new Vector2(0.5f, 1));
+        room5Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> links
-        room5Uvs.Add(new Vector2(0.5f, 0));
+        room5Uvs.Add(new Vector2((70.0f - 30.0f - doorwayThickness) / 70.0f, 0));
         room5Uvs.Add(new Vector2(0, 0));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
-        room5Uvs.Add(new Vector2(0, 0.5f));
+        room5Uvs.Add(new Vector2((70.0f - 30.0f - doorwayThickness) / 70.0f, wallAboveUV));
+        room5Uvs.Add(new Vector2(0, wallAboveUV));
         // Wand unter Türrahmen -> rechts
-        room5Uvs.Add(new Vector2(0.5f, 0));
-        room5Uvs.Add(new Vector2(0, 0));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
-        room5Uvs.Add(new Vector2(0, 0.5f));
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(1.0f - (30.0f / 70.0f), 0));
+        room5Uvs.Add(new Vector2(1, wallAboveUV));
+        room5Uvs.Add(new Vector2(1.0f - (30.0f / 70.0f), wallAboveUV));
         // Vorderseite
         room5Uvs.Add(new Vector2(1, 0));
         room5Uvs.Add(new Vector2(0, 0));
         room5Uvs.Add(new Vector2(0, 1));
         room5Uvs.Add(new Vector2(1, 1));
         // Wand über Türrahmen
-        room5Uvs.Add(new Vector2(1, 0.5f));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
+        room5Uvs.Add(new Vector2(0, wallAboveUV));
+        room5Uvs.Add(new Vector2(1, wallAboveUV));
+        room5Uvs.Add(new Vector2(0, 1));
         room5Uvs.Add(new Vector2(1, 1));
-        room5Uvs.Add(new Vector2(0.5f, 1));
-        // Wand unter Türrahmen -> rechts
-        room5Uvs.Add(new Vector2(0.5f, 0));
-        room5Uvs.Add(new Vector2(0, 0));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
-        room5Uvs.Add(new Vector2(0, 0.5f));
         // Wand unter Türrahmen -> links
-        room5Uvs.Add(new Vector2(0.5f, 0));
         room5Uvs.Add(new Vector2(0, 0));
-        room5Uvs.Add(new Vector2(0.5f, 0.5f));
-        room5Uvs.Add(new Vector2(0, 0.5f));
+        room5Uvs.Add(new Vector2(50.0f / 72.0f, 0));
+        room5Uvs.Add(new Vector2(0, wallAboveUV));
+        room5Uvs.Add(new Vector2(50.0f / 72.0f, wallAboveUV));
+        // Wand unter Türrahmen -> rechts
+        room5Uvs.Add(new Vector2(1.0f - ((72.0f - 50.0f - doorwayThickness) / 72.0f), 0));
+        room5Uvs.Add(new Vector2(1, 0));
+        room5Uvs.Add(new Vector2(1.0f - ((72.0f - 50.0f - doorwayThickness) / 72.0f), wallAboveUV));
+        room5Uvs.Add(new Vector2(1, wallAboveUV));
         /*// Decke
         room5Uvs.Add(new Vector2(1, 0));
         room5Uvs.Add(new Vector2(0, 0));
@@ -1461,7 +1465,7 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend6 = room6.GetComponent<Renderer>();
         rend6.material = new Material(Shader.Find("Standard"));
         meshRoom6 = room6.GetComponent<MeshFilter>().mesh;
-        Texture texture6 = Resources.Load("TexturePurple") as Texture;
+        Texture texture6 = Resources.Load("StripeTest") as Texture;
         rend6.material.mainTexture = texture6;
 
         meshRoom6.Clear();
