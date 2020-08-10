@@ -993,7 +993,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2871,7 +2871,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   woodGround: {fileID: 2100000, guid: 07bf168059b3e6742a8831b646a3254a, type: 2}
-  woodDoorway: {fileID: 2100000, guid: 2cab0f22e2f192743b3475a162a37266, type: 2}
 --- !u!4 &1002221902
 Transform:
   m_ObjectHideFlags: 0

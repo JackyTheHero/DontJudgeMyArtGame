@@ -3140,25 +3140,25 @@ public class MW_roomScript : MonoBehaviour
         meshWall1.triangles = wall1Triangles.ToArray();
 
         // Seite
-        wall1Uvs.Add(new Vector2(54.0f / 80.0f, upUV));
+        wall1Uvs.Add(new Vector2((29.0f - wallThickness + 27.0f) / 80.0f, upUV));
         wall1Uvs.Add(new Vector2(0, upUV));
-        wall1Uvs.Add(new Vector2(54.0f / 80.0f, 0));
+        wall1Uvs.Add(new Vector2((29.0f - wallThickness + 27.0f) / 80.0f, 0));
         wall1Uvs.Add(new Vector2(0, 0));
         // Seite
-        wall1Uvs.Add(new Vector2(54.0f / 80.0f, upUV));
+        wall1Uvs.Add(new Vector2((29.0f - wallThickness + 27.0f) / 80.0f, upUV));
         wall1Uvs.Add(new Vector2(0, upUV));
-        wall1Uvs.Add(new Vector2(54.0f / 80.0f, 0));
+        wall1Uvs.Add(new Vector2((29.0f - wallThickness + 27.0f) / 80.0f, 0));
         wall1Uvs.Add(new Vector2(0, 0));
         // zwischen den Seiten
-        wall1Uvs.Add(new Vector2(0, upUV));
         wall1Uvs.Add(new Vector2(0, 0));
-        wall1Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
-        wall1Uvs.Add(new Vector2(1.0f / 80.0f, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
         // oben
-        wall1Uvs.Add(new Vector2(0, upUV));
         wall1Uvs.Add(new Vector2(0, 0));
-        wall1Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
-        wall1Uvs.Add(new Vector2(1.0f / 80.0f, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
+        wall1Uvs.Add(new Vector2(0, 0));
         
         meshWall1.uv = wall1Uvs.ToArray();
 
@@ -3267,30 +3267,30 @@ public class MW_roomScript : MonoBehaviour
         meshwall3.triangles = wall3Triangles.ToArray();
 
         // Seite
-        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), 0));
-        wall3Uvs.Add(new Vector2(18.0f / 70.0f, 0));
-        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), upUV));
-        wall3Uvs.Add(new Vector2(18.0f / 70.0f, upUV));
+        wall3Uvs.Add(new Vector2(1.0f - (((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness)), 0));
+        wall3Uvs.Add(new Vector2(((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness), 0));
+        wall3Uvs.Add(new Vector2(1.0f - (((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness)), upUV));
+        wall3Uvs.Add(new Vector2(((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness), upUV));
         // Seite
-        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), 0));
-        wall3Uvs.Add(new Vector2(18.0f / 70.0f, 0));
-        wall3Uvs.Add(new Vector2(1.0f - (18.0f / 70.0f), upUV));
-        wall3Uvs.Add(new Vector2(18.0f / 70.0f, upUV));
+        wall3Uvs.Add(new Vector2(1.0f - (((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness)), 0));
+        wall3Uvs.Add(new Vector2(((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness), 0));
+        wall3Uvs.Add(new Vector2(1.0f - (((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness)), upUV));
+        wall3Uvs.Add(new Vector2(((19 - wallThickness + 17.0f) / 2) / (70.0f + wallThickness + wallThickness), upUV));
         // zwischen den Seiten
-        wall3Uvs.Add(new Vector2(0, upUV));
         wall3Uvs.Add(new Vector2(0, 0));
-        wall3Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
-        wall3Uvs.Add(new Vector2(1.0f / 80.0f, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
         // zwischen den Seiten
-        wall3Uvs.Add(new Vector2(0, upUV));
         wall3Uvs.Add(new Vector2(0, 0));
-        wall3Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
-        wall3Uvs.Add(new Vector2(1.0f / 80.0f, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
         // oben
-        wall3Uvs.Add(new Vector2(0, upUV));
         wall3Uvs.Add(new Vector2(0, 0));
-        wall3Uvs.Add(new Vector2(1.0f / 80.0f, upUV));
-        wall3Uvs.Add(new Vector2(1.0f / 80.0f, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
+        wall3Uvs.Add(new Vector2(0, 0));
         
         meshwall3.uv = wall3Uvs.ToArray();
 
