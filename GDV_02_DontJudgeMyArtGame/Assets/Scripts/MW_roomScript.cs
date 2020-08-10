@@ -78,6 +78,7 @@ public class MW_roomScript : MonoBehaviour
 
         /* wallThickness / 2 -> sodass ein Boden immer bis zur Hälfte des Türrahmens geht */
 
+        // -> Farbangaben aus 1. Version (richtige Tapeten kamen erst, als die Räume fertig waren)
         // Raum 1 -> grüner Raum
         groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
         groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
@@ -263,7 +264,7 @@ public class MW_roomScript : MonoBehaviour
         rend1.material = new Material(Shader.Find("Standard"));
         meshRoom1 = room1.GetComponent<MeshFilter>().mesh;
         // Texture texture1 = Resources.Load("TextureGreen") as Texture;
-        Texture texture1 = Resources.Load("StripeTest") as Texture;
+        Texture texture1 = Resources.Load("Tapete5") as Texture;
         rend1.material.mainTexture = texture1;
 
         meshRoom1.Clear();
@@ -272,7 +273,7 @@ public class MW_roomScript : MonoBehaviour
         List<int> room1Triangles = new List<int>();
         List<Vector2> room1Uvs = new List<Vector2>();
 
-        // Wand über Türrahmen -> Eingang zu dunkelgrüner Wand
+        // Wand über Türrahmen -> Eingang zu dunkelgrüner Wand -> Farbangaben aus 1. Version (richtige Tapeten kamen erst, als die Räume fertig waren)
         room1Vertices.Add(new Vector3(-12, height / doorwayFactor, wallThickness));
         room1Vertices.Add(new Vector3(42, height / doorwayFactor, wallThickness));
         room1Vertices.Add(new Vector3(42, height, wallThickness));
@@ -288,15 +289,15 @@ public class MW_roomScript : MonoBehaviour
         room1Vertices.Add(new Vector3(42  , height / doorwayFactor, wallThickness));
         room1Vertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, wallThickness));
         // Wand über Türrahmen -> Eingang zu dunkelblauer Wand
-        room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 0 + wallThickness));
+        room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 0));
         room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 50));
         room1Vertices.Add(new Vector3(-12 + wallThickness, height, 50));
-        room1Vertices.Add(new Vector3(-12 + wallThickness, height, 0 + wallThickness));
+        room1Vertices.Add(new Vector3(-12 + wallThickness, height, 0));
         // Wand unter Türrahmen -> links
-        room1Vertices.Add(new Vector3(-12 + wallThickness, 0, 0 + wallThickness));
+        room1Vertices.Add(new Vector3(-12 + wallThickness, 0, 0));
         room1Vertices.Add(new Vector3(-12 + wallThickness, 0, 20));
         room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 20));
-        room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 0 + wallThickness));
+        room1Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 0));
         // Wand unter Türrahmen -> rechts
         room1Vertices.Add(new Vector3(-12 + wallThickness, 0, 20 + doorwayThickness));
         room1Vertices.Add(new Vector3(-12 + wallThickness, 0, 50));
@@ -458,14 +459,14 @@ public class MW_roomScript : MonoBehaviour
         room1Uvs.Add(new Vector2(0, 1));
         // Wand unter Türrahmen -> links
         room1Uvs.Add(new Vector2(0, 0));
-        room1Uvs.Add(new Vector2((20.0f - wallThickness) / (50.0f - wallThickness), 0));
-        room1Uvs.Add(new Vector2((20.0f - wallThickness) / (50.0f - wallThickness), wallAboveUV));
+        room1Uvs.Add(new Vector2(20.0f / 50.0f, 0));
+        room1Uvs.Add(new Vector2(20.0f / 50.0f, wallAboveUV));
         room1Uvs.Add(new Vector2(0, wallAboveUV));
         // Wand unter Türrahmen -> rechts
-        room1Uvs.Add(new Vector2(1.0f - ((50.0f - 20.0f - doorwayThickness) / (50.0f - wallThickness)), 0));
+        room1Uvs.Add(new Vector2(1.0f - ((50.0f - 20.0f - doorwayThickness) / 50.0f), 0));
         room1Uvs.Add(new Vector2(1, 0));
         room1Uvs.Add(new Vector2(1, wallAboveUV));
-        room1Uvs.Add(new Vector2(1.0f - ((50.0f - 20.0f - doorwayThickness) / (50.0f - wallThickness)), wallAboveUV));
+        room1Uvs.Add(new Vector2(1.0f - ((50.0f - 20.0f - doorwayThickness) / 50.0f), wallAboveUV));
         // Wand über Türrahmen
         room1Uvs.Add(new Vector2(0, wallAboveUV));
         room1Uvs.Add(new Vector2(1, wallAboveUV));
@@ -523,7 +524,7 @@ public class MW_roomScript : MonoBehaviour
         rend2.material = new Material(Shader.Find("Standard"));
         meshRoom2 = room2.GetComponent<MeshFilter>().mesh;
         // Texture texture2 = Resources.Load("TexturePurple") as Texture;
-        Texture texture2 = Resources.Load("StripeTest") as Texture;
+        Texture texture2 = Resources.Load("Tapete3") as Texture;
         rend2.material.mainTexture = texture2;
 
         meshRoom2.Clear();
@@ -533,15 +534,15 @@ public class MW_roomScript : MonoBehaviour
         List<Vector2> room2Uvs = new List<Vector2>();
 
         // Wand über Türrahmen
-        room2Vertices.Add(new Vector3(-12, height / doorwayFactor, 50));
+        room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 50));
         room2Vertices.Add(new Vector3(60, height / doorwayFactor, 50));
         room2Vertices.Add(new Vector3(60, height, 50));
-        room2Vertices.Add(new Vector3(-12, height, 50));
+        room2Vertices.Add(new Vector3(-12 + wallThickness, height, 50));
         // Wand unter Türrahmen -> rechts
-        room2Vertices.Add(new Vector3(-12, 0, 50));
+        room2Vertices.Add(new Vector3(-12 + wallThickness, 0, 50));
         room2Vertices.Add(new Vector3(22, 0, 50));
         room2Vertices.Add(new Vector3(22, height / doorwayFactor, 50));
-        room2Vertices.Add(new Vector3(-12, height / doorwayFactor, 50));
+        room2Vertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 50));
         // Wand unter Türrahmen -> links
         room2Vertices.Add(new Vector3(22 + doorwayThickness, 0,  50));
         room2Vertices.Add(new Vector3(60, 0,  50));
@@ -677,14 +678,14 @@ public class MW_roomScript : MonoBehaviour
         room2Uvs.Add(new Vector2(1, 1));
         // Wand unter Türrahmen -> rechts
         room2Uvs.Add(new Vector2(1, 0));
-        room2Uvs.Add(new Vector2(1.0f - (34.0f / 72.0f), 0)); // 0.68519f
-        room2Uvs.Add(new Vector2(1.0f - (34.0f / 72.0f), wallAboveUV));
+        room2Uvs.Add(new Vector2(1.0f - ((22.0f + 12.0f - wallThickness) / (60.0f + 12.0f - wallThickness)), 0));
+        room2Uvs.Add(new Vector2(1.0f - ((22.0f + 12.0f - wallThickness) / (60.0f + 12.0f - wallThickness)), wallAboveUV));
         room2Uvs.Add(new Vector2(1, wallAboveUV));
         // Wand unter Türrahmen -> links
-        room2Uvs.Add(new Vector2((60.0f - 22.0f - doorwayThickness) / 72.0f, 0)); // 0.5f
+        room2Uvs.Add(new Vector2((60.0f - 22.0f - doorwayThickness) / (60.0f + 12.0f - wallThickness), 0));
         room2Uvs.Add(new Vector2(0, 0));
         room2Uvs.Add(new Vector2(0, wallAboveUV));
-        room2Uvs.Add(new Vector2((60.0f - 22.0f - doorwayThickness) / 72.0f, wallAboveUV));
+        room2Uvs.Add(new Vector2((60.0f - 22.0f - doorwayThickness) / (60.0f + 12.0f - wallThickness), wallAboveUV));
         // Wand über Türrahmen
         room2Uvs.Add(new Vector2(1, wallAboveUV));
         room2Uvs.Add(new Vector2(0, wallAboveUV));
@@ -744,7 +745,7 @@ public class MW_roomScript : MonoBehaviour
         rend3.material = new Material(Shader.Find("Standard"));
         meshRoom3 = room3.GetComponent<MeshFilter>().mesh;
         // Texture texture3 = Resources.Load("TextureBlue") as Texture;
-        Texture texture3 = Resources.Load("StripeTest") as Texture;
+        Texture texture3 = Resources.Load("Tapete7") as Texture;
         rend3.material.mainTexture = texture3;
 
         meshRoom3.Clear();
@@ -965,7 +966,7 @@ public class MW_roomScript : MonoBehaviour
         rend4.material = new Material(Shader.Find("Standard"));
         meshRoom4 = room4.GetComponent<MeshFilter>().mesh;
         // Texture texture4 = Resources.Load("TextureDarkBlue") as Texture;
-        Texture texture4 = Resources.Load("StripeTest") as Texture;
+        Texture texture4 = Resources.Load("Tapete4") as Texture;
         rend4.material.mainTexture = texture4;
 
         meshRoom4.Clear();
@@ -1254,7 +1255,7 @@ public class MW_roomScript : MonoBehaviour
         rend5.material = new Material(Shader.Find("Standard"));
         meshRoom5 = room5.GetComponent<MeshFilter>().mesh;
         // Texture texture5 = Resources.Load("TextureDarkGreen") as Texture;
-        Texture texture5 = Resources.Load("StripeTest") as Texture;
+        Texture texture5 = Resources.Load("Tapete8") as Texture;
         rend5.material.mainTexture = texture5;
 
         meshRoom5.Clear();
@@ -1474,7 +1475,7 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend6 = room6.GetComponent<Renderer>();
         rend6.material = new Material(Shader.Find("Standard"));
         meshRoom6 = room6.GetComponent<MeshFilter>().mesh;
-        Texture texture6 = Resources.Load("StripeTest") as Texture;
+        Texture texture6 = Resources.Load("Tapete1") as Texture;
         rend6.material.mainTexture = texture6;
 
         meshRoom6.Clear();
@@ -1661,7 +1662,7 @@ public class MW_roomScript : MonoBehaviour
         rend7.material = new Material(Shader.Find("Standard"));
         meshRoom7 = room7.GetComponent<MeshFilter>().mesh;
         // Texture texture7 = Resources.Load("TextureGreen") as Texture;
-        Texture texture7 = Resources.Load("StripeTest") as Texture;
+        Texture texture7 = Resources.Load("Tapete6") as Texture;
         rend7.material.mainTexture = texture7;
 
         meshRoom7.Clear();
@@ -1848,7 +1849,7 @@ public class MW_roomScript : MonoBehaviour
         rend8.material = new Material(Shader.Find("Standard"));
         meshRoom8 = room8.GetComponent<MeshFilter>().mesh;
         // Texture texture8 = Resources.Load("TextureDarkGreen") as Texture;
-        Texture texture8 = Resources.Load("StripeTest") as Texture;
+        Texture texture8 = Resources.Load("Tapete9") as Texture;
         rend8.material.mainTexture = texture8;
 
         meshRoom8.Clear();
@@ -2035,7 +2036,7 @@ public class MW_roomScript : MonoBehaviour
         rend9.material = new Material(Shader.Find("Standard"));
         meshRoom9 = room9.GetComponent<MeshFilter>().mesh;
         // Texture texture9 = Resources.Load("TextureDarkBlue") as Texture;
-        Texture texture9 = Resources.Load("StripeTest") as Texture;
+        Texture texture9 = Resources.Load("Tapete2") as Texture;
         rend9.material.mainTexture = texture9;
 
         meshRoom9.Clear();
@@ -3066,12 +3067,12 @@ public class MW_roomScript : MonoBehaviour
         float upUV = (height / wallFactor) / height;
 
         Mesh meshWall1 = new Mesh();
-        GameObject wall1 = new GameObject("Dividing Wall Purple (1)", typeof(MeshFilter), typeof(MeshRenderer));
+        GameObject wall1 = new GameObject("Dividing Wall Room 2 (1)", typeof(MeshFilter), typeof(MeshRenderer));
 
         Renderer rend1 = wall1.GetComponent<Renderer>();
         rend1.material = new Material(Shader.Find("Standard"));
         // Texture texture1 = Resources.Load("TexturePurple") as Texture;
-        Texture texture1 = Resources.Load("StripeTest") as Texture;
+        Texture texture1 = Resources.Load("Tapete3") as Texture;
         rend1.material.mainTexture = texture1;
 
         meshWall1 = wall1.GetComponent<MeshFilter>().mesh;
@@ -3175,17 +3176,17 @@ public class MW_roomScript : MonoBehaviour
         // nimm wall1 und kopiere es -> setze es dann an andere Position
         Vector3 newPosition = new Vector3(95, 0, 62);
         wall2 = Instantiate(wall1, newPosition, wall1.transform.rotation);
-        wall2.name = "Dividing Wall Purple (2)";
+        wall2.name = "Dividing Wall Room 2 (2)";
 
         /* DUNKELBLAUE WAND */
 
         Mesh meshwall3 = new Mesh();
-        GameObject wall3 = new GameObject("Dividing Wall Blue", typeof(MeshFilter), typeof(MeshRenderer));
+        GameObject wall3 = new GameObject("Dividing Wall Room 9", typeof(MeshFilter), typeof(MeshRenderer));
 
         Renderer rend2 = wall3.GetComponent<Renderer>();
         rend2.material = new Material(Shader.Find("Standard"));
         // Texture texture2 = Resources.Load("TextureDarkBlue") as Texture;
-        Texture texture2 = Resources.Load("StripeTest") as Texture;
+        Texture texture2 = Resources.Load("Tapete2") as Texture;
         rend2.material.mainTexture = texture2;
 
         meshwall3 = wall3.GetComponent<MeshFilter>().mesh;
