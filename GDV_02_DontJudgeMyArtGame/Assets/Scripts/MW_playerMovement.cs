@@ -40,12 +40,13 @@ public class MW_playerMovement : MonoBehaviour
         lookDirection = this.transform.forward;
         camForward = Camera.main.transform.forward;
         camRight = Camera.main.transform.right;
+
     }
 
     // Update is called once per frame
     void Update () {
         // jegliche Bewegungen erst möglich, wenn Keyboard freigegeben wird
-        if (MW_playerCollider.keyboardEnabled == true) {
+        if (MW_playerColliderInteraction.keyboardEnabled == true) {
             // Funktion, die die Blickrichtung des Players je nach Tastendruck und Kameraposititon ändert
             Rotation();
 

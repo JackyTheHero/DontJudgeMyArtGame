@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MW_playerCollider : MonoBehaviour
+/*DIESES SKRIPT KÜMMERT SICH UM DIE KOLLISION DES SPIELERS UND TRACKT ZUSÄTZLICH VIA
+  ONTRIGGERENTER, OB EIN OBJEKT UNMITTELBAR VOR DEM SPIELER IST, UM SO MIT DIESEM ZU INTERAGIEREN.*/
+public class MW_playerColliderInteraction : MonoBehaviour
 {
     // speichere in dieser Variablen, ob ein interagierbares Gameobject in der Nähe ist
     bool isInRange = false;
@@ -16,10 +18,14 @@ public class MW_playerCollider : MonoBehaviour
     // Rigidbody des Players
     public Rigidbody playerRig;
 
+    public ParticleSystem smoke;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        
+        smoke.Pause();
     }
 
     // Update is called once per frame
@@ -30,6 +36,12 @@ public class MW_playerCollider : MonoBehaviour
             Destroy(inFocus);
             // isInRange wird wieder auf false gesetzt, da das GameObject nicht mehr existiert
             isInRange = false;
+
+            // setze ParticleSystem auf Position des zu zerstörenden Objektes
+            smoke.transform.position = inFocus.transform.position;
+            // setze PartikelSystem zurück und spiele es danach von vorne ab
+            smoke.Clear();
+            smoke.Play();
         }
     }
 
