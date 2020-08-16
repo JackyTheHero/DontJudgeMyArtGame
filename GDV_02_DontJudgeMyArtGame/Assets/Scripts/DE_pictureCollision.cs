@@ -12,23 +12,27 @@ public class DE_pictureCollision : MonoBehaviour
 
     //Prüft ob Spieler in Gemäldebereich
     void OnTriggerEnter(Collider other) {
-        //Check ob vom Typ Gemälde
-        if (other.gameObject.name.Substring(0, 7) == "Gemälde") {
-            //Jetzt im Bereich
-             isInPictureRange = true;
-            //speichere Referenz auf das Gemälde
-            focusPicture = other.gameObject;
-        }   
+        if (other.gameObject.name.Length >= 7){
+            //Check ob vom Typ Gemälde
+            if (other.gameObject.name.Substring(0, 7) == "Gemälde") {
+                //Jetzt im Bereich
+                isInPictureRange = true;
+                //speichere Referenz auf das Gemälde
+                focusPicture = other.gameObject;
+            } 
+        }  
     }
 
      //Prüft ob Spieler nicht mehr in Gemäldebereich
     void OnTriggerExit(Collider other) {
         //Check ob vom Typ Gemälde
-        if (other.gameObject.name.Substring(0, 7) == "Gemälde") {
-            //Nicht mehr im Bereich
-            isInPictureRange = false;
-            //Lösche Referenz auf das Gemälde
-            focusPicture = null;
+        if (other.gameObject.name.Length >= 7){
+            if (other.gameObject.name.Substring(0, 7) == "Gemälde") {
+                //Nicht mehr im Bereich
+                isInPictureRange = false;
+                //Lösche Referenz auf das Gemälde
+                focusPicture = null;
+            }
         }
     }
 
