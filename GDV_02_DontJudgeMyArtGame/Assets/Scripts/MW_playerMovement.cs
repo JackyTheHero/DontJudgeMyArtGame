@@ -14,6 +14,10 @@ public class MW_playerMovement : MonoBehaviour
     Vector3 camForward;
     Vector3 camRight;
 
+    // Keyboard wird bei Start der Szene gesperrt, da Player aus einer gewissen Höhe auf den Boden fällt ...
+    // ... während dieses Falles soll sich der Player nicht bewegen können
+    public static bool keyboardEnabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +50,7 @@ public class MW_playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update () {
         // jegliche Bewegungen erst möglich, wenn Keyboard freigegeben wird
-        if (MW_playerColliderInteraction.keyboardEnabled == true) {
+        if (keyboardEnabled == true) {
             // Funktion, die die Blickrichtung des Players je nach Tastendruck und Kameraposititon ändert
             Rotation();
 
