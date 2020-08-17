@@ -17,6 +17,11 @@ public class MW_playerColliderInteraction : MonoBehaviour
 
     public ParticleSystem smoke;
 
+    GameObject stolenPicture;
+
+    // checke, ob ein Bild bereits gestohlen wurde, da man immer nur eines zur gleichen Zeit stehlen können soll
+    bool steal = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,18 +33,44 @@ public class MW_playerColliderInteraction : MonoBehaviour
     // Update is called once per frame
     void Update () {
         // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste E gelöscht werden
-        if (isInWindowRange == true && Input.GetKeyDown(KeyCode.E)) {
+        if (DE_pictureCollision.isInPictureRange == true && Input.GetKeyDown(KeyCode.E)) {
             // lösche GameObject, das im Fokus steht
-            Destroy(inFocus);
+            Destroy(DE_pictureCollision.focusPicture);
             // isInWindowRange wird wieder auf false gesetzt, da das GameObject nicht mehr existiert
             isInWindowRange = false;
 
+            Renderer rend = DE_pictureCollision.focusPicture.GetComponent<Renderer>();
+            DE_pictureCollision.focusPicture.AddComponent<MeshRenderer>();
             // setze ParticleSystem auf Position des zu zerstörenden Objektes
-            smoke.transform.position = inFocus.transform.position;
+            smoke.transform.position = DE_pictureCollision.focusPicture.transform.position;
             // setze PartikelSystem zurück und spiele es danach von vorne ab
             smoke.Clear();
             smoke.Play();
+            
+            // setze isInPictureRange zurück auf false, da das Gemälde nicht länger existiert
+            DE_pictureCollision.isInPictureRange = false;
         }
+
+        // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste G gestohlen werden
+        // nur wenn man zum jetzigen Zeitpunkt nicht ein Bild unter dem Arm hat, kann man ein Bild stehlen -> nur eines zum gleichen Zeitpunkt
+        if (DE_pictureCollision.isInPictureRange == true && Input.GetKeyDown(KeyCode.G) && steal == false) {
+            steal = true;
+            // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
+            stolenPicture = DE_pictureCollision.focusPicture;
+        }
+
+        // wenn man ein Gemälde bereits unter dem Arm hat und vor einem offenen Fenster steht, kann man es dort hinausschmuggeln
+        if (steal == true && isInWindowRange == true && Input.GetKeyDown(KeyCode.E)) {
+            // setze steal wieder auf false, da das Stehlen erfolgreich war und man nun ein anderes stehlen kann bzw. "darf"
+            steal = false;
+            // zerstöre das stolenPicture und setze Referenz auf null
+            Destroy(stolenPicture);
+            stolenPicture = null;
+            // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
+            isInWindowRange = false;
+        }
+        // Debug.Log(DE_pictureCollision.focusPicture);
+        // Debug.Log(stolenPicture);
     }
 
     void OnCollisionEnter(Collision other) {
@@ -79,23 +110,34 @@ public class MW_playerColliderInteraction : MonoBehaviour
         }
     }
 
-// Text erscheint oben links in der Ecke
+    // GUI für Testzwecke
     // mit Variable collectedItems werden die eingesammelten Items gezählt
     void OnGUI() {
         GUIStyle style = new GUIStyle();
-        style.fontSize = 24;
+        style.fontSize = 20;
         // Färbe Schrift rot, um die besser lesen zu können
         style.normal.textColor = Color.red;
-        // collectedItems wird in triggerEnter (Skript am Schlangenkopf) deklariert und hochgezählt
-        if (isInWindowRange == true) {
-            GUI.Label(new Rect((Screen.width) / 2 - (Screen.width) / 4,
+        if (isInWindowRange == true && steal == true) {
+            GUI.Label(new Rect(60,
                                 (Screen.height) / 2 - (Screen.height) / 8,
                                 (Screen.width) / 4,
                                 (Screen.height) / 4),
-                                "Drücke E, um das Fenster zu löschen", style);
+                                "Drücke E, um das Bild aus dem Fenster zu schmuggeln", style);
         }
         if (isInWindowRange == false) {
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
+
+        if (DE_pictureCollision.isInPictureRange == true) {
+            GUI.Label(new Rect(50,
+                                (Screen.height) / 2 - (Screen.height) / 8,
+                                (Screen.width) / 4,
+                                (Screen.height) / 4),
+                                "Drücke E, um das Bild zu löschen oder G, um das Bild zu stehlen", style);
+        }
+        if (DE_pictureCollision.isInPictureRange == false) {
+            GUI.Label(new Rect(0, 0, 0, 0), "", style);
+        }
     }
+
 }
