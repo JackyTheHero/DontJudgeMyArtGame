@@ -24,11 +24,15 @@ public class MW_playerColliderInteraction : MonoBehaviour
     // checke, ob ein Bild bereits gestohlen wurde, da man immer nur eines zur gleichen Zeit stehlen können soll
     bool steal = false;
 
+    // prüfe mit dieser Variable, ob es ein eigenes Bild ist
+    bool owned = false;
+
     // Start is called before the first frame update
     void Start()
     {
         playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         
+        // setze Partkelsystem anfangs auf Pause, damit es nicht beim Start des Spiels ebenso startet
         smoke.Pause();
         splinter1.Pause();
         splinter2.Pause();
@@ -36,6 +40,24 @@ public class MW_playerColliderInteraction : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+        // prüfe, ob focusPicture auf "owned" endet, da nur eigene Bilder zerstört und gestohlen werden können
+        // prüfe nur, wenn focusPicture nicht null ist
+        if (DE_pictureCollision.focusPicture != null) {
+            if (DE_pictureCollision.focusPicture.name.Substring(DE_pictureCollision.focusPicture.name.Length - 5) == "owned") {
+                owned = true;
+            } else {
+                owned = false;
+            }
+        }
+
+        // wenn es eigenes Bild ist, erlaube das Zerstören und das Stehlen
+        if (owned == true) {
+            destroyPicture();
+            stealPicture();
+        }
+    }
+
+    void destroyPicture() {
         // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste E gelöscht werden
         if (DE_pictureCollision.isInPictureRange == true && Input.GetKeyDown(KeyCode.E)) {
             // lösche GameObject, das im Fokus steht
@@ -43,8 +65,6 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // isInWindowRange wird wieder auf false gesetzt, da das GameObject nicht mehr existiert
             isInWindowRange = false;
 
-            Renderer rend = DE_pictureCollision.focusPicture.GetComponent<Renderer>();
-            DE_pictureCollision.focusPicture.AddComponent<MeshRenderer>();
             // setze ParticleSystem auf Position des zu zerstörenden Objektes
             smoke.transform.position = DE_pictureCollision.focusPicture.transform.position;
             splinter1.transform.position = DE_pictureCollision.focusPicture.transform.position;
@@ -56,7 +76,9 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // setze isInPictureRange zurück auf false, da das Gemälde nicht länger existiert
             DE_pictureCollision.isInPictureRange = false;
         }
+    }
 
+    void stealPicture() {
         // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste G gestohlen werden
         // nur wenn man zum jetzigen Zeitpunkt nicht ein Bild unter dem Arm hat, kann man ein Bild stehlen -> nur eines zum gleichen Zeitpunkt
         if (DE_pictureCollision.isInPictureRange == true && Input.GetKeyDown(KeyCode.G) && steal == false) {
@@ -76,7 +98,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             isInWindowRange = false;
         }
         // Debug.Log(DE_pictureCollision.focusPicture);
-        // Debug.Log(stolenPicture);
+        Debug.Log(stolenPicture);
     }
 
     void OnCollisionEnter(Collision other) {
@@ -134,7 +156,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
 
-        if (DE_pictureCollision.isInPictureRange == true) {
+        if (DE_pictureCollision.isInPictureRange == true && owned == true) {
             GUI.Label(new Rect(50,
                                 (Screen.height) / 2 - (Screen.height) / 8,
                                 (Screen.width) / 4,
