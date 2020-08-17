@@ -16,6 +16,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
     public Rigidbody playerRig;
 
     public ParticleSystem smoke;
+    public ParticleSystem splinter1;
+    public ParticleSystem splinter2;
 
     GameObject stolenPicture;
 
@@ -28,6 +30,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
         playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         
         smoke.Pause();
+        splinter1.Pause();
+        splinter2.Pause();
     }
 
     // Update is called once per frame
@@ -43,9 +47,11 @@ public class MW_playerColliderInteraction : MonoBehaviour
             DE_pictureCollision.focusPicture.AddComponent<MeshRenderer>();
             // setze ParticleSystem auf Position des zu zerstörenden Objektes
             smoke.transform.position = DE_pictureCollision.focusPicture.transform.position;
+            splinter1.transform.position = DE_pictureCollision.focusPicture.transform.position;
+            splinter2.transform.position = DE_pictureCollision.focusPicture.transform.position;
             // setze PartikelSystem zurück und spiele es danach von vorne ab
-            smoke.Clear();
-            smoke.Play();
+            smoke.Clear(); splinter1.Clear(); splinter2.Clear();
+            smoke.Play(); splinter1.Play(); splinter2.Play();
             
             // setze isInPictureRange zurück auf false, da das Gemälde nicht länger existiert
             DE_pictureCollision.isInPictureRange = false;
