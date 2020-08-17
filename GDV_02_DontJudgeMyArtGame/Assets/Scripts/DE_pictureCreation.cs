@@ -54,7 +54,7 @@ public class DE_pictureCreation : MonoBehaviour
             Mesh picMesh = pic.GetComponent<MeshFilter>().mesh;
             
             //Arrays für Bildfläche
-            picMesh.vertices = new Vector3[] {new Vector3(-sizeX / 2, 0, dist), new Vector3(sizeX / 2, 0, dist), new Vector3(sizeX / 2, sizeY, dist), new Vector3(-sizeX / 2, sizeY, dist)};
+            picMesh.vertices = new Vector3[] {new Vector3(-sizeX / 2, -sizeY / 2, dist), new Vector3(sizeX / 2, -sizeY / 2, dist), new Vector3(sizeX / 2, sizeY / 2, dist), new Vector3(-sizeX / 2, sizeY / 2, dist)};
             picMesh.triangles = new int[] {3, 2, 1, 3, 1, 0};
             picMesh.uv = new Vector2[] {new Vector2(0,0), new Vector2(1,0), new Vector2(1,1), new Vector2(0,1)};
 
@@ -78,46 +78,46 @@ public class DE_pictureCreation : MonoBehaviour
                    
             //Arrays für Rahmen
             frameMesh.vertices = new Vector3[] {
-                new Vector3(-sizeX / 2 - thick, -thick, depth),
-                new Vector3(-sizeX / 2 - thick, -thick, depth), 
-                new Vector3(-sizeX / 2 - thick, -thick, depth), 
-                new Vector3(sizeX / 2 + thick, -thick, depth),
-                new Vector3(sizeX / 2 + thick, -thick, depth),
-                new Vector3(sizeX / 2 + thick, -thick, depth),
-                new Vector3(sizeX / 2 + thick, sizeY + thick, depth),
-                new Vector3(sizeX / 2 + thick, sizeY + thick, depth),
-                new Vector3(sizeX / 2 + thick, sizeY + thick, depth),
-                new Vector3(-sizeX / 2 - thick, sizeY + thick, depth),
-                new Vector3(-sizeX / 2 - thick, sizeY + thick, depth),
-                new Vector3(-sizeX / 2 - thick, sizeY + thick, depth),
-                new Vector3(-sizeX / 2 - thick, -thick, 0),
-                new Vector3(-sizeX / 2 - thick, -thick, 0), 
-                new Vector3(sizeX / 2 + thick, -thick, 0),
-                new Vector3(sizeX / 2 + thick, -thick, 0),
-                new Vector3(sizeX / 2 + thick, sizeY + thick, 0),
-                new Vector3(sizeX / 2 + thick, sizeY + thick, 0),
-                new Vector3(-sizeX / 2 - thick, sizeY + thick, 0),
-                new Vector3(-sizeX / 2 - thick, sizeY + thick, 0),
-                new Vector3(-sizeX / 2, 0, depth),
-                new Vector3(-sizeX / 2, 0, depth),
-                new Vector3(-sizeX / 2, 0, depth),
-                new Vector3(sizeX / 2, 0, depth),
-                new Vector3(sizeX / 2, 0, depth),
-                new Vector3(sizeX / 2, 0, depth), 
-                new Vector3(sizeX / 2, sizeY, depth),
-                new Vector3(sizeX / 2, sizeY, depth),
-                new Vector3(sizeX / 2, sizeY, depth),
-                new Vector3(-sizeX / 2, sizeY, depth),
-                new Vector3(-sizeX / 2, sizeY, depth),
-                new Vector3(-sizeX / 2, sizeY, depth),
-                new Vector3(-sizeX / 2, 0, dist),
-                new Vector3(-sizeX / 2, 0, dist),  
-                new Vector3(sizeX / 2 , 0, dist), 
-                new Vector3(sizeX / 2 , 0, dist),  
-                new Vector3(sizeX / 2 , sizeY, dist), 
-                new Vector3(sizeX / 2 , sizeY, dist),  
-                new Vector3(-sizeX / 2, sizeY, dist),
-                new Vector3(-sizeX / 2, sizeY, dist)
+                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, depth),
+                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, depth), 
+                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, depth), 
+                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, depth),
+                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, depth),
+                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, depth),
+                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, depth),
+                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, depth),
+                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, depth),
+                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, depth),
+                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, depth),
+                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, depth),
+                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, 0),
+                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, 0), 
+                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, 0),
+                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, 0),
+                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, 0),
+                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, 0),
+                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, 0),
+                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, 0),
+                new Vector3(-sizeX / 2, -sizeY / 2, depth),
+                new Vector3(-sizeX / 2, -sizeY / 2, depth),
+                new Vector3(-sizeX / 2, -sizeY / 2, depth),
+                new Vector3(sizeX / 2, -sizeY / 2, depth),
+                new Vector3(sizeX / 2, -sizeY / 2, depth),
+                new Vector3(sizeX / 2, -sizeY / 2, depth), 
+                new Vector3(sizeX / 2, sizeY / 2 , depth),
+                new Vector3(sizeX / 2, sizeY / 2 , depth),
+                new Vector3(sizeX / 2, sizeY / 2 , depth),
+                new Vector3(-sizeX / 2, sizeY / 2 , depth),
+                new Vector3(-sizeX / 2, sizeY / 2 , depth),
+                new Vector3(-sizeX / 2, sizeY / 2 , depth),
+                new Vector3(-sizeX / 2, -sizeY / 2, dist),
+                new Vector3(-sizeX / 2, -sizeY / 2, dist),  
+                new Vector3(sizeX / 2 , -sizeY / 2, dist), 
+                new Vector3(sizeX / 2 , -sizeY / 2, dist),  
+                new Vector3(sizeX / 2 , sizeY / 2 , dist), 
+                new Vector3(sizeX / 2 , sizeY / 2 , dist),  
+                new Vector3(-sizeX / 2, sizeY / 2 , dist),
+                new Vector3(-sizeX / 2, sizeY / 2 , dist)
             };
 
             frameMesh.triangles = new int[] {0,20,23,0,23,3, 3,23,26,3,26,6, 6,26,29,6,29,9, 0,9,29,0,29,20, 1,5,14,1,14,13, 4,8,16,4,16,15, 7,11,18,7,18,17, 10,2,12,10,12,19, 22,33,34,22,34,24, 25,35,36,25,36,27, 28,37,38,28,38,30, 21,31,39,21,39,32};
@@ -162,6 +162,9 @@ public class DE_pictureCreation : MonoBehaviour
                 sign.name = "Plakette" + i;
                 sign.AddComponent<MeshFilter>();
                 sign.AddComponent<MeshRenderer>();
+
+                //Besitz im Namen festlegen
+                painting.name = "Gemälde" + i + "owned";
 
                 //Mesh erzeugen
                 Mesh signMesh = sign.GetComponent<MeshFilter>().mesh;
@@ -227,7 +230,7 @@ public class DE_pictureCreation : MonoBehaviour
             frame.transform.parent = painting.transform;
 
             //Rotation und Translation
-            painting.transform.Translate(posX, height, posZ);
+            painting.transform.Translate(posX, height + sizeY / 2, posZ);
             painting.transform.Rotate(0, rotation, 0); 
             
             //Collider hinzufügen
