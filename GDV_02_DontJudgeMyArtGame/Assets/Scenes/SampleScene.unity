@@ -7206,6 +7206,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: playerWIP1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 707165847e42bdc4c8428186e41e7ff1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707165847e42bdc4c8428186e41e7ff1, type: 3}
 --- !u!1 &892580091 stripped
@@ -7223,7 +7228,7 @@ BoxCollider:
   m_GameObject: {fileID: 892580091}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 3}
   m_Center: {x: 0, y: 2.5, z: -2}
@@ -14601,6 +14606,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: figureWIP1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 707165847e42bdc4c8428186e41e7ff1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707165847e42bdc4c8428186e41e7ff1, type: 3}

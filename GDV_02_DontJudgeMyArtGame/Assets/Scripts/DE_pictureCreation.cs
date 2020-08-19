@@ -10,8 +10,8 @@ public class DE_pictureCreation : MonoBehaviour
     //Bilderklasse
     public class Picture
     {
-        //Globale Variablen
-        float posX, posZ, sizeX, sizeY, height, rotation;
+        //Variablen
+        float posX, posZ, sizeX, sizeY, height, rotation, sizeXhalf, sizeYhalf;
         //textureID aktuell unbenutzt, wichtig für unterschiedliche Bilder
         int owned, textureID;
 
@@ -31,6 +31,10 @@ public class DE_pictureCreation : MonoBehaviour
             this.height = height;
             this.rotation = rotation;
             this.owned = owned;
+
+            sizeXhalf = sizeX / 2;
+            sizeYhalf = sizeY / 2;
+
             //this.textureID = textureID;
         }
     
@@ -54,7 +58,7 @@ public class DE_pictureCreation : MonoBehaviour
             Mesh picMesh = pic.GetComponent<MeshFilter>().mesh;
             
             //Arrays für Bildfläche
-            picMesh.vertices = new Vector3[] {new Vector3(-sizeX / 2, -sizeY / 2, dist), new Vector3(sizeX / 2, -sizeY / 2, dist), new Vector3(sizeX / 2, sizeY / 2, dist), new Vector3(-sizeX / 2, sizeY / 2, dist)};
+            picMesh.vertices = new Vector3[] {new Vector3(-sizeXhalf, -sizeYhalf, dist), new Vector3(sizeXhalf, -sizeYhalf, dist), new Vector3(sizeXhalf, sizeYhalf, dist), new Vector3(-sizeXhalf, sizeYhalf, dist)};
             picMesh.triangles = new int[] {3, 2, 1, 3, 1, 0};
             picMesh.uv = new Vector2[] {new Vector2(0,0), new Vector2(1,0), new Vector2(1,1), new Vector2(0,1)};
 
@@ -78,46 +82,46 @@ public class DE_pictureCreation : MonoBehaviour
                    
             //Arrays für Rahmen
             frameMesh.vertices = new Vector3[] {
-                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, depth),
-                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, depth), 
-                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, depth), 
-                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, depth),
-                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, depth),
-                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, depth),
-                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, depth),
-                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, depth),
-                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, depth),
-                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, depth),
-                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, depth),
-                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, depth),
-                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, 0),
-                new Vector3(-sizeX / 2 - thick, -sizeY / 2 -thick, 0), 
-                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, 0),
-                new Vector3(sizeX / 2 + thick, -sizeY / 2 -thick, 0),
-                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, 0),
-                new Vector3(sizeX / 2 + thick, sizeY / 2 + thick, 0),
-                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, 0),
-                new Vector3(-sizeX / 2 - thick, sizeY / 2 + thick, 0),
-                new Vector3(-sizeX / 2, -sizeY / 2, depth),
-                new Vector3(-sizeX / 2, -sizeY / 2, depth),
-                new Vector3(-sizeX / 2, -sizeY / 2, depth),
-                new Vector3(sizeX / 2, -sizeY / 2, depth),
-                new Vector3(sizeX / 2, -sizeY / 2, depth),
-                new Vector3(sizeX / 2, -sizeY / 2, depth), 
-                new Vector3(sizeX / 2, sizeY / 2 , depth),
-                new Vector3(sizeX / 2, sizeY / 2 , depth),
-                new Vector3(sizeX / 2, sizeY / 2 , depth),
-                new Vector3(-sizeX / 2, sizeY / 2 , depth),
-                new Vector3(-sizeX / 2, sizeY / 2 , depth),
-                new Vector3(-sizeX / 2, sizeY / 2 , depth),
-                new Vector3(-sizeX / 2, -sizeY / 2, dist),
-                new Vector3(-sizeX / 2, -sizeY / 2, dist),  
-                new Vector3(sizeX / 2 , -sizeY / 2, dist), 
-                new Vector3(sizeX / 2 , -sizeY / 2, dist),  
-                new Vector3(sizeX / 2 , sizeY / 2 , dist), 
-                new Vector3(sizeX / 2 , sizeY / 2 , dist),  
-                new Vector3(-sizeX / 2, sizeY / 2 , dist),
-                new Vector3(-sizeX / 2, sizeY / 2 , dist)
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth), 
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth), 
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, 0),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, 0), 
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, 0),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, 0),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth), 
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, dist),
+                new Vector3(-sizeXhalf, -sizeYhalf, dist),  
+                new Vector3(sizeXhalf , -sizeYhalf, dist), 
+                new Vector3(sizeXhalf , -sizeYhalf, dist),  
+                new Vector3(sizeXhalf , sizeYhalf , dist), 
+                new Vector3(sizeXhalf , sizeYhalf , dist),  
+                new Vector3(-sizeXhalf, sizeYhalf , dist),
+                new Vector3(-sizeXhalf, sizeYhalf , dist)
             };
 
             frameMesh.triangles = new int[] {0,20,23,0,23,3, 3,23,26,3,26,6, 6,26,29,6,29,9, 0,9,29,0,29,20, 1,5,14,1,14,13, 4,8,16,4,16,15, 7,11,18,7,18,17, 10,2,12,10,12,19, 22,33,34,22,34,24, 25,35,36,25,36,27, 28,37,38,28,38,30, 21,31,39,21,39,32};
@@ -170,33 +174,58 @@ public class DE_pictureCreation : MonoBehaviour
                 Mesh signMesh = sign.GetComponent<MeshFilter>().mesh;
                 
                 //Abstand der Plakette zum Bild
-                float links = (-sizeX / 2) - thick - 1.7f;
-                float rechts = (sizeX / 2) + thick + 1.7f;
+                float left = (-sizeXhalf) - thick - 1.7f;
+                float right = (sizeXhalf) + thick + 1.7f;
 
                 //Arrays für Plakette
                 //Tenärer Operator für links oder rechts
-                signMesh.vertices = new Vector3[] {
-                    new Vector3((owned == 1) ? links + 1 : rechts, 0.5f, -0.1f),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 0.5f, -0.1f),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 0.5f, -0.1f),
-                    new Vector3((owned == 1) ? links : rechts - 1, 0.5f, -0.1f),
-                    new Vector3((owned == 1) ? links : rechts - 1, 0.5f, -0.1f), 
-                    new Vector3((owned == 1) ? links : rechts - 1, 0.5f, -0.1f), 
-                    new Vector3((owned == 1) ? links : rechts - 1, 2f, -0.1f),
-                    new Vector3((owned == 1) ? links : rechts - 1, 2f, -0.1f),
-                    new Vector3((owned == 1) ? links : rechts - 1, 2f, -0.1f),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 2f, -0.1f),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 2f, -0.1f),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 2f, -0.1f),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 0.5f, 0),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 0.5f, 0),
-                    new Vector3((owned == 1) ? links : rechts - 1, 0.5f, 0),
-                    new Vector3((owned == 1) ? links : rechts - 1, 0.5f, 0),
-                    new Vector3((owned == 1) ? links : rechts - 1, 2f, 0),
-                    new Vector3((owned == 1) ? links : rechts - 1, 2f, 0),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 2f, 0),
-                    new Vector3((owned == 1) ? links + 1 : rechts, 2f, 0)
-                };
+                if(owned == 1){
+                    signMesh.vertices = new Vector3[] {
+                    new Vector3(left, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(left, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(left, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(left - 1, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(left - 1, -sizeYhalf + 0.5f, -0.1f), 
+                    new Vector3(left - 1, -sizeYhalf + 0.5f, -0.1f), 
+                    new Vector3(left - 1, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(left - 1, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(left - 1, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(left, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(left, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(left, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(left, -sizeYhalf + 0.5f, 0),
+                    new Vector3(left, -sizeYhalf + 0.5f, 0),
+                    new Vector3(left - 1, -sizeYhalf + 0.5f, 0),
+                    new Vector3(left - 1, -sizeYhalf + 0.5f, 0),
+                    new Vector3(left - 1, -sizeYhalf + 2f, 0),
+                    new Vector3(left - 1, -sizeYhalf + 2f, 0),
+                    new Vector3(left, -sizeYhalf + 2f, 0),
+                    new Vector3(left, -sizeYhalf + 2f, 0)
+                    };
+                } else{
+                    signMesh.vertices = new Vector3[] {
+                    new Vector3(right, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(right, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(right, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(right - 1, -sizeYhalf + 0.5f, -0.1f),
+                    new Vector3(right - 1, -sizeYhalf + 0.5f, -0.1f), 
+                    new Vector3(right - 1, -sizeYhalf + 0.5f, -0.1f), 
+                    new Vector3(right - 1, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(right - 1, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(right - 1, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(right, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(right, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(right, -sizeYhalf + 2f, -0.1f),
+                    new Vector3(right, -sizeYhalf + 0.5f, 0),
+                    new Vector3(right, -sizeYhalf + 0.5f, 0),
+                    new Vector3(right - 1, -sizeYhalf + 0.5f, 0),
+                    new Vector3(right - 1, -sizeYhalf + 0.5f, 0),
+                    new Vector3(right - 1, -sizeYhalf + 2f, 0),
+                    new Vector3(right - 1, -sizeYhalf + 2f, 0),
+                    new Vector3(right, -sizeYhalf + 2f, 0),
+                    new Vector3(right, -sizeYhalf + 2f, 0)
+                    };
+                }
 
                 signMesh.triangles = new int[] {0,3,6,0,6,9, 1,12,14,1,14,5, 4,15,16,4,16,8, 7,17,18,7,18,11, 2,10,19,2,19,13};
 
@@ -230,12 +259,13 @@ public class DE_pictureCreation : MonoBehaviour
             frame.transform.parent = painting.transform;
 
             //Rotation und Translation
-            painting.transform.Translate(posX, height + sizeY / 2, posZ);
+            painting.transform.Translate(posX, height + sizeYhalf, posZ);
             painting.transform.Rotate(0, rotation, 0); 
             
             //Collider hinzufügen
             BoxCollider boxCollider = painting.AddComponent<BoxCollider>();
-            boxCollider.size = new Vector3(sizeX,sizeY,1);
+            boxCollider.size = new Vector3(sizeX+2,sizeY,2);
+            boxCollider.center =  new Vector3(0,0,-1);
             boxCollider.isTrigger = true; 
         }
     }
