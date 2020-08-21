@@ -58,8 +58,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
     }
 
     void destroyPicture() {
-        // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste E gelöscht werden
-        if (DE_pictureCollision.isInPictureRange == true && Input.GetKeyDown(KeyCode.E)) {
+        // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste 1 gelöscht werden
+        if (DE_pictureCollision.isInPictureRange == true && (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))) {
             // lösche GameObject, das im Fokus steht
             Destroy(DE_pictureCollision.focusPicture);
             // isInWindowRange wird wieder auf false gesetzt, da das GameObject nicht mehr existiert
@@ -79,9 +79,9 @@ public class MW_playerColliderInteraction : MonoBehaviour
     }
 
     void stealPicture() {
-        // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste G gestohlen werden
+        // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste 2 gestohlen werden
         // nur wenn man zum jetzigen Zeitpunkt nicht ein Bild unter dem Arm hat, kann man ein Bild stehlen -> nur eines zum gleichen Zeitpunkt
-        if (DE_pictureCollision.isInPictureRange == true && Input.GetKeyDown(KeyCode.G) && steal == false) {
+        if (DE_pictureCollision.isInPictureRange == true && (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) && steal == false) {
             steal = true;
             // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
             stolenPicture = DE_pictureCollision.focusPicture;
@@ -98,7 +98,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             isInWindowRange = false;
         }
         // Debug.Log(DE_pictureCollision.focusPicture);
-        Debug.Log(stolenPicture);
+        // Debug.Log(stolenPicture);
     }
 
     void OnCollisionEnter(Collision other) {
@@ -161,7 +161,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
                                 (Screen.height) / 2 - (Screen.height) / 8,
                                 (Screen.width) / 4,
                                 (Screen.height) / 4),
-                                "Drücke E, um das Bild zu löschen oder G, um das Bild zu stehlen", style);
+                                "Drücke 1, um das Bild zu löschen oder 2, um das Bild zu stehlen", style);
         }
         if (DE_pictureCollision.isInPictureRange == false) {
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
