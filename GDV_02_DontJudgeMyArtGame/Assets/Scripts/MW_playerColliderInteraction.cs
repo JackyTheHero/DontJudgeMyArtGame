@@ -157,7 +157,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
 
-        if (DE_pictureCollision.isInPictureRange == true && owned == true && DE_cameraPan.inMenu == false && DE_cameraPan.inMotion == false) {
+        if (DE_pictureCollision.isInPictureRange == true && DE_cameraPan.inMenu == false && DE_cameraPan.inMotion == false) {
             GUI.Label(new Rect(150,
                                 (Screen.height) / 2 - (Screen.height) / 8,
                                 (Screen.width) / 4,
