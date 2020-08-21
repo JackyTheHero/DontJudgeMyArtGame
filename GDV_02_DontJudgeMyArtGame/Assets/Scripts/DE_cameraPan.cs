@@ -39,10 +39,10 @@ public class DE_cameraPan : MonoBehaviour
     //Bools für Ablauf========================================
 
     //Speicher ob Bewegung startet
-    static bool inMotion = false;
+    public static bool inMotion = false;
 
     //Speichert ob Auswahl getätigt
-    static bool inMenu = false;
+    public static bool inMenu = false;
 
     //Checkt ob Bewegung gestartet werden kann und führt diese dann aus, läuft durch alle vier Schritte, setzt sich selbst zurück
     public static void checkCameraPan()
