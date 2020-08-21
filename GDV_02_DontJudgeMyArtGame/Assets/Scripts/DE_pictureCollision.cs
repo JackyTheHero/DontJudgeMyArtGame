@@ -36,32 +36,11 @@ public class DE_pictureCollision : MonoBehaviour
         }
     }
 
-    //Nur zum Testen ===================================================================
-    /*
+    //Aufruf für Kameraschwenk, sollte woanders stehen ===================================================================
+    
     void Update () 
     { 
-        if (isInPictureRange == true && Input.GetKeyDown(KeyCode.E)) {
-            
-            Destroy(focusPicture);   
-        }
+        DE_cameraPan.checkCameraPan();
     }
-
-    void OnGUI() {
-        GUIStyle style = new GUIStyle();
-        style.fontSize = 24;
-        // Färbe Schrift rot, um die besser lesen zu können
-        style.normal.textColor = Color.red;
-        // collectedItems wird in triggerEnter (Skript am Schlangenkopf) deklariert und hochgezählt
-        if (isInPictureRange == true) {
-            GUI.Label(new Rect((Screen.width) / 2 - (Screen.width) / 4,
-                                (Screen.height) / 2 - (Screen.height) / 8,
-                                (Screen.width) / 4,
-                                (Screen.height) / 4),
-                                "Drücke E, um das Fenster zu löschen", style);
-        }
-        if (isInPictureRange == false) {
-            GUI.Label(new Rect(0, 0, 0, 0), "", style);
-        }
-    }
-    */
+    
 }
