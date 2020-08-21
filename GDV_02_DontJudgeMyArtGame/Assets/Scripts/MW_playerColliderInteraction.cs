@@ -51,7 +51,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         }
 
         // wenn es eigenes Bild ist, erlaube das Zerstören und das Stehlen
-        if (owned == true) {
+        if (owned == true && DE_cameraPan.inMotion == false && DE_cameraPan.inMenu == true) {
             destroyPicture();
             stealPicture();
         }
@@ -152,17 +152,27 @@ public class MW_playerColliderInteraction : MonoBehaviour
                                 (Screen.height) / 4),
                                 "Drücke E, um das Bild aus dem Fenster zu schmuggeln", style);
         }
+
         if (isInWindowRange == false) {
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
 
-        if (DE_pictureCollision.isInPictureRange == true && owned == true) {
+        if (DE_pictureCollision.isInPictureRange == true && owned == true && DE_cameraPan.inMenu == false && DE_cameraPan.inMotion == false) {
+            GUI.Label(new Rect(150,
+                                (Screen.height) / 2 - (Screen.height) / 8,
+                                (Screen.width) / 4,
+                                (Screen.height) / 4),
+                                "Drücke E, um das Bild genauer anzusehen", style);
+        }
+
+        if (DE_pictureCollision.isInPictureRange == true && owned == true && DE_cameraPan.inMotion == false && DE_cameraPan.inMenu == true) {
             GUI.Label(new Rect(50,
                                 (Screen.height) / 2 - (Screen.height) / 8,
                                 (Screen.width) / 4,
                                 (Screen.height) / 4),
                                 "Drücke 1, um das Bild zu löschen oder 2, um das Bild zu stehlen", style);
         }
+        
         if (DE_pictureCollision.isInPictureRange == false) {
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
