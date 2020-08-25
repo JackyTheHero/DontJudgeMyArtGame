@@ -48,7 +48,7 @@ public class DE_cameraPan : MonoBehaviour
     public static void checkCameraPan()
     {
         //Start der Bewegung zum Gemälde, nur wenn IN Reichweite, NICHT im Menü und NICHT in Bewegung
-        if (Input.GetKey(KeyCode.Q) && DE_pictureCollision.isInPictureRange && !inMenu && !inMotion) {
+        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2)) && DE_pictureCollision.isInPictureRange && !inMenu && !inMotion) {
             inMotion = true;
             inMenu = true;
 
@@ -62,7 +62,7 @@ public class DE_cameraPan : MonoBehaviour
         }
 
         //Start der Bewegung zum Gemälde, nur wenn IN Menü und NICHT in Bewegung
-        if (Input.GetKey(KeyCode.Q) && inMenu && !inMotion) {
+        if (Input.GetKey(KeyCode.E) && inMenu && !inMotion) {
             inMotion = true;
             inMenu = false;
         }
