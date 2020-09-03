@@ -19,21 +19,24 @@ public class JH_visitorBehaviour : MonoBehaviour
 {
 
     // public GameObject visitor; // visitor height --> 4 tiles
-    public GameObject textBubble;
+    public GameObject speechBubble;
     public Boolean nearPainting;
     private Rigidbody visitRigid;
     private int goodOrBad;
     public JH_scoreMaster scoreMaster;
+    Texture speechTexture;
+    float countdown;
+    Boolean countsDown;
 
     // Start is called before the first frame update
     void Start()
     {
-        //set textBubble to visitorPosition and set parent to visitor figure
-        textBubble = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        textBubble.SetActive(false);
+        //set speechBubble to visitorPosition and set parent to visitor figure
+        createSpeechBubble();
+        speechBubble.SetActive(false);
 
-        textBubble.transform.position = this.transform.position;
-        textBubble.transform.parent = this.transform;
+        speechBubble.transform.position = this.transform.position;
+        speechBubble.transform.parent = this.transform;
 
         nearPainting = false;
 
@@ -44,54 +47,158 @@ public class JH_visitorBehaviour : MonoBehaviour
         visitRigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         scoreMaster = this.gameObject.AddComponent<JH_scoreMaster>();
+
+        countdown = 0;
+        countsDown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if no painting, no speechBubble
+        //if near painting, speechBubble appears for 10 seconds
+        //after 10 seconds speechBubble disappears and visitor moves on on its rail
+
+        //Debug.Log(countdown);
+
+        if (!countsDown)
+        {
+            countdown = 10f;
+        }
+
         if (nearPainting) {
+            countsDown = true;
             speak();
+
+            if (countdown < 0)
+            {
+                //speechBubble.SetActive(false);
+                countsDown = false;
+                nearPainting = false;
+                this.transform.position = new Vector3(14,0,0);
+            }
         }
     }
 
     public void speak()
     {
-        
-        //constraints to freeze the figure in place
-        visitRigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        countdown -= Time.deltaTime;
 
-        //need something like Time.time to time the review (maybe 10 secs active)
+            //constraints to freeze the figure in place
+        //visitRigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         //move up speechbubble until it reaches its position at y = 5.0f
-        textBubble.SetActive(true);
-        if (textBubble.transform.position.y < 5.0f) {
-            textBubble.transform.position += new Vector3(0.0f, 0.02f, 0.0f);
+        speechBubble.SetActive(true);
+        if (speechBubble.transform.position.y < 5.0f) {
+            speechBubble.transform.position += new Vector3(0.0f, 0.02f, 0.0f);
         } else {
-            textBubble.transform.Rotate(0.0f, 0.1f, 0.0f); 
+            speechBubble.transform.Rotate(0.0f, 0.1f, 0.0f); 
         }
     }
 
+    private void createSpeechBubble()
+    {
+        Mesh speechMesh = new Mesh();
+        speechBubble = new GameObject("speechBubble", typeof(MeshFilter), typeof(MeshRenderer));
+
+        Renderer speechRend = speechBubble.GetComponent<Renderer>();
+        speechRend.material = new Material(Shader.Find("Standard"));
+
+        speechTexture = Resources.Load("thumbsUp") as Texture;
+        speechRend.material.mainTexture = speechTexture;
+
+        speechMesh = speechBubble.GetComponent<MeshFilter>().mesh;
+
+        speechMesh.Clear();
+
+        List<Vector3> speechVertices = new List<Vector3>();
+        List<int> speechTriangles = new List<int>();
+        List<Vector2> speechUv = new List<Vector2>();
+
+        speechVertices.Add(new Vector3(-0.5f,0 , 0.5f));
+        speechVertices.Add(new Vector3(0.5f, 0, 0.5f));
+        speechVertices.Add(new Vector3(0.5f, 1, 0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 1, 0.5f));
+
+        speechVertices.Add(new Vector3(0.5f, 0, 0.5f));
+        speechVertices.Add(new Vector3(0.5f, 0, -0.5f));
+        speechVertices.Add(new Vector3(0.5f, 1, -0.5f));
+        speechVertices.Add(new Vector3(0.5f, 1, 0.5f));
+
+        speechVertices.Add(new Vector3(0.5f, 0, -0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 0, -0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 1, -0.5f));
+        speechVertices.Add(new Vector3(0.5f, 1, -0.5f));
+
+        speechVertices.Add(new Vector3(-0.5f, 0, -0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 0, 0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 1, 0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 1, -0.5f));
+
+        //oben
+        speechVertices.Add(new Vector3(-0.5f, 1, 0.5f));
+        speechVertices.Add(new Vector3(0.5f, 1, 0.5f));
+        speechVertices.Add(new Vector3(0.5f, 1, -0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 1, -0.5f));
+
+        //unten
+        speechVertices.Add(new Vector3(-0.5f, 0, -0.5f));
+        speechVertices.Add(new Vector3(0.5f, 0, -0.5f));
+        speechVertices.Add(new Vector3(0.5f, 0, 0.5f));
+        speechVertices.Add(new Vector3(-0.5f, 0, 0.5f));
+
+        speechMesh.vertices = speechVertices.ToArray();
+
+        for (int i = 0; i < speechMesh.vertices.Length; i = i + 4)
+        {
+            speechTriangles.Add(i);
+            speechTriangles.Add(i + 1);
+            speechTriangles.Add(i + 2);
+            speechTriangles.Add(i);
+            speechTriangles.Add(i + 2);
+            speechTriangles.Add(i + 3);
+        }
+
+        speechMesh.triangles = speechTriangles.ToArray();
+
+        for (int j = 0; j < speechMesh.vertices.Length; j = j + 4)
+        {
+            speechUv.Add(new Vector2(0, 0));
+            speechUv.Add(new Vector2(1, 0));
+            speechUv.Add(new Vector2(1, 1));
+            speechUv.Add(new Vector2(0, 1));
+        }
+
+        speechMesh.uv = speechUv.ToArray();
+
+        speechMesh.RecalculateNormals();
+    }
     
     void OnTriggerEnter(Collider other) {
         // gib folgende Zeile für alle Kollisionen aus
        Debug.Log(this.name + " has an OnTriggerEnter with " + other.gameObject.name);
        
         //if trigger of owned painting was entered
-        if (other.gameObject.name.Contains("owned")) {
+        if (other.gameObject.tag == "ownedPainting") {
             nearPainting = true;
 
-            //random number decides if there is a good or bad review (0 == bad, 1 == good)
-            goodOrBad = (int)UnityEngine.Random.Range(0f, 2f);
+            //random number decides if there is a good or bad review (0 == bad, 1 and 2 == good)
+            goodOrBad = (int) UnityEngine.Random.Range(0f, 3f);
 
-            if (goodOrBad == 1)
+            if (goodOrBad >= 1)
             {
-                scoreMaster.raiseScore(this.gameObject);
+                speechTexture = Resources.Load("thumbsUp") as Texture;
+                speechBubble.GetComponent<Renderer>().material.mainTexture = speechTexture;
+                scoreMaster.raiseScore(other.gameObject);
             }
             else {
-                scoreMaster.lowerScore(this.gameObject);
+                speechTexture = Resources.Load("thumbsDown") as Texture;
+                speechBubble.GetComponent<Renderer>().material.mainTexture = speechTexture;
+                scoreMaster.lowerScore(other.gameObject);
             }
+        } else
+        {
+            nearPainting = false;
         }
     }
-
-
 }
