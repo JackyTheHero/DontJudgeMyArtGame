@@ -144,6 +144,10 @@ public class DE_pictureCreation : MonoBehaviour
                     maxSize = 5;
                     if(imgX < 250 && imgY < 250){
                         maxSize = 4;
+                        if(imgX < 100 && imgY < 100){
+                            //Verhindert starke Unschärfe bei kleinen Bildern (z.B. Pixelart)
+                            img.filterMode = FilterMode.Point;
+                        }
                     }
                 }
             }
