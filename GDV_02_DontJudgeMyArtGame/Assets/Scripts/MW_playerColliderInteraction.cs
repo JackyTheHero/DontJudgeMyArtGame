@@ -43,7 +43,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // prüfe, ob focusPicture auf "owned" endet, da nur eigene Bilder zerstört und gestohlen werden können
         // prüfe nur, wenn focusPicture nicht null ist
         if (DE_pictureCollision.focusPicture != null) {
-            if (DE_pictureCollision.focusPicture.name.Substring(DE_pictureCollision.focusPicture.name.Length - 5) == "owned") {
+            if (DE_pictureCollision.focusPicture.name.Contains("owned")) {
                 owned = true;
             } else {
                 owned = false;
@@ -54,6 +54,11 @@ public class MW_playerColliderInteraction : MonoBehaviour
         if (owned == true && DE_cameraPan.inMotion == false && DE_cameraPan.inMenu == true) {
             destroyPicture();
             stealPicture();
+        }
+
+        // wenn man Bild unter dem Arm hat und vor einem Fenster steht, kann man es durch Drücken der Taste E rausschmuggeln
+        if (steal == true && isInWindowRange == true && Input.GetKeyDown(KeyCode.E)) {
+            throwPictureOutWindow();
         }
     }
 
@@ -75,6 +80,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
             
             // setze isInPictureRange zurück auf false, da das Gemälde nicht länger existiert
             DE_pictureCollision.isInPictureRange = false;
+            // erhöhe Punktzahl nach erfolgreichem Zerstören -> false bedeutet, Gemälde wurde zerstört
+            JH_scoreMaster.raiseGeneralScore(false);
         }
     }
 
@@ -86,17 +93,19 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
             stolenPicture = DE_pictureCollision.focusPicture;
         }
+    }
 
+    void throwPictureOutWindow() {
         // wenn man ein Gemälde bereits unter dem Arm hat und vor einem offenen Fenster steht, kann man es dort hinausschmuggeln
-        if (steal == true && isInWindowRange == true && Input.GetKeyDown(KeyCode.E)) {
-            // setze steal wieder auf false, da das Stehlen erfolgreich war und man nun ein anderes stehlen kann bzw. "darf"
-            steal = false;
-            // zerstöre das stolenPicture und setze Referenz auf null
-            Destroy(stolenPicture);
-            stolenPicture = null;
-            // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
-            isInWindowRange = false;
-        }
+        // setze steal wieder auf false, da das Stehlen erfolgreich war und man nun ein anderes stehlen kann bzw. "darf"
+        steal = false;
+        // zerstöre das stolenPicture und setze Referenz auf null
+        Destroy(stolenPicture);
+        stolenPicture = null;
+        // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
+        isInWindowRange = false;
+        // erhöhe Punktzahl nach erfolgreichem Zerstören -> true bedeutet, Gemälde wurde gestohlen
+        JH_scoreMaster.raiseGeneralScore(true);
         // Debug.Log(DE_pictureCollision.focusPicture);
         // Debug.Log(stolenPicture);
     }
@@ -138,7 +147,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         }
     }
 
-    /*
+    
     // GUI für Testzwecke
     // mit Variable collectedItems werden die eingesammelten Items gezählt
     void OnGUI() {
@@ -178,5 +187,5 @@ public class MW_playerColliderInteraction : MonoBehaviour
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
     }
-    */
+    
 }
