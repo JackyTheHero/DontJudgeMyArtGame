@@ -147,7 +147,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         }
     }
 
-    
+    /*
     // GUI für Testzwecke
     // mit Variable collectedItems werden die eingesammelten Items gezählt
     void OnGUI() {
@@ -187,5 +187,5 @@ public class MW_playerColliderInteraction : MonoBehaviour
             GUI.Label(new Rect(0, 0, 0, 0), "", style);
         }
     }
-    
+    */
 }
