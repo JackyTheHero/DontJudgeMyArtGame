@@ -194,12 +194,12 @@ public class JH_visitorBehaviour : MonoBehaviour
             {
                 speechTexture = Resources.Load("thumbsUp") as Texture;
                 speechBubble.GetComponent<Renderer>().material.mainTexture = speechTexture;
-                scoreMaster.raiseScore(other.gameObject);
+                JH_scoreMaster.raiseScore(other.gameObject);
             }
             else {
                 speechTexture = Resources.Load("thumbsDown") as Texture;
                 speechBubble.GetComponent<Renderer>().material.mainTexture = speechTexture;
-                scoreMaster.lowerScore(other.gameObject);
+                JH_scoreMaster.lowerScore(other.gameObject);
             }
         } else
         {

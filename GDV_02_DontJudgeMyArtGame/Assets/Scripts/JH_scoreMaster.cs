@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class JH_scoreMaster : MonoBehaviour
 {
-    public int generalScore;
-    public int[] paintingScore;
-    public Boolean gameover;
-    public GameObject[] ownedPaintings;
+    public static int generalScore;
+    public static int[] paintingScore;
+    public static Boolean gameover;
+    public static GameObject[] ownedPaintings;
 
     // Start is called before the first frame update
     void Start()
