@@ -120,7 +120,7 @@ public class DE_pictureCreation : MonoBehaviour
 
         //Wenn Bild nicht eigenes: Normale Bildtextur aus Assets laden
         if(owned == 0){
-            img = Resources.Load("bild" + number) as Texture2D;
+            img = Resources.Load("Bilder/bild" + number) as Texture2D;
         } else{ //Wenn Bild eigenes: benutzerdefiniertes Bild aus StreamingAssets laden
             //Pfad zu Bild
             string path = Application.streamingAssetsPath + "\\" + numberOwned + ".png";
