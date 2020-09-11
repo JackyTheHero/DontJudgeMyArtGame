@@ -36,7 +36,7 @@ public class JH_scoreMaster : MonoBehaviour
         }
     }
 
-    public void raiseScore(GameObject painting) {
+    public static void raiseScore(GameObject painting) {
         generalScore += 3;
 
         int index = getPaintingIndex(painting);
@@ -45,7 +45,7 @@ public class JH_scoreMaster : MonoBehaviour
         paintingScore[index] += 3;
     }
 
-    public void lowerScore(GameObject painting) {
+    public static void lowerScore(GameObject painting) {
         generalScore -= 2;
         
         int index = getPaintingIndex(painting);
@@ -54,18 +54,18 @@ public class JH_scoreMaster : MonoBehaviour
         paintingScore[index] -= 2;
     }
 
-    public int getGeneralScore()
+    public static int getGeneralScore()
     {
         return generalScore;
     }
 
-    public int getPaintingScore(GameObject painting) {
+    public static int getPaintingScore(GameObject painting) {
         return paintingScore[getPaintingIndex(painting)];
     }
     
     //Keep in mind that all (destroyed) paintings have to be reset BEFORE calling this method; an array is initialized containing all owned paintings
     //if resetScores is called before that, the painting scores are possibly not in the right order
-    public void resetScores() {
+    public static void resetScores() {
         gameover = false;
         generalScore = 0;
 
@@ -81,7 +81,7 @@ public class JH_scoreMaster : MonoBehaviour
     }
 
     //search the index of the right painting in the ownedPaintings array
-    public int getPaintingIndex(GameObject painting)
+    public static int getPaintingIndex(GameObject painting)
     {
         int i = 0;
 
@@ -94,7 +94,7 @@ public class JH_scoreMaster : MonoBehaviour
         return i;
     }
 
-    public void setOwnedPaintings()
+    public static void setOwnedPaintings()
     {
         // giving all owned paintings a tag to access them easier
         var gameObjList = GameObject.FindObjectsOfType<GameObject>();
@@ -111,7 +111,7 @@ public class JH_scoreMaster : MonoBehaviour
         ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
     }
 
-    public void raiseGeneralScore(Boolean stolen)
+    public static void raiseGeneralScore(Boolean stolen)
     {
         if (stolen) {
             generalScore += 10;
