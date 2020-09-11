@@ -27,6 +27,7 @@ public class JH_visitorBehaviour : MonoBehaviour
     Texture speechTexture;
     float countdown;
     Boolean countsDown;
+    Collider otherCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,8 @@ public class JH_visitorBehaviour : MonoBehaviour
 
         countdown = 0;
         countsDown = false;
+
+        otherCollider = null;
     }
 
     // Update is called once per frame
@@ -72,10 +75,12 @@ public class JH_visitorBehaviour : MonoBehaviour
 
             if (countdown < 0)
             {
-                //speechBubble.SetActive(false);
                 countsDown = false;
-                nearPainting = false;
-                this.transform.position = new Vector3(14,0,0);
+                if (otherCollider != null)
+                {
+                    //this.transform.position = new Vector3(14,0,0);
+                    this.transform.position -= new Vector3(6, 0, 6);
+                }
             }
         }
     }
@@ -175,9 +180,9 @@ public class JH_visitorBehaviour : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider other) {
-        // gib folgende Zeile für alle Kollisionen aus
-       Debug.Log(this.name + " has an OnTriggerEnter with " + other.gameObject.name);
-       
+        //saves other collider to 
+        otherCollider = other;
+
         //if trigger of owned painting was entered
         if (other.gameObject.tag == "ownedPainting") {
             nearPainting = true;
@@ -200,5 +205,18 @@ public class JH_visitorBehaviour : MonoBehaviour
         {
             nearPainting = false;
         }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        speechBubble.SetActive(false);
+        speechBubble.transform.position = this.transform.position;
+        otherCollider = null;
+        nearPainting = false;
+    }
+    
+    public GameObject getCollidedObject()
+    {
+        return otherCollider.gameObject;
     }
 }

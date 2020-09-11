@@ -33,7 +33,6 @@ public class JH_scoreMaster : MonoBehaviour
         if (Input.GetKeyDown("c"))
         {
             Debug.Log("generalScore: " + getGeneralScore());
-            Debug.Log("paintingScore von Gemälde4owned" + getPaintingScore(GameObject.Find("Gemälde4owned")));
         }
     }
 
@@ -110,6 +109,17 @@ public class JH_scoreMaster : MonoBehaviour
 
         //own array for ownedPainting tagged GameObjects for easy access
         ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
+    }
+
+    public void raiseGeneralScore(Boolean stolen)
+    {
+        if (stolen) {
+            generalScore += 10;
+        }else
+        {
+            generalScore += 5;
+        }
+        
     }
 
 }
