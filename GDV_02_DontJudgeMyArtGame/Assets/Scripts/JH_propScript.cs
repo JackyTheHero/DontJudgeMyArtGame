@@ -13,6 +13,12 @@ public class JH_propScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //createAllBenches();
+        //createAllStatues();
+    }
+
+    public static void createAllBenches()
+    {
         //Standard bench
         GameObject bench = new GameObject("bench", typeof(MeshFilter), typeof(MeshRenderer));
         Renderer benchRend = bench.GetComponent<Renderer>();
@@ -29,14 +35,14 @@ public class JH_propScript : MonoBehaviour
         //Bench placing
         placingBenches(bench, benchParent);
 
-        bench.transform.Translate(-20,30,20);
+        bench.transform.Translate(-20, 30, 20);
+    }
 
-        //------------------------------------------------
-
+    public static void createAllStatues() {
         //Standard statue
         GameObject statue = new GameObject("statue", typeof(MeshFilter), typeof(MeshRenderer));
         Renderer statueRend = statue.GetComponent<Renderer>();
-        benchRend.material = new Material(Shader.Find("Standard"));
+        statueRend.material = new Material(Shader.Find("Standard"));
         Texture statueTexture = Resources.Load("marbleTexture") as Texture;
         statueRend.material.mainTexture = statueTexture;
         statue = createStatue(statue);
@@ -52,7 +58,8 @@ public class JH_propScript : MonoBehaviour
         statue.transform.Translate(-20, 30, 20);
     }
 
-    public GameObject createBench(GameObject benchMaster) {
+
+    public static GameObject createBench(GameObject benchMaster) {
         Mesh benchMesh = new Mesh();
         GameObject benchLegOne = new GameObject("benchLegOne", typeof(MeshFilter), typeof(MeshRenderer));
 
@@ -316,7 +323,7 @@ public class JH_propScript : MonoBehaviour
         return benchMaster;
     }
 
-    public void placingBenches(GameObject bench, GameObject parent) {
+    public static void placingBenches(GameObject bench, GameObject parent) {
 
         GameObject benchOne = Instantiate(bench);
         benchOne.name = "benchOne";
@@ -379,7 +386,7 @@ public class JH_propScript : MonoBehaviour
         benchEleven.transform.parent = parent.transform;
     }
 
-    public GameObject createStatue(GameObject statueMaster) {
+    public static GameObject createStatue(GameObject statueMaster) {
         Mesh statueMesh = new Mesh();
         GameObject foundation = new GameObject("foundation", typeof(MeshFilter), typeof(MeshRenderer));
 
@@ -694,7 +701,7 @@ public class JH_propScript : MonoBehaviour
         
     }
 
-    public void placingStatues(GameObject statue, GameObject parent) {
+    public static void placingStatues(GameObject statue, GameObject parent) {
         GameObject statueOne = Instantiate(statue);
         statueOne.name = "statueOne";
         statueOne.transform.parent = parent.transform;
@@ -706,7 +713,7 @@ public class JH_propScript : MonoBehaviour
         statueTwo.transform.Translate(168, 0, 49);
     }
 
-    public void CombineMesh(GameObject obj) {
+    public static void CombineMesh(GameObject obj) {
 
         MeshFilter[] meshFilters = obj.GetComponentsInChildren<MeshFilter>();
         
