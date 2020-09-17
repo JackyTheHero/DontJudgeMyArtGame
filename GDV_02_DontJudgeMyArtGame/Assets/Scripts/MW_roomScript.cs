@@ -30,9 +30,7 @@ public class MW_roomScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // berechnet die UV-Koordinate zwischen den Faces in Relation zu ihrer Höhe
-        wallAboveUV = (height / doorwayFactor) / height;
-
+		// Methode wird in einem anderen Skript aufgerufen, daher Deklaration als public static
         // CreateWholeBuilding();
     }
 
@@ -43,6 +41,9 @@ public class MW_roomScript : MonoBehaviour
     }
 
     public static void CreateWholeBuilding() {
+		// berechnet die UV-Koordinate zwischen den Faces in Relation zu ihrer Höhe
+        wallAboveUV = (height / doorwayFactor) / height;
+		
         // Empty, an das alle Bestandteile des Raumaufbaus gehängt werden
         building = new GameObject();
         // Empty so verschieben, dass Spieler auf seiner Startposition steht
