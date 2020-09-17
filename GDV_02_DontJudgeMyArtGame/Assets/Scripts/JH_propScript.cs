@@ -36,6 +36,7 @@ public class JH_propScript : MonoBehaviour
         placingBenches(bench, benchParent);
 
         bench.transform.Translate(-20, 30, 20);
+        Destroy(bench);
     }
 
     public static void createAllStatues() {
@@ -56,6 +57,7 @@ public class JH_propScript : MonoBehaviour
         placingStatues(statue, statueParent);
 
         statue.transform.Translate(-20, 30, 20);
+        Destroy(statue);
     }
 
 
