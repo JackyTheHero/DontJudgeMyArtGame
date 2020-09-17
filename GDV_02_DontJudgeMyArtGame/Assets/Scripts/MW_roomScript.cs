@@ -14,19 +14,18 @@ public class MW_roomScript : MonoBehaviour
     */
 
     // Variable für Höhe und Dicke der Wand, sodass sie später leichter dnymaisch geändert werden können
-    float height = 45.0f;
-    float wallThickness = 2.0f;
+    static float height = 45.0f;
+    static float wallThickness = 2.0f;
     // Wie hoch sind die Durchgänge in Relation zur Wandhöhe? -> height / doorwayFactor
-    float doorwayFactor = 4.0f;
+    static float doorwayFactor = 4.0f;
     // Wie lang und breit sind die Durchgänge
-    float doorwayThickness = 10.0f;
+    static float doorwayThickness = 10.0f;
 
     // berechnet die UV-Koordinate zwischen den Faces in Realtion zu ihrer Höhe
-    float wallAboveUV;
+    static float wallAboveUV;
 
-    GameObject building;
+    static GameObject building;
 
-    public Material woodGround;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +33,16 @@ public class MW_roomScript : MonoBehaviour
         // berechnet die UV-Koordinate zwischen den Faces in Realtion zu ihrer Höhe
         wallAboveUV = (height / doorwayFactor) / height;
 
+        // CreateWholeBuilding();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public static void CreateWholeBuilding() {
         // Empty, an das alle Bestandteile des Raumaufbaus gehängt werden
         building = new GameObject();
         // Empty so verschieben, dass Spieler auf seiner Startposition steht
@@ -50,23 +59,19 @@ public class MW_roomScript : MonoBehaviour
         building.transform.Translate(82, 0, -41);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     /* FUNKTION, DIE BODEN ERSTELLT */
-    private void CreateGround() {
+    static void CreateGround() {
         Mesh meshGround = new Mesh();
         GameObject ground = new GameObject("Ground", typeof(MeshFilter), typeof(MeshRenderer));
         ground.transform.parent = building.transform;
 
         Renderer rend = ground.GetComponent<Renderer>();
         rend.material = new Material(Shader.Find("Standard"));
+
         // Material hinzufügen, das in der UI erstellt wurde (Assets -> Create -> Material)
         // unter Albedo schließlich die Textur auswählen
+        Material woodGround = Resources.Load("woodGround") as Material;
         ground.GetComponent<Renderer>().material = woodGround;
 
         meshGround = ground.GetComponent<MeshFilter>().mesh;
@@ -254,7 +259,7 @@ public class MW_roomScript : MonoBehaviour
 
 
     /* FUNKTION, DIE RÄUME ERSTELLT */
-    private void CreateRooms() {
+    static void CreateRooms() {
         // Room 1
         Mesh meshRoom1 = new Mesh();
         GameObject room1 = new GameObject("Room 1", typeof(MeshFilter), typeof(MeshRenderer));
@@ -2217,7 +2222,7 @@ public class MW_roomScript : MonoBehaviour
 
 
     /* FUNKTION, DIE TÜRRAHMEN ERSTELLT */
-    private void CreateDoorways() {
+    static void CreateDoorways() {
         Mesh meshDoorway = new Mesh();
         GameObject doorway = new GameObject("Doorways", typeof(MeshFilter), typeof(MeshRenderer));
         doorway.transform.parent = building.transform;
@@ -2935,7 +2940,7 @@ public class MW_roomScript : MonoBehaviour
 
 
     /* FUNKTION, DIE EINGANGSTÜR ERSTELLT */
-    private void CreateFrontDoor() {
+    static void CreateFrontDoor() {
         Mesh meshDoor = new Mesh();
         GameObject door = new GameObject("Front Door", typeof(MeshFilter), typeof(MeshRenderer));
         door.transform.parent = building.transform;
@@ -3062,7 +3067,7 @@ public class MW_roomScript : MonoBehaviour
 
 
     /* FUNKTION, DIE ZWISCHENWÄNDE ERSTELLT */
-    public void CreateDividingWall() {
+    static void CreateDividingWall() {
         float wallFactor = 3.75f;
         float upUV = (height / wallFactor) / height;
 
@@ -3304,4 +3309,5 @@ public class MW_roomScript : MonoBehaviour
         wall3Body.isKinematic = true;
         meshwall3 = wall3Collider.sharedMesh;
     }
+
 }
