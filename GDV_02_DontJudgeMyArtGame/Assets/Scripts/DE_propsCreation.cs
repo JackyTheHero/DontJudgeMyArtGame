@@ -5,7 +5,7 @@ using UnityEngine;
 public class DE_propsCreation : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public static void propsCreation()
     {
         createPillar(29, 54);
         createPillar(29, 74);
@@ -28,7 +28,7 @@ public class DE_propsCreation : MonoBehaviour
     }
 
     //SÄULE================================================================================================================
-    void createPillar(float posX, float posZ){
+    static void createPillar(float posX, float posZ){
 
         //Variablen für Sockelhöhe und Säulenhöhe
         float heightBasis = 1;
@@ -218,7 +218,7 @@ public class DE_propsCreation : MonoBehaviour
     }
 
     //VASE===================================================================================================================
-    void createVase(float posX, float posZ){
+    static void createVase(float posX, float posZ){
 
         //Variablen für Sockelhöhe und Vasenhöhe
         float heightBasis = 0.5f;
@@ -582,7 +582,7 @@ public class DE_propsCreation : MonoBehaviour
     }
 
     //FENSTER===========================================================================================================
-    void createWindow(float posX, float posZ, int open){
+    static void createWindow(float posX, float posZ, int open){
 
     }
 

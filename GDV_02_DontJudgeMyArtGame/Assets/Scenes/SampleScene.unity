@@ -5302,7 +5302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &465072554
 GameObject:
@@ -5439,8 +5439,8 @@ MonoBehaviour:
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.6666667
+  m_OverrideVoxelSize: 1
+  m_VoxelSize: 0.5
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
 --- !u!4 &466687164
@@ -5450,12 +5450,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466687162}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &492465457
 GameObject:
@@ -5929,9 +5929,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 786168473}
-  - component: {fileID: 786168472}
   - component: {fileID: 786168474}
   - component: {fileID: 786168475}
+  - component: {fileID: 786168476}
   m_Layer: 0
   m_Name: PropMaster
   m_TagString: Untagged
@@ -5939,18 +5939,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &786168472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786168471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6f61d40ae165554dbfbff2cb77fb6bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &786168473
 Transform:
   m_ObjectHideFlags: 0
@@ -5989,6 +5977,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb41ad34d07118949bce7e5337e7819d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &786168476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786168471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e32bda1d647d04baa5be4a3bd27dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 466687163}
 --- !u!1 &879085147
 GameObject:
   m_ObjectHideFlags: 0
@@ -6592,7 +6593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312291a2fcf1f2d4491e26368c723811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodGround: {fileID: 2100000, guid: 07bf168059b3e6742a8831b646a3254a, type: 2}
 --- !u!4 &1002221902
 Transform:
   m_ObjectHideFlags: 0
@@ -18444,7 +18444,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speechBubble: {fileID: 0}
   nearPainting: 0
-  scoreMaster: {fileID: 0}
 --- !u!1 &2030521278
 GameObject:
   m_ObjectHideFlags: 0

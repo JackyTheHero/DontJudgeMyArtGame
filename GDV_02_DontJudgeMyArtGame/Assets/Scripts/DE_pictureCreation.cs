@@ -6,10 +6,12 @@ using System.IO;
 public class DE_pictureCreation : MonoBehaviour
 {
     //Gibt Bildern eine Nummer
-    int number = 1;
-    int numberOwned = 1;
+    static int number = 1;
+    static int numberOwned = 1;
+
+    static GameObject pictureParent = new GameObject("pictureParent");
         
-    void Start()
+    public static void pictureCreation()
     {
         //Erzeugt Bilder bei Start
 
@@ -112,7 +114,7 @@ public class DE_pictureCreation : MonoBehaviour
     // @param rotation: Ausrichtung
     // @param owned: Ob das Bild dem Spieler gehört, legt außerdem fest ob Plakette erzeugt wird und auf welcher Seite (0: keine Plakette, 1: links, 2: rechts)
     // @param number: Iterator Nummer
-    public void createPicture(float posX, float posZ, float sizeX, float sizeY, float height, float rotation, int owned)
+    public static void createPicture(float posX, float posZ, float sizeX, float sizeY, float height, float rotation, int owned)
     {
 
         //Textur für später deklarieren
@@ -386,6 +388,8 @@ public class DE_pictureCreation : MonoBehaviour
         //Rotation und Translation
         painting.transform.Translate(posX, height + sizeYhalf, posZ);
         painting.transform.Rotate(0, rotation, 0); 
+
+        painting.transform.parent = pictureParent.transform;
         
         //Collider hinzufügen
         BoxCollider boxCollider = painting.AddComponent<BoxCollider>();

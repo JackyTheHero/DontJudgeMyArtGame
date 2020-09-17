@@ -10,7 +10,12 @@ public class DE_NavMeshScript : MonoBehaviour
 
     void Start()
     {
-       surface.BuildNavMesh();
+        MW_roomScript.CreateWholeBuilding();
+        JH_propScript. createAllBenches();
+        JH_propScript.createAllStatues();
+        DE_pictureCreation.pictureCreation();
+        DE_propsCreation.propsCreation();
+        surface.BuildNavMesh();
         
     }
 
