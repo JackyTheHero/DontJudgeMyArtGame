@@ -3183,6 +3183,9 @@ public class MW_roomScript : MonoBehaviour
         wall1Body.isKinematic = true;
         meshWall1 = wall1Collider.sharedMesh;
 
+        // verschieben nötig, da es an Empty "Building" gehängt wird, was erst später eingefügt wurde
+        wall1.transform.Translate(-82, 0, 41);
+
         // erstelle separates GameObject für wall2, um es Instantiate direkt zuzuweisen -> um wall2 selbst benennen zu können
         GameObject wall2;
         // nimm wall1 und kopiere es -> setze es dann an andere Position
@@ -3191,6 +3194,9 @@ public class MW_roomScript : MonoBehaviour
         wall2.name = "Dividing Wall Room 2 (2)";
         // füge wall2 zum Empty "Building"
         wall2.transform.parent = building.transform;
+
+        // verschieben nötig, da es an Empty "Building" gehängt wird, was erst später eingefügt wurde
+        wall2.transform.Translate(-82, 0, 41);
 
         /* DUNKELBLAUE WAND */
 
@@ -3313,6 +3319,8 @@ public class MW_roomScript : MonoBehaviour
         meshwall3.RecalculateNormals();
 
         wall3.transform.position = new Vector3(158, 0, -75);
+        // verschieben und dann rotieren -> nötig, da es an Empty "Building" gehängt wird, was erst später eingefügt wurde
+        wall3.transform.Translate(-82, 0, 41);
         wall3.transform.Rotate(0, 90, 0);
 
         MeshCollider wall3Collider = wall3.AddComponent<MeshCollider>();
