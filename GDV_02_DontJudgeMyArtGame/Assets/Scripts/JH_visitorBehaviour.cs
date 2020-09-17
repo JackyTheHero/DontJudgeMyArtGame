@@ -23,7 +23,6 @@ public class JH_visitorBehaviour : MonoBehaviour
     public Boolean nearPainting;
     private Rigidbody visitRigid;
     private int goodOrBad;
-    public JH_scoreMaster scoreMaster;
     Texture speechTexture;
     float countdown;
     Boolean countsDown;
@@ -47,7 +46,7 @@ public class JH_visitorBehaviour : MonoBehaviour
         visitRigid = this.GetComponent<Rigidbody>();
         visitRigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        scoreMaster = this.gameObject.AddComponent<JH_scoreMaster>();
+        this.gameObject.AddComponent<JH_scoreMaster>();
 
         countdown = 0;
         countsDown = false;
