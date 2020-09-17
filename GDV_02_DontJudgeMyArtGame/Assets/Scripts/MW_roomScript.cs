@@ -30,7 +30,7 @@ public class MW_roomScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // berechnet die UV-Koordinate zwischen den Faces in Realtion zu ihrer Höhe
+        // berechnet die UV-Koordinate zwischen den Faces in Relation zu ihrer Höhe
         wallAboveUV = (height / doorwayFactor) / height;
 
         // CreateWholeBuilding();
@@ -64,6 +64,7 @@ public class MW_roomScript : MonoBehaviour
     static void CreateGround() {
         Mesh meshGround = new Mesh();
         GameObject ground = new GameObject("Ground", typeof(MeshFilter), typeof(MeshRenderer));
+        // füge ground zum Empty "Building"
         ground.transform.parent = building.transform;
 
         Renderer rend = ground.GetComponent<Renderer>();
@@ -263,6 +264,7 @@ public class MW_roomScript : MonoBehaviour
         // Room 1
         Mesh meshRoom1 = new Mesh();
         GameObject room1 = new GameObject("Room 1", typeof(MeshFilter), typeof(MeshRenderer));
+        // füge room1 zum Empty "Building" -> auch alle anderen Räume werden hinzugefügt
         room1.transform.parent = building.transform;
 
         Renderer rend1 = room1.GetComponent<Renderer>();
@@ -2225,6 +2227,7 @@ public class MW_roomScript : MonoBehaviour
     static void CreateDoorways() {
         Mesh meshDoorway = new Mesh();
         GameObject doorway = new GameObject("Doorways", typeof(MeshFilter), typeof(MeshRenderer));
+        // füge doorways zum Empty "Building"
         doorway.transform.parent = building.transform;
 
         Renderer rend = doorway.GetComponent<Renderer>();
@@ -2943,6 +2946,7 @@ public class MW_roomScript : MonoBehaviour
     static void CreateFrontDoor() {
         Mesh meshDoor = new Mesh();
         GameObject door = new GameObject("Front Door", typeof(MeshFilter), typeof(MeshRenderer));
+        // füge door zum Empty "Building"
         door.transform.parent = building.transform;
 
         Renderer rend = door.GetComponent<Renderer>();
@@ -3073,6 +3077,8 @@ public class MW_roomScript : MonoBehaviour
 
         Mesh meshWall1 = new Mesh();
         GameObject wall1 = new GameObject("Dividing Wall Room 2 (1)", typeof(MeshFilter), typeof(MeshRenderer));
+        // füge wall1 zum Empty "Building"
+        wall1.transform.parent = building.transform;
 
         Renderer rend1 = wall1.GetComponent<Renderer>();
         rend1.material = new Material(Shader.Find("Standard"));
@@ -3182,11 +3188,15 @@ public class MW_roomScript : MonoBehaviour
         Vector3 newPosition = new Vector3(95, 0, 62);
         wall2 = Instantiate(wall1, newPosition, wall1.transform.rotation);
         wall2.name = "Dividing Wall Room 2 (2)";
+        // füge wall2 zum Empty "Building"
+        wall2.transform.parent = building.transform;
 
         /* DUNKELBLAUE WAND */
 
         Mesh meshwall3 = new Mesh();
         GameObject wall3 = new GameObject("Dividing Wall Room 9", typeof(MeshFilter), typeof(MeshRenderer));
+        // füge wall3 zum Empty "Building"
+        wall3.transform.parent = building.transform;
 
         Renderer rend2 = wall3.GetComponent<Renderer>();
         rend2.material = new Material(Shader.Find("Standard"));
