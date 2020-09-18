@@ -115,7 +115,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // Debug.Log(this.name + " has an OnCollisionEnter with " + other.gameObject.name);
 
         // wenn Player mit dem Boden kollidiert und somit der Fall beendet ist, wird Tasteneingabe freigegeben
-        if (other.gameObject.name == "Ground") {
+        if (other.gameObject.name.Contains("Ground")) {
             // Rigidbody des Players erhält position und rotation constraints, sodass er sich auf diesen Achsen nicht verändert
             // constraint für position y wird hier erst eingefügt, da Player zuvor auf dem Boden aufgekommen sein muss
             playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;

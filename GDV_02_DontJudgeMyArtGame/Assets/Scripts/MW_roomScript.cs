@@ -50,10 +50,10 @@ public class MW_roomScript : MonoBehaviour
         building.transform.Translate(-82, 0, 41);
         building.name = "Building";
 
-        CreateGround();
+        CreateAllGrounds();
         CreateFrontDoor();
         CreateRooms();
-        CreateDoorways();
+        CreateAllDoorways();
         CreateDividingWall();
 
         // Versetzt Empty auf den Ursprungsppunkt 0|0|0, wo auch Spieler starten soll
@@ -61,10 +61,17 @@ public class MW_roomScript : MonoBehaviour
     }
 
 
-    /* FUNKTION, DIE BODEN ERSTELLT */
-    static void CreateGround() {
+    // Empty, in dem sich Böden aller Räume befinden
+    static GameObject grounds = new GameObject("Grounds");
+    // zähle Anzahl der Böden beim Erstellen hoch -> Namensgebung
+    static int countGrounds = 0;
+
+    /* FUNKTION, DIE EINEN BODEN ERSTELLT */
+    static void CreateGround(float posX, float posZ, float width, float length) {
+        countGrounds++;
+
         Mesh meshGround = new Mesh();
-        GameObject ground = new GameObject("Ground", typeof(MeshFilter), typeof(MeshRenderer));
+        GameObject ground = new GameObject("Ground " + countGrounds, typeof(MeshFilter), typeof(MeshRenderer));
         // füge ground zum Empty "Building"
         ground.transform.parent = building.transform;
 
@@ -83,54 +90,10 @@ public class MW_roomScript : MonoBehaviour
         List<int> groundTriangles = new List<int>();
         List<Vector2> groundUvs = new List<Vector2>();
 
-        /* wallThickness / 2 -> sodass ein Boden immer bis zur Hälfte des Türrahmens geht */
-
-        // -> Farbangaben aus 1. Version (richtige Tapeten kamen erst, als die Räume fertig waren)
-        // Raum 1 -> grüner Raum
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 50 - wallThickness / 2));
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 50 - wallThickness / 2));
-        // Raum 2 -> lila Raum
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 50 - wallThickness / 2));
-        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 50 - wallThickness / 2));
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 130 + wallThickness / 2));
-        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 130 + wallThickness / 2));
-        // Raum 3 -> blauer Raum
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(110 + wallThickness  /2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 50 - wallThickness / 2));
-        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 50 - wallThickness / 2));
-        // Raum 4 -> dunkelblauer Raum
-        groundVertices.Add(new Vector3(-95 - wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-95 - wallThickness / 2, 0, 78 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));
-        // Raum 5 -> dunkelgrüner Raum
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, -70 - wallThickness / 2));
-        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 - wallThickness / 2));
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
-        // Raum 6 -> lila Raum
-        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, -70 - wallThickness / 2));
-        groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-30 + wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-70 + wallThickness / 2, 0, -70 - wallThickness / 2));
-        // Raum 7 -> grüner Raum
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 78 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-70 - wallThickness / 2, 0, 78 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-12 + wallThickness / 2, 0, 130 + wallThickness / 2));
-        groundVertices.Add(new Vector3(-70 - wallThickness / 2, 0, 130 + wallThickness / 2));
-        // Raum 8 -> dunkelgrüner Raum
-        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 50 - wallThickness / 2));
-        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 50 - wallThickness / 2));
-        groundVertices.Add(new Vector3(60 + wallThickness / 2, 0, 130 + wallThickness / 2));
-        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 130 + wallThickness / 2));
-        // Raum 9 -> dunkelblauer Raum
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, 0 + wallThickness / 2));
-        groundVertices.Add(new Vector3(42 - wallThickness / 2, 0, -70 - wallThickness / 2));
-        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, -70 - wallThickness / 2));
-        groundVertices.Add(new Vector3(110 + wallThickness / 2, 0, 0 + wallThickness / 2));
+        groundVertices.Add(new Vector3(posX, 0, posZ));
+        groundVertices.Add(new Vector3(posX + width, 0, posZ ));
+        groundVertices.Add(new Vector3(posX, 0, posZ + length));
+        groundVertices.Add(new Vector3(posX + width, 0, posZ + length));
         
         meshGround.vertices = groundVertices.ToArray();
 
@@ -141,62 +104,6 @@ public class MW_roomScript : MonoBehaviour
         groundTriangles.Add(3);
         groundTriangles.Add(1);
         groundTriangles.Add(2);
-        // Raum 2 -> 4 bis 7
-        groundTriangles.Add(5);
-        groundTriangles.Add(4);
-        groundTriangles.Add(6);
-        groundTriangles.Add(7);
-        groundTriangles.Add(5);
-        groundTriangles.Add(6);
-        // Raum 3 -> 8 bis 11
-        groundTriangles.Add(9);
-        groundTriangles.Add(8);
-        groundTriangles.Add(10);
-        groundTriangles.Add(11);
-        groundTriangles.Add(9);
-        groundTriangles.Add(10);
-        // Raum 4 -> 12 bis 15
-        groundTriangles.Add(13);
-        groundTriangles.Add(12);
-        groundTriangles.Add(14);
-        groundTriangles.Add(15);
-        groundTriangles.Add(13);
-        groundTriangles.Add(14);
-        // Raum 5 -> 16 bis 19
-        groundTriangles.Add(17);
-        groundTriangles.Add(16);
-        groundTriangles.Add(18);
-        groundTriangles.Add(19);
-        groundTriangles.Add(16);
-        groundTriangles.Add(17);
-        // Raum 6 -> 20 bis 23
-        groundTriangles.Add(20);
-        groundTriangles.Add(21);
-        groundTriangles.Add(22);
-        groundTriangles.Add(20);
-        groundTriangles.Add(23);
-        groundTriangles.Add(21);
-        // Raum 7 -> 24 bis 27
-        groundTriangles.Add(24);
-        groundTriangles.Add(25);
-        groundTriangles.Add(26);
-        groundTriangles.Add(27);
-        groundTriangles.Add(26);
-        groundTriangles.Add(25);
-        // Raum 8 -> 28 bis 31
-        groundTriangles.Add(29);
-        groundTriangles.Add(28);
-        groundTriangles.Add(30);
-        groundTriangles.Add(30);
-        groundTriangles.Add(31);
-        groundTriangles.Add(29);
-        // Raum 9 -> 32 bis 35
-        groundTriangles.Add(33);
-        groundTriangles.Add(32);
-        groundTriangles.Add(34);
-        groundTriangles.Add(32);
-        groundTriangles.Add(35);
-        groundTriangles.Add(34);
 
         meshGround.triangles = groundTriangles.ToArray();
 
@@ -206,46 +113,6 @@ public class MW_roomScript : MonoBehaviour
         groundUvs.Add(new Vector2(0, 0));
         groundUvs.Add(new Vector2(1, 1));
         groundUvs.Add(new Vector2(1, 0));
-        // Raum 2
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 1));
-        groundUvs.Add(new Vector2(1, 0));
-        // Raum 3
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 1));
-        groundUvs.Add(new Vector2(1, 0));
-        // Raum 4
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 1));
-        groundUvs.Add(new Vector2(1, 0));
-        // Raum 5
-        groundUvs.Add(new Vector2(1, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 0));
-        groundUvs.Add(new Vector2(0, 1));
-        // Raum 6
-        groundUvs.Add(new Vector2(1, 0));
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 1));
-        // Raum 7
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 1));
-        groundUvs.Add(new Vector2(1, 0));
-        // Raum 8
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(1, 1));
-        groundUvs.Add(new Vector2(1, 0));
-        // Raum 9
-        groundUvs.Add(new Vector2(1, 0));
-        groundUvs.Add(new Vector2(0, 0));
-        groundUvs.Add(new Vector2(0, 1));
-        groundUvs.Add(new Vector2(1, 1));
 
         meshGround.uv = groundUvs.ToArray();
 
@@ -257,6 +124,35 @@ public class MW_roomScript : MonoBehaviour
         MeshCollider groundCollider = ground.AddComponent<MeshCollider>();
         meshGround = groundCollider.sharedMesh;
 
+        // Empty grounds wird zu building hinzugefügt
+        grounds.transform.parent = building.transform;
+        // einzelne Türrahmen werden zum Empty grounds hinzugefügt
+        ground.transform.parent = grounds.transform;
+    }
+
+    /*FUNKTION, DIE ALLE BÖDEN ERSTELLT*/
+    static void CreateAllGrounds() {
+        /* wallThickness / 2 -> sodass ein Boden immer bis zur Hälfte des Türrahmens geht */
+
+        // -> Farbangaben aus 1. Version (richtige Tapeten kamen erst, als die Räume fertig waren)
+        // Raum 1 -> grüner Raum
+        CreateGround(-12.0f + wallThickness / 2, 0.0f + wallThickness / 2, 54.0f - wallThickness, 50.0f- wallThickness);
+        // Raum 2 -> lila Raum
+        CreateGround(-12.0f + wallThickness / 2, 50.0f - wallThickness / 2, 72.0f, 80.0f + wallThickness);
+        // Raum 3 -> blauer Raum
+        CreateGround(42.0f - wallThickness / 2, 0.0f + wallThickness / 2, 68.0f + wallThickness, 48.0f);
+        // Raum 4 -> dunkelblauer Raum
+        CreateGround(-95.0f - wallThickness / 2, 0.0f + wallThickness / 2, 83.0f + wallThickness, 78.0f);
+        // Raum 5 -> dunkelgrüner Raum
+        CreateGround(-30.0f + wallThickness / 2, -70.0f - wallThickness / 2, 72.0f - wallThickness, 70.0f + wallThickness);
+        // Raum 6 -> lila Raum
+        CreateGround(-70.0f + wallThickness / 2, -70.0f - wallThickness / 2, 40.0f, 70.0f + wallThickness);
+        // Raum 7 -> grüner Raum
+        CreateGround(-70.0f - wallThickness / 2, 78.0f + wallThickness / 2, 58.0f + wallThickness, 52.0f);
+        // Raum 8 -> dunkelgrüner Raum
+        CreateGround(60.0f + wallThickness / 2, 50.0f - wallThickness / 2, 50.0f, 80.0f + wallThickness);
+        // Raum 9 -> dunkelblauer Raum
+        CreateGround(42.0f - wallThickness / 2, -70.0f - wallThickness / 2, 68.0f + wallThickness, 70.0f + wallThickness);
     }
 
 
@@ -2224,10 +2120,17 @@ public class MW_roomScript : MonoBehaviour
     }
 
 
-    /* FUNKTION, DIE TÜRRAHMEN ERSTELLT */
-    static void CreateDoorways() {
+    // Empty für alle Türrahmen
+    static GameObject doorways = new GameObject("Doorways");
+    // zähle Türrahmen beim Erstellen hoch -> Doorway 1, Doorway 2, ...
+    static int countDoorways = 0;
+
+    /* FUNKTION, DIE EINEN TÜRRAHMEN ERSTELLT */
+    static void CreateDoorway(float posX, float posZ, bool rotate) {
+        countDoorways++;
+
         Mesh meshDoorway = new Mesh();
-        GameObject doorway = new GameObject("Doorways", typeof(MeshFilter), typeof(MeshRenderer));
+        GameObject doorway = new GameObject("Doorway " + countDoorways, typeof(MeshFilter), typeof(MeshRenderer));
         // füge doorways zum Empty "Building"
         doorway.transform.parent = building.transform;
 
@@ -2244,209 +2147,23 @@ public class MW_roomScript : MonoBehaviour
         List<int> doorwayTriangles = new List<int>();
         List<Vector2> doorwayUvs = new List<Vector2>();
 
-        // Eingang grün zu lila
+        // doorwayThickness / 2 und -doorwayThickness / 2 werden genutzt, damit Empty direkt in der Mitte liegt
+        // ... macht die Drehung der Türrahmen leichter
         // oben
-        doorwayVertices.Add(new Vector3(22 + doorwayThickness, height / doorwayFactor, 50 - wallThickness));
-        doorwayVertices.Add(new Vector3(22, height / doorwayFactor, 50 - wallThickness));
-        doorwayVertices.Add(new Vector3(22, height / doorwayFactor, 50));
-        doorwayVertices.Add(new Vector3(22 + doorwayThickness, height / doorwayFactor, 50));
+        doorwayVertices.Add(new Vector3(doorwayThickness / 2, height / doorwayFactor, -wallThickness));
+        doorwayVertices.Add(new Vector3(-doorwayThickness / 2, height / doorwayFactor, -wallThickness));
+        doorwayVertices.Add(new Vector3(-doorwayThickness / 2, height / doorwayFactor, 0));
+        doorwayVertices.Add(new Vector3(doorwayThickness / 2, height / doorwayFactor, 0));
         // links
-        doorwayVertices.Add(new Vector3(22, 0,  50 - wallThickness));
-        doorwayVertices.Add(new Vector3(22, height / doorwayFactor,  50 - wallThickness));
-        doorwayVertices.Add(new Vector3(22, 0,  50));
-        doorwayVertices.Add(new Vector3(22, height / doorwayFactor,  50));
+        doorwayVertices.Add(new Vector3(-doorwayThickness / 2, 0,  -wallThickness));
+        doorwayVertices.Add(new Vector3(-doorwayThickness / 2, height / doorwayFactor,  -wallThickness));
+        doorwayVertices.Add(new Vector3(-doorwayThickness / 2, 0,  0));
+        doorwayVertices.Add(new Vector3(-doorwayThickness / 2, height / doorwayFactor,  0));
         // rechts
-        doorwayVertices.Add(new Vector3(22 + doorwayThickness, 0,  50 - wallThickness));
-        doorwayVertices.Add(new Vector3(22 + doorwayThickness, height / doorwayFactor,  50 - wallThickness));
-        doorwayVertices.Add(new Vector3(22 + doorwayThickness, 0,  50));
-        doorwayVertices.Add(new Vector3(22 + doorwayThickness, height / doorwayFactor,  50));
-
-        // Eingang grün zu blau
-        // oben
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor, 20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor, 20));
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, 20));
-        // links
-        doorwayVertices.Add(new Vector3(42 - wallThickness, 0,  20));
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor,  20));
-        doorwayVertices.Add(new Vector3(42, 0,  20));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor,  20));
-        // rechts
-        doorwayVertices.Add(new Vector3(42 - wallThickness, 0,  20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor,  20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(42, 0,  20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor,  20 + doorwayThickness));
-
-        // Eingang grün zu dunkelblau
-        // oben
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor, 20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor, 20));
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 20));
-        // links
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, 0,  20));
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor,  20));
-        doorwayVertices.Add(new Vector3(-12, 0,  20));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor,  20));
-        // rechts
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, 0,  20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor,  20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, 0,  20 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor,  20 + doorwayThickness));
-
-        // Eingang grün zu dunkelgrün
-        // oben
-        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(5, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(5, height / doorwayFactor, 0));
-        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor, 0));
-        // links
-        doorwayVertices.Add(new Vector3(5, 0,  0 + wallThickness));
-        doorwayVertices.Add(new Vector3(5, height / doorwayFactor,  0 + wallThickness));
-        doorwayVertices.Add(new Vector3(5, 0,  0));
-        doorwayVertices.Add(new Vector3(5, height / doorwayFactor,  0));
-        // rechts
-        doorwayVertices.Add(new Vector3(5 + doorwayThickness, 0,  0 + wallThickness));
-        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor,  0 + wallThickness));
-        doorwayVertices.Add(new Vector3(5 + doorwayThickness, 0,  0));
-        doorwayVertices.Add(new Vector3(5 + doorwayThickness, height / doorwayFactor,  0));
-
-        // Eingang dunkelblau zu lila
-        // oben
-        doorwayVertices.Add(new Vector3(-50 - doorwayThickness, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(-50, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(-50, height / doorwayFactor, 0));
-        doorwayVertices.Add(new Vector3(-50 - doorwayThickness, height / doorwayFactor, 0));
-        // links
-        doorwayVertices.Add(new Vector3(-50 - doorwayThickness, 0, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(-50 - doorwayThickness, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(-50 - doorwayThickness, 0, 0));
-        doorwayVertices.Add(new Vector3(-50 - doorwayThickness, height / doorwayFactor, 0));
-        // rechts
-        doorwayVertices.Add(new Vector3(-50, 0, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(-50, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(-50, 0, 0));
-        doorwayVertices.Add(new Vector3(-50, height / doorwayFactor, 0));
-
-        // Eingang dunkelgrün zu lila
-        // oben
-        doorwayVertices.Add(new Vector3(-30 + wallThickness, height / doorwayFactor, -30 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, -30 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(-30 + wallThickness, height / doorwayFactor, -30));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, -30));
-        // links
-        doorwayVertices.Add(new Vector3(-30 + wallThickness, 0, -30));
-        doorwayVertices.Add(new Vector3(-30 + wallThickness, height / doorwayFactor, -30));
-        doorwayVertices.Add(new Vector3(-30, 0, -30));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, -30));
-        // rechts
-        doorwayVertices.Add(new Vector3(-30 + wallThickness, 0, -30 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(-30 + wallThickness, height / doorwayFactor, -30 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(-30, 0, -30 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, -30 - doorwayThickness));
-
-        // Eingang lila zu grün
-        // oben
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 100 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor, 100 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 100));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor, 100));
-        // links
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, 0, 100 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 100 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, 0, 100 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor, 100 + doorwayThickness));
-        // rechts
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, 0, 100));
-        doorwayVertices.Add(new Vector3(-12 + wallThickness, height / doorwayFactor, 100));
-        doorwayVertices.Add(new Vector3(-12, 0, 100));
-        doorwayVertices.Add(new Vector3(-12, height / doorwayFactor, 100));
-
-        // Eingang lila zu dunkelblau
-        // oben
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, 78));
-        doorwayVertices.Add(new Vector3(-30 - doorwayThickness, height / doorwayFactor, 78));
-        doorwayVertices.Add(new Vector3(-30 - doorwayThickness, height / doorwayFactor, 78 + wallThickness));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, 78 + wallThickness));
-        // links
-        doorwayVertices.Add(new Vector3(-30, 0, 78 + wallThickness));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, 78 + wallThickness));
-        doorwayVertices.Add(new Vector3(-30, 0, 78));
-        doorwayVertices.Add(new Vector3(-30, height / doorwayFactor, 78));
-        // rechts
-        doorwayVertices.Add(new Vector3(-30 - doorwayThickness, 0, 78 + wallThickness));
-        doorwayVertices.Add(new Vector3(-30 - doorwayThickness, height / doorwayFactor, 78 + wallThickness));
-        doorwayVertices.Add(new Vector3(-30 - doorwayThickness, 0, 78));
-        doorwayVertices.Add(new Vector3(-30 - doorwayThickness, height / doorwayFactor, 78));
-
-        // Eingang lila zu dunkelgrün
-        // oben
-        doorwayVertices.Add(new Vector3(60 + wallThickness, height / doorwayFactor, 70 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(60, height / doorwayFactor, 70 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(60 + wallThickness, height / doorwayFactor, 70));
-        doorwayVertices.Add(new Vector3(60, height / doorwayFactor, 70));
-        // links
-        doorwayVertices.Add(new Vector3(60 + wallThickness, 0, 70));
-        doorwayVertices.Add(new Vector3(60, 0, 70));
-        doorwayVertices.Add(new Vector3(60 + wallThickness, height / doorwayFactor, 70));
-        doorwayVertices.Add(new Vector3(60, height / doorwayFactor, 70));
-        // rechts
-        doorwayVertices.Add(new Vector3(60 + wallThickness, 0, 70 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(60, 0, 70 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(60 + wallThickness, height / doorwayFactor, 70 + doorwayThickness));
-        doorwayVertices.Add(new Vector3(60, height / doorwayFactor, 70 + doorwayThickness));
-
-        // Eingang blau zu dunkelgrün
-        // oben
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 48 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 48 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 48));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 48));
-        // links
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, 0, 48 + wallThickness));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 48 + wallThickness));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, 0, 48));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 48));
-        // rechts
-        doorwayVertices.Add(new Vector3(95, 0, 48 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 48 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, 0, 48));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 48));
-
-        // Eingang blau zu dunkelblau
-        // oben
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 0));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 0));
-        // rechts
-        doorwayVertices.Add(new Vector3(95, 0, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(95, 0, 0));
-        doorwayVertices.Add(new Vector3(95, height / doorwayFactor, 0));
-        // links
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, 0, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 0 + wallThickness));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, 0, 0));
-        doorwayVertices.Add(new Vector3(95 - doorwayThickness, height / doorwayFactor, 0));
-
-        // Eingang dunkelgrün zu dunkelblau
-        // oben
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor, -50));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor, -50 - doorwayThickness));
-        // rechts
-        doorwayVertices.Add(new Vector3(42 - wallThickness, 0, -50));
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50));
-        doorwayVertices.Add(new Vector3(42, 0, -50));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor, -50));
-        // links
-        doorwayVertices.Add(new Vector3(42 - wallThickness, 0, -50 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(42 - wallThickness, height / doorwayFactor, -50 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(42, 0, -50 - doorwayThickness));
-        doorwayVertices.Add(new Vector3(42, height / doorwayFactor, -50 - doorwayThickness));
+        doorwayVertices.Add(new Vector3(doorwayThickness / 2, 0,  -wallThickness));
+        doorwayVertices.Add(new Vector3(doorwayThickness / 2, height / doorwayFactor,  -wallThickness));
+        doorwayVertices.Add(new Vector3(doorwayThickness / 2, 0,  0));
+        doorwayVertices.Add(new Vector3(doorwayThickness / 2, height / doorwayFactor,  0));
 
         meshDoorway.vertices = doorwayVertices.ToArray();
 
@@ -2473,259 +2190,6 @@ public class MW_roomScript : MonoBehaviour
         doorwayTriangles.Add(10);
         doorwayTriangles.Add(11);
 
-        // Eingang grün zu blau
-        // oben -> 12 bis 15
-        doorwayTriangles.Add(12);
-        doorwayTriangles.Add(14);
-        doorwayTriangles.Add(13);
-        doorwayTriangles.Add(12);
-        doorwayTriangles.Add(15);
-        doorwayTriangles.Add(14);
-        // links -> 16 bis 19
-        doorwayTriangles.Add(17);
-        doorwayTriangles.Add(16);
-        doorwayTriangles.Add(18);
-        doorwayTriangles.Add(17);
-        doorwayTriangles.Add(18);
-        doorwayTriangles.Add(19);
-        // rechts -> 20 bis 23
-        doorwayTriangles.Add(20);
-        doorwayTriangles.Add(21);
-        doorwayTriangles.Add(22);
-        doorwayTriangles.Add(21);
-        doorwayTriangles.Add(23);
-        doorwayTriangles.Add(22);
-
-        // Eingang grün zu dunkelblau
-        // oben -> 24 bis 27
-        doorwayTriangles.Add(26);
-        doorwayTriangles.Add(24);
-        doorwayTriangles.Add(25);
-        doorwayTriangles.Add(24);
-        doorwayTriangles.Add(26);
-        doorwayTriangles.Add(27);
-        // links -> 28 bis 31
-        doorwayTriangles.Add(28);
-        doorwayTriangles.Add(29);
-        doorwayTriangles.Add(30);
-        doorwayTriangles.Add(29);
-        doorwayTriangles.Add(31);
-        doorwayTriangles.Add(30);
-        // rechts -> 32 bis 35
-        doorwayTriangles.Add(33);
-        doorwayTriangles.Add(32);
-        doorwayTriangles.Add(34);
-        doorwayTriangles.Add(33);
-        doorwayTriangles.Add(34);
-        doorwayTriangles.Add(35);
-
-        // Eingang grün zu dunkelgrün
-        // oben -> 36 bis 39
-        doorwayTriangles.Add(38);
-        doorwayTriangles.Add(36);
-        doorwayTriangles.Add(37);
-        doorwayTriangles.Add(36);
-        doorwayTriangles.Add(38);
-        doorwayTriangles.Add(39);
-        // links -> 40 bis 43
-        doorwayTriangles.Add(41);
-        doorwayTriangles.Add(40);
-        doorwayTriangles.Add(42);
-        doorwayTriangles.Add(41);
-        doorwayTriangles.Add(42);
-        doorwayTriangles.Add(43);
-        // rechts -> 44 bis 47
-        doorwayTriangles.Add(44);
-        doorwayTriangles.Add(45);
-        doorwayTriangles.Add(46);
-        doorwayTriangles.Add(45);
-        doorwayTriangles.Add(47);
-        doorwayTriangles.Add(46);
-
-        // Eingang dunkelblau zu lila
-        // oben -> 48 bis 51
-        doorwayTriangles.Add(51);
-        doorwayTriangles.Add(49);
-        doorwayTriangles.Add(48);
-        doorwayTriangles.Add(49);
-        doorwayTriangles.Add(51);
-        doorwayTriangles.Add(50);
-        // links -> 52 bis 55
-        doorwayTriangles.Add(53);
-        doorwayTriangles.Add(52);
-        doorwayTriangles.Add(54);
-        doorwayTriangles.Add(53);
-        doorwayTriangles.Add(54);
-        doorwayTriangles.Add(55);
-        // rechts -> 56 bis 59
-        doorwayTriangles.Add(57);
-        doorwayTriangles.Add(58);
-        doorwayTriangles.Add(56);
-        doorwayTriangles.Add(57);
-        doorwayTriangles.Add(59);
-        doorwayTriangles.Add(58);
-
-        // Eingang dunkelgrün zu lila
-        // oben -> 60 bis 63
-        doorwayTriangles.Add(62);
-        doorwayTriangles.Add(61);
-        doorwayTriangles.Add(60);
-        doorwayTriangles.Add(61);
-        doorwayTriangles.Add(62);
-        doorwayTriangles.Add(63);
-        // links -> 64 bis 67
-        doorwayTriangles.Add(65);
-        doorwayTriangles.Add(64);
-        doorwayTriangles.Add(66);
-        doorwayTriangles.Add(65);
-        doorwayTriangles.Add(66);
-        doorwayTriangles.Add(67);
-        // rechts -> 68 bis 71
-        doorwayTriangles.Add(69);
-        doorwayTriangles.Add(70);
-        doorwayTriangles.Add(68);
-        doorwayTriangles.Add(69);
-        doorwayTriangles.Add(71);
-        doorwayTriangles.Add(70);
-
-        // Eingang lila zu grün
-        // oben -> 72 bis 75
-        doorwayTriangles.Add(74);
-        doorwayTriangles.Add(72);
-        doorwayTriangles.Add(73);
-        doorwayTriangles.Add(73);
-        doorwayTriangles.Add(75);
-        doorwayTriangles.Add(74);
-        // links -> 76 bis 79
-        doorwayTriangles.Add(77);
-        doorwayTriangles.Add(76);
-        doorwayTriangles.Add(78);
-        doorwayTriangles.Add(77);
-        doorwayTriangles.Add(78);
-        doorwayTriangles.Add(79);
-        // rechts -> 80 bis 83
-        doorwayTriangles.Add(80);
-        doorwayTriangles.Add(81);
-        doorwayTriangles.Add(82);
-        doorwayTriangles.Add(81);
-        doorwayTriangles.Add(83);
-        doorwayTriangles.Add(82);
-
-        // Eingang lila zu dunkelblau
-        // oben -> 84 bis 87
-        doorwayTriangles.Add(87);
-        doorwayTriangles.Add(85);
-        doorwayTriangles.Add(84);
-        doorwayTriangles.Add(85);
-        doorwayTriangles.Add(87);
-        doorwayTriangles.Add(86);
-        // links -> 88 bis 91
-        doorwayTriangles.Add(88);
-        doorwayTriangles.Add(89);
-        doorwayTriangles.Add(90);
-        doorwayTriangles.Add(89);
-        doorwayTriangles.Add(91);
-        doorwayTriangles.Add(90);
-        // rechts -> 92 bis 95
-        doorwayTriangles.Add(93);
-        doorwayTriangles.Add(92);
-        doorwayTriangles.Add(94);
-        doorwayTriangles.Add(93);
-        doorwayTriangles.Add(94);
-        doorwayTriangles.Add(95);
-
-        // Eingang lila zu dunkelgrün
-        // oben -> 96 bis 99
-        doorwayTriangles.Add(99);
-        doorwayTriangles.Add(96);
-        doorwayTriangles.Add(97);
-        doorwayTriangles.Add(96);
-        doorwayTriangles.Add(99);
-        doorwayTriangles.Add(98);
-        // links -> 100 bis 103
-        doorwayTriangles.Add(101);
-        doorwayTriangles.Add(100);
-        doorwayTriangles.Add(102);
-        doorwayTriangles.Add(101);
-        doorwayTriangles.Add(102);
-        doorwayTriangles.Add(103);
-        // rechts -> 104 bis 107
-        doorwayTriangles.Add(104);
-        doorwayTriangles.Add(105);
-        doorwayTriangles.Add(106);
-        doorwayTriangles.Add(105);
-        doorwayTriangles.Add(107);
-        doorwayTriangles.Add(106);
-
-        // Eingang blau zu dunkelgrün
-        // oben -> 108 bis 111
-        doorwayTriangles.Add(111);
-        doorwayTriangles.Add(109);
-        doorwayTriangles.Add(108);
-        doorwayTriangles.Add(109);
-        doorwayTriangles.Add(111);
-        doorwayTriangles.Add(110);
-        // links -> 112 bis 115
-        doorwayTriangles.Add(113);
-        doorwayTriangles.Add(112);
-        doorwayTriangles.Add(114);
-        doorwayTriangles.Add(113);
-        doorwayTriangles.Add(114);
-        doorwayTriangles.Add(115);
-        // rechts -> 116 bis 119
-        doorwayTriangles.Add(116);
-        doorwayTriangles.Add(117);
-        doorwayTriangles.Add(118);
-        doorwayTriangles.Add(117);
-        doorwayTriangles.Add(119);
-        doorwayTriangles.Add(118);
-
-        // Eingang blau zu dunkelblau
-        // oben -> 120 bis 123
-        doorwayTriangles.Add(120);
-        doorwayTriangles.Add(122);
-        doorwayTriangles.Add(121);
-        doorwayTriangles.Add(120);
-        doorwayTriangles.Add(123);
-        doorwayTriangles.Add(122);
-        // rechts -> 124 bis 127
-        doorwayTriangles.Add(124);
-        doorwayTriangles.Add(125);
-        doorwayTriangles.Add(126);
-        doorwayTriangles.Add(125);
-        doorwayTriangles.Add(127);
-        doorwayTriangles.Add(126);
-        // links -> 128 bis 131
-        doorwayTriangles.Add(129);
-        doorwayTriangles.Add(128);
-        doorwayTriangles.Add(130);
-        doorwayTriangles.Add(129);
-        doorwayTriangles.Add(130);
-        doorwayTriangles.Add(131);
-
-        // Eingang dunkelgrün zu dunkelblau
-        // oben -> 132 bis 135
-        doorwayTriangles.Add(132);
-        doorwayTriangles.Add(134);
-        doorwayTriangles.Add(133);
-        doorwayTriangles.Add(132);
-        doorwayTriangles.Add(135);
-        doorwayTriangles.Add(134);
-        // rechts -> 136 bis 139
-        doorwayTriangles.Add(136);
-        doorwayTriangles.Add(137);
-        doorwayTriangles.Add(138);
-        doorwayTriangles.Add(137);
-        doorwayTriangles.Add(139);
-        doorwayTriangles.Add(138);
-        // links -> 140 bis 143
-        doorwayTriangles.Add(141);
-        doorwayTriangles.Add(140);
-        doorwayTriangles.Add(142);
-        doorwayTriangles.Add(141);
-        doorwayTriangles.Add(142);
-        doorwayTriangles.Add(143);
-
         meshDoorway.triangles = doorwayTriangles.ToArray();
 
         // Eingang grün zu lila
@@ -2745,193 +2209,6 @@ public class MW_roomScript : MonoBehaviour
         doorwayUvs.Add(new Vector2(1, 1));
         doorwayUvs.Add(new Vector2(1, 0));
 
-        // Eingang grün zu blau
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang grün zu dunkelblau
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang grün zu dunkelgrün
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang dunkelblau zu lila
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang dunkelgrün zu lila
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang lila zu grün
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang lila zu dunkelblau
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang lila zu dunkelgrün
-        // oben
-        doorwayUvs.Add(new Vector2(1, 0));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(0, 1));
-        // links
-        doorwayUvs.Add(new Vector2(1, 0));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(0, 1));
-        // rechts
-        doorwayUvs.Add(new Vector2(1, 0));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(0, 1));
-
-        // Eingang blau zu dunkelgrün
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang blau zu dunkelblau
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
-        // Eingang dunkelgrün zu dunkelblau
-        // oben
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // rechts
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-        // links
-        doorwayUvs.Add(new Vector2(0, 1));
-        doorwayUvs.Add(new Vector2(0, 0));
-        doorwayUvs.Add(new Vector2(1, 1));
-        doorwayUvs.Add(new Vector2(1, 0));
-
         meshDoorway.uv = doorwayUvs.ToArray();
 
         meshDoorway.RecalculateNormals();
@@ -2940,8 +2217,34 @@ public class MW_roomScript : MonoBehaviour
         Rigidbody doorwayBody = doorway.AddComponent<Rigidbody>();
         doorwayBody.isKinematic = true;
         meshDoorway = doorwayCollider.sharedMesh;
+
+        // wenn Türrahmen im Gegensatz zum "Standard"-Türrahmen gedreht werden muss, wird true angegeben
+        if (rotate == true) {
+            doorway.transform.Rotate(0, 90, 0);
+        }
+        // schiebe Türrahmen auf richtige Position
+        doorway.transform.position = new Vector3(posX, 0, posZ);
+        // Empty doorways wird zu building hinzugefügt
+        doorways.transform.parent = building.transform;
+        // einzelne Türrahmen werden zum Empty doorways hinzugefügt
+        doorway.transform.parent = doorways.transform;
     }
 
+    /*FUNKTION, DIE ALLE TÜRRAHMEN ERSTELLT*/
+    static void CreateAllDoorways() {
+        CreateDoorway(22.0f + doorwayThickness / 2, 50.0f, false);
+        CreateDoorway(42.0f, 20.0f + doorwayThickness / 2, true);
+        CreateDoorway(-12.0f + wallThickness, 20.0f + doorwayThickness / 2, true);
+        CreateDoorway(5.0f + doorwayThickness / 2, 0.0f + wallThickness, false);
+        CreateDoorway(-50.0f - doorwayThickness / 2, 0.0f + wallThickness, false);
+        CreateDoorway(-30.0f + wallThickness, -30.0f - doorwayThickness / 2, true);
+        CreateDoorway(-12.0f + wallThickness, 100.0f + doorwayThickness / 2, true);
+        CreateDoorway(-30.0f - doorwayThickness / 2, 78.0f + wallThickness, false);
+        CreateDoorway(60.0f + wallThickness, 70.0f + doorwayThickness / 2, true);
+        CreateDoorway(95.0f - doorwayThickness / 2, 48.0f + wallThickness, false);
+        CreateDoorway(95.0f - doorwayThickness / 2, 0.0f + wallThickness, false);
+        CreateDoorway(42.0f, -50.0f - doorwayThickness / 2, true);
+    }
 
     /* FUNKTION, DIE EINGANGSTÜR ERSTELLT */
     static void CreateFrontDoor() {
