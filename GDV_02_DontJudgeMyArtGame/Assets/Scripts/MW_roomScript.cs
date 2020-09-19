@@ -156,6 +156,10 @@ public class MW_roomScript : MonoBehaviour
     }
 
 
+    // speichere Texturen dieser beiden Räume für die Zwischenwände
+    static Texture texture2;
+    static Texture texture9;
+
     /* FUNKTION, DIE RÄUME ERSTELLT */
     static void CreateRooms() {
         // Room 1
@@ -168,8 +172,9 @@ public class MW_roomScript : MonoBehaviour
         rend1.material = new Material(Shader.Find("Standard"));
         meshRoom1 = room1.GetComponent<MeshFilter>().mesh;
         // Texture texture1 = Resources.Load("TextureGreen") as Texture;
-        Texture texture1 = Resources.Load("Tapete5") as Texture;
+        Texture texture1 = MW_randomWallpaper.RandomTexture(room1);
         rend1.material.mainTexture = texture1;
+        MW_randomWallpaper.wallpapers.Remove(texture1);
 
         meshRoom1.Clear();
 
@@ -428,8 +433,9 @@ public class MW_roomScript : MonoBehaviour
         rend2.material = new Material(Shader.Find("Standard"));
         meshRoom2 = room2.GetComponent<MeshFilter>().mesh;
         // Texture texture2 = Resources.Load("TexturePurple") as Texture;
-        Texture texture2 = Resources.Load("Tapete3") as Texture;
+        texture2 = MW_randomWallpaper.RandomTexture(room2);
         rend2.material.mainTexture = texture2;
+        MW_randomWallpaper.wallpapers.Remove(texture2);
 
         meshRoom2.Clear();
 
@@ -649,8 +655,9 @@ public class MW_roomScript : MonoBehaviour
         rend3.material = new Material(Shader.Find("Standard"));
         meshRoom3 = room3.GetComponent<MeshFilter>().mesh;
         // Texture texture3 = Resources.Load("TextureBlue") as Texture;
-        Texture texture3 = Resources.Load("Tapete7") as Texture;
+        Texture texture3 = MW_randomWallpaper.RandomTexture(room3);
         rend3.material.mainTexture = texture3;
+        MW_randomWallpaper.wallpapers.Remove(texture3);
 
         meshRoom3.Clear();
 
@@ -870,8 +877,9 @@ public class MW_roomScript : MonoBehaviour
         rend4.material = new Material(Shader.Find("Standard"));
         meshRoom4 = room4.GetComponent<MeshFilter>().mesh;
         // Texture texture4 = Resources.Load("TextureDarkBlue") as Texture;
-        Texture texture4 = Resources.Load("Tapete4") as Texture;
+        Texture texture4 = MW_randomWallpaper.RandomTexture(room4);
         rend4.material.mainTexture = texture4;
+        MW_randomWallpaper.wallpapers.Remove(texture4);
 
         meshRoom4.Clear();
 
@@ -1159,8 +1167,9 @@ public class MW_roomScript : MonoBehaviour
         rend5.material = new Material(Shader.Find("Standard"));
         meshRoom5 = room5.GetComponent<MeshFilter>().mesh;
         // Texture texture5 = Resources.Load("TextureDarkGreen") as Texture;
-        Texture texture5 = Resources.Load("Tapete8") as Texture;
+        Texture texture5 = MW_randomWallpaper.RandomTexture(room5);
         rend5.material.mainTexture = texture5;
+        MW_randomWallpaper.wallpapers.Remove(texture5);
 
         meshRoom5.Clear();
 
@@ -1379,8 +1388,9 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend6 = room6.GetComponent<Renderer>();
         rend6.material = new Material(Shader.Find("Standard"));
         meshRoom6 = room6.GetComponent<MeshFilter>().mesh;
-        Texture texture6 = Resources.Load("Tapete1") as Texture;
+        Texture texture6 = MW_randomWallpaper.RandomTexture(room6);
         rend6.material.mainTexture = texture6;
+        MW_randomWallpaper.wallpapers.Remove(texture6);
 
         meshRoom6.Clear();
 
@@ -1566,8 +1576,9 @@ public class MW_roomScript : MonoBehaviour
         rend7.material = new Material(Shader.Find("Standard"));
         meshRoom7 = room7.GetComponent<MeshFilter>().mesh;
         // Texture texture7 = Resources.Load("TextureGreen") as Texture;
-        Texture texture7 = Resources.Load("Tapete6") as Texture;
+        Texture texture7 = MW_randomWallpaper.RandomTexture(room7);
         rend7.material.mainTexture = texture7;
+        MW_randomWallpaper.wallpapers.Remove(texture7);
 
         meshRoom7.Clear();
 
@@ -1753,8 +1764,9 @@ public class MW_roomScript : MonoBehaviour
         rend8.material = new Material(Shader.Find("Standard"));
         meshRoom8 = room8.GetComponent<MeshFilter>().mesh;
         // Texture texture8 = Resources.Load("TextureDarkGreen") as Texture;
-        Texture texture8 = Resources.Load("Tapete9") as Texture;
+        Texture texture8 = MW_randomWallpaper.RandomTexture(room8);
         rend8.material.mainTexture = texture8;
+        MW_randomWallpaper.wallpapers.Remove(texture8);
 
         meshRoom8.Clear();
 
@@ -1940,8 +1952,9 @@ public class MW_roomScript : MonoBehaviour
         rend9.material = new Material(Shader.Find("Standard"));
         meshRoom9 = room9.GetComponent<MeshFilter>().mesh;
         // Texture texture9 = Resources.Load("TextureDarkBlue") as Texture;
-        Texture texture9 = Resources.Load("Tapete2") as Texture;
+        texture9 = MW_randomWallpaper.RandomTexture(room9);
         rend9.material.mainTexture = texture9;
+        MW_randomWallpaper.wallpapers.Remove(texture9);
 
         meshRoom9.Clear();
 
@@ -2387,8 +2400,7 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend1 = wall1.GetComponent<Renderer>();
         rend1.material = new Material(Shader.Find("Standard"));
         // Texture texture1 = Resources.Load("TexturePurple") as Texture;
-        Texture texture1 = Resources.Load("Tapete3") as Texture;
-        rend1.material.mainTexture = texture1;
+        rend1.material.mainTexture = texture2;
 
         meshWall1 = wall1.GetComponent<MeshFilter>().mesh;
         meshWall1.Clear();
@@ -2511,8 +2523,7 @@ public class MW_roomScript : MonoBehaviour
         Renderer rend2 = wall3.GetComponent<Renderer>();
         rend2.material = new Material(Shader.Find("Standard"));
         // Texture texture2 = Resources.Load("TextureDarkBlue") as Texture;
-        Texture texture2 = Resources.Load("Tapete2") as Texture;
-        rend2.material.mainTexture = texture2;
+        rend2.material.mainTexture = texture9;
 
         meshwall3 = wall3.GetComponent<MeshFilter>().mesh;
         meshwall3.Clear();
