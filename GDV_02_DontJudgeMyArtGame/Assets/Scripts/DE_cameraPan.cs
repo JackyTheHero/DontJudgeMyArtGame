@@ -102,7 +102,9 @@ public class DE_cameraPan : MonoBehaviour
         //Berechnet Abstände und Rotationen
         targetPosCam = originPosPic + originRotPic * new Vector3(-0.5f,-0.3f,-5.7f);
 
-        targetPosPlayer = originPosPic + originRotPic * new Vector3(4f,-4f,-2.5f);
+        targetPosPlayer = originPosPic + originRotPic * new Vector3(4f, 0,-2.5f);
+
+        targetPosPlayer = new Vector3(targetPosPlayer.x, 0, targetPosPlayer.z);
 
         targetRotPlayer = Quaternion.LookRotation(originPosPlayer - targetPosPlayer, Vector3.up);
 
