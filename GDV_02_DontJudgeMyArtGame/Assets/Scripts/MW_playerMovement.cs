@@ -21,9 +21,6 @@ public class MW_playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Maus-Cursor wird ausgeblendet
-        Cursor.visible = false;
-        
         // ohne freeLookCamera
         // Kamera folgt player
         Camera.main.transform.position = this.transform.position;
@@ -50,7 +47,7 @@ public class MW_playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update () {
         // jegliche Bewegungen erst möglich, wenn Keyboard freigegeben wird
-        if (keyboardEnabled == true) {
+        if (keyboardEnabled == true && MW_mainMenu.isInMenu == false) {
             // Funktion, die die Blickrichtung des Players je nach Tastendruck und Kameraposititon ändert
             Rotation();
 
