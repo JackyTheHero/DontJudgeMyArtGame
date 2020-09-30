@@ -166,7 +166,7 @@ public class DE_pictureCreation : MonoBehaviour
         
         //Breite des Bilderrahmens an den Rändern (Thickness)
         float thick = 0.3f;
-        //Tiefe des inneren Bilderrahmens, zusammen mit Abstand ergibt es Gesamtdicke des Bilderrahmens 
+        //Tiefe des Bilderrahmens
         float depth = -0.3f;
         //Abstand des Bildes zur Wand
         float dist = -0.2f;
@@ -193,7 +193,8 @@ public class DE_pictureCreation : MonoBehaviour
 
         //Renderer
         Renderer picRend = pic.GetComponent<Renderer>();
-        picRend.material= new Material(Shader.Find("Standard"));
+        picRend.material= new Material(Shader.Find("Legacy Shaders/Self-Illumin/Diffuse"));
+        picRend.material.SetColor("_Color", new Color(0.5f,0.5f,0.5f));
         picRend.material.mainTexture = img;
 
         picMesh.RecalculateNormals();

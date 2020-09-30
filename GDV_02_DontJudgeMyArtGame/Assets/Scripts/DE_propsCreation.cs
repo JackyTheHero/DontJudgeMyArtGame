@@ -4,31 +4,83 @@ using UnityEngine;
 
 public class DE_propsCreation : MonoBehaviour
 {
+
+    static GameObject pillar;
+    static GameObject vase;
+    static GameObject window;
+    
     // Start is called before the first frame update
     public static void propsCreation()
     {
-        createPillar(29, 54);
-        createPillar(29, 74);
-        createPillar(55, 54);
-        createPillar(55, 74);
-        createPillar(146.5f, -16);
-        createPillar(169.5f, -16);
-        createPillar(33, -86.5f);
-        createPillar(33, -63.5f);
-        createVase(-8,-12);
-        createVase(-8,12);
-        createVase(75,-36);
-        createVase(75,4);
-        createVase(119,4);
-        createVase(119,-36);
-        createVase(189,-106);
-        createVase(189,86);
-        createVase(147,86);
+        
+        GameObject pillarParent = new GameObject();
+        pillarParent.name = "pillarParent";
+        createPillar();
+        Instantiate(pillar, new Vector3(29, 0, 54), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(29, 0, 74), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(55, 0, 54), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(55, 0, 74), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(146.5f, 0, -16), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(169.5f, 0, -16), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(33, 0, -86.5f), Quaternion.identity, pillarParent.transform);
+        Instantiate(pillar, new Vector3(33, 0, -63.5f), Quaternion.identity, pillarParent.transform);
+        Destroy(pillar);
+
+        
+        GameObject vaseParent = new GameObject();
+        vaseParent.name = "vaseParent";
+        createVase();
+        Instantiate(vase, new Vector3(29, 0, 54), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(-8, 0, -12), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(-8, 0, 12), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(75, 0, -36), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(75, 0, 4), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(119, 0, 4), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(119, 0, -36), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(189, 0, -106), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(189, 0, 86), Quaternion.identity, vaseParent.transform);
+        Instantiate(vase, new Vector3(147, 0, 86), Quaternion.identity, vaseParent.transform);
+        Destroy(vase);
+
+        
+        GameObject windowParent = new GameObject();
+        windowParent.name = "windowParent";
+        createWindow(false);
+        Instantiate(window, new Vector3(3, 6, 15), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(3, 6, -15),  Quaternion.Euler(0,180,0), windowParent.transform);
+        Instantiate(window, new Vector3(14, 6, 26), Quaternion.Euler(0,270,0), windowParent.transform);
+        Instantiate(window, new Vector3(14, 6, -26),  Quaternion.Euler(0,270,0), windowParent.transform);
+        Instantiate(window, new Vector3(14, 6, -99),  Quaternion.Euler(0,270,0), windowParent.transform);
+        Instantiate(window, new Vector3(14, 6, 64),  Quaternion.Euler(0,270,0), windowParent.transform);
+        Instantiate(window, new Vector3(192, 6, -97),  Quaternion.Euler(0,90,0), windowParent.transform);
+        Instantiate(window, new Vector3(192, 6, -53),  Quaternion.Euler(0,90,0), windowParent.transform);
+        Instantiate(window, new Vector3(192, 6, -16),  Quaternion.Euler(0,90,0), windowParent.transform);
+        Instantiate(window, new Vector3(192, 6, 75),  Quaternion.Euler(0,90,0), windowParent.transform);
+        Instantiate(window, new Vector3(192, 6, 23),  Quaternion.Euler(0,90,0), windowParent.transform);
+        Instantiate(window, new Vector3(42, 6, 89), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(83, 6, 89), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(131, 6, 89), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(157, 6, 89), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(179, 6, 89), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(33, 6, -109), Quaternion.Euler(0,180,0), windowParent.transform);
+        Instantiate(window, new Vector3(70, 6, -109), Quaternion.Euler(0,180,0), windowParent.transform);
+        Instantiate(window, new Vector3(106, 6, -109), Quaternion.Euler(0,180,0), windowParent.transform);
+        Instantiate(window, new Vector3(144, 6, -109), Quaternion.Euler(0,180,0), windowParent.transform);
+        Destroy(window);
+
+        createWindow(true);
+        Instantiate(window, new Vector3(14, 6, -51),  Quaternion.Euler(0,270,0), windowParent.transform);
+        Instantiate(window, new Vector3(107, 6, 89), Quaternion.identity, windowParent.transform);
+        Instantiate(window, new Vector3(172, 6, -109), Quaternion.Euler(0,180,0), windowParent.transform);
+        Destroy(window);
+
+
+        createDesk();
 
     }
 
     //SÄULE================================================================================================================
-    static void createPillar(float posX, float posZ){
+    static void createPillar(){
 
         //Variablen für Sockelhöhe und Säulenhöhe
         float heightBasis = 1;
@@ -201,15 +253,14 @@ public class DE_propsCreation : MonoBehaviour
         basisMesh.RecalculateNormals();
 
         //Parent erzeugen=================================================
-        GameObject pillar = new GameObject();
+        pillar = new GameObject();
         pillar.name = "Säule";
 
         //Parent setzen
         shaft.transform.parent = pillar.transform;
         basis.transform.parent = pillar.transform;
 
-        //Translation
-        pillar.transform.Translate(posX, 0, posZ);
+        pillar.transform.Translate(-20, 0, -20);
 
         BoxCollider boxCollider = pillar.AddComponent<BoxCollider>();
         boxCollider.size = new Vector3(5,45,5);
@@ -218,7 +269,7 @@ public class DE_propsCreation : MonoBehaviour
     }
 
     //VASE===================================================================================================================
-    static void createVase(float posX, float posZ){
+    static void createVase(){
 
         //Variablen für Sockelhöhe und Vasenhöhe
         float heightBasis = 0.5f;
@@ -565,7 +616,7 @@ public class DE_propsCreation : MonoBehaviour
         basisMesh.RecalculateNormals();
 
         //Parent erzeugen=================================================
-        GameObject vase = new GameObject();
+        vase = new GameObject();
         vase.name = "Vase";
 
         //Parent setzen
@@ -573,7 +624,7 @@ public class DE_propsCreation : MonoBehaviour
         basis.transform.parent = vase.transform;
 
         //Translation
-        vase.transform.Translate(posX, 0, posZ);
+        vase.transform.Translate(-20, 0, -20);
 
         BoxCollider boxCollider = vase.AddComponent<BoxCollider>();
         boxCollider.size = new Vector3(4,heightVaseTop + heightBasis,4);
@@ -582,7 +633,502 @@ public class DE_propsCreation : MonoBehaviour
     }
 
     //FENSTER===========================================================================================================
-    static void createWindow(float posX, float posZ, int open){
+    static void createWindow(bool open){
+        
+        //Breite des Fensterrahmens an den Rändern (Thickness)
+        float thick = 0.5f;
+        float thickHalf = thick / 2;
+        float thickExtra = thick + thickHalf;
+        //Tiefe des Fensterrahmens
+        float depth = -0.4f;
+        float depthInner = -0.3f;
+        //Abstand der Scheibe zur Wand
+        float dist = -0.01f;
+
+        //Halbe Größen des Fensters
+        float sizeXhalf = 4;
+        float sizeYhalf = 4;
+
+        //GameObject erzeugen
+        GameObject pane = new GameObject();
+        pane.name = "Scheine";
+        pane.AddComponent<MeshFilter>();
+        pane.AddComponent<MeshRenderer>();
+
+        //Scheibe erzeugen
+        Mesh paneMesh = pane.GetComponent<MeshFilter>().mesh;
+        
+        //Arrays für Scheibe
+        paneMesh.vertices = new Vector3[] {new Vector3(-sizeXhalf, -sizeYhalf, dist), new Vector3(sizeXhalf, -sizeYhalf, dist), new Vector3(sizeXhalf, sizeYhalf, dist), new Vector3(-sizeXhalf, sizeYhalf, dist)};
+        paneMesh.triangles = new int[] {3, 2, 1, 3, 1, 0};
+        paneMesh.uv = new Vector2[] {new Vector2(0,0), new Vector2(1,0), new Vector2(1,1), new Vector2(0,1)};
+
+        paneMesh.RecalculateBounds();
+
+        //Renderer
+        Renderer paneRend = pane.GetComponent<Renderer>();
+        paneRend.material= new Material(Shader.Find("Legacy Shaders/Self-Illumin/Diffuse"));
+        if(open){
+            paneRend.material.mainTexture = Resources.Load("open") as Texture;
+        } else{
+            paneRend.material.mainTexture = Resources.Load("closed") as Texture;
+        }
+    
+        paneRend.material.SetColor("_Color", new Color(0.5f,0.5f,0.5f));
+
+        paneMesh.RecalculateNormals();
+
+        //Rahmen erzeugen
+        GameObject frame = new GameObject();
+        frame.name = "Rahmen";
+        frame.AddComponent<MeshFilter>();
+        frame.AddComponent<MeshRenderer>();
+
+        //Mesh erzeugen
+        Mesh frameMesh = frame.GetComponent<MeshFilter>().mesh;
+                
+        if(open){
+            //Arrays für Rahmen
+            frameMesh.vertices = new Vector3[] {
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth), 
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth), 
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, 0),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, 0), 
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, 0),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, 0),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth), 
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, dist),
+                new Vector3(-sizeXhalf, -sizeYhalf, dist),  
+                new Vector3(sizeXhalf , -sizeYhalf, dist), 
+                new Vector3(sizeXhalf , -sizeYhalf, dist),  
+                new Vector3(sizeXhalf , sizeYhalf , dist), 
+                new Vector3(sizeXhalf , sizeYhalf , dist),  
+                new Vector3(-sizeXhalf, sizeYhalf , dist),
+                new Vector3(-sizeXhalf, sizeYhalf , dist),
+                new Vector3(-sizeXhalf, -thickHalf, dist),
+                new Vector3(-sizeXhalf, thickHalf, dist),
+                new Vector3(sizeXhalf, -thickHalf, dist),
+                new Vector3(sizeXhalf, thickHalf, dist),
+                new Vector3(-sizeXhalf, -thickHalf, depthInner),
+                new Vector3(-sizeXhalf, -thickHalf, depthInner),
+                new Vector3(-sizeXhalf, thickHalf, depthInner),
+                new Vector3(-sizeXhalf, thickHalf, depthInner),
+                new Vector3(sizeXhalf, -thickHalf, depthInner),
+                new Vector3(sizeXhalf, -thickHalf, depthInner),
+                new Vector3(sizeXhalf, thickHalf, depthInner),
+                new Vector3(sizeXhalf, thickHalf, depthInner),
+                new Vector3(-thickHalf, sizeYhalf, dist),
+                new Vector3(thickHalf, sizeYhalf, dist),
+                new Vector3(-thickHalf, thickHalf, dist),
+                new Vector3(thickHalf, thickHalf, dist),
+                new Vector3(-thickHalf, sizeYhalf, depthInner),
+                new Vector3(-thickHalf, sizeYhalf, depthInner),
+                new Vector3(thickHalf, sizeYhalf, depthInner),
+                new Vector3(thickHalf, sizeYhalf, depthInner),
+                new Vector3(-thickHalf, thickHalf, depthInner),
+                new Vector3(-thickHalf, thickHalf, depthInner),
+                new Vector3(thickHalf, thickHalf, depthInner),
+                new Vector3(thickHalf, thickHalf, depthInner),
+                new Vector3(-sizeXhalf, -thickExtra,  dist),
+                new Vector3(sizeXhalf, -thickExtra,  dist),
+                new Vector3(-sizeXhalf, -thickExtra, depth),
+                new Vector3(sizeXhalf, -thickExtra, depth),
+                new Vector3(-sizeXhalf, -thickExtra, depth),
+                new Vector3(sizeXhalf, -thickExtra, depth),
+                new Vector3(-sizeXhalf, -thickHalf, depth),
+                new Vector3(sizeXhalf, -thickHalf, depth),
+                new Vector3(-sizeXhalf, -thickHalf, depth),
+                new Vector3(sizeXhalf, -thickHalf, depth),
+                new Vector3(-sizeXhalf, -thickHalf,  dist),
+                new Vector3(sizeXhalf, -thickHalf,  dist),
+
+
+            };
+
+            frameMesh.triangles = new int[] {0,20,23,0,23,3, 3,23,26,3,26,6, 6,26,29,6,29,9, 0,9,29,0,29,20, 1,5,14,1,14,13, 4,8,16,4,16,15, 7,11,18,7,18,17, 10,2,12,10,12,19, 22,33,34,22,34,24, 25,35,36,25,36,27, 28,37,38,28,38,30, 21,31,39,21,39,32,
+            40,44,48,40,48,42, 46,41,43,46,43,50, 45,47,51,45,51,49, 52,56,60,52,60,54, 58,53,55,58,55,62, 57,59,63,57,63,61, 64,66,67,64,67,65, 68,70,71,68,71,69, 72,74,75,72,75,73 };
+
+            frameMesh.uv = new Vector2[] {
+                new Vector2(0,0), new Vector2(0,0), new Vector2(0,0), 
+                new Vector2(1,0), new Vector2(1,0), new Vector2(1,0), 
+                new Vector2(0,0), new Vector2(0,0), new Vector2(0,0), 
+                new Vector2(1,0), new Vector2(1,0), new Vector2(1,0),
+                new Vector2(0,1), new Vector2(0,1),  
+                new Vector2(1,1), new Vector2(1,1), 
+                new Vector2(0,1), new Vector2(0,1), 
+                new Vector2(1,1), new Vector2(1,1), 
+                new Vector2(0,1), new Vector2(0,1), new Vector2(0,1),
+                new Vector2(1,1), new Vector2(1,1), new Vector2(1,1),
+                new Vector2(0,1), new Vector2(0,1), new Vector2(0,1),
+                new Vector2(1,1), new Vector2(1,1), new Vector2(1,1),
+                new Vector2(0,0), new Vector2(0,0),
+                new Vector2(1,0), new Vector2(1,0),
+                new Vector2(0,0), new Vector2(0,0), 
+                new Vector2(1,0), new Vector2(1,0),
+                new Vector2(0,0),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(0,0),
+                new Vector2(0,1),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(1,0),
+                new Vector2(1,1),
+                new Vector2(1,1),
+                new Vector2(0,0),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(0,0),
+                new Vector2(0,1),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(1,0),
+                new Vector2(1,1),
+                new Vector2(1,1),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(1,1)
+            };
+
+        } else{
+            //Arrays für Rahmen
+            frameMesh.vertices = new Vector3[] {
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth), 
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, depth), 
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, depth),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, 0),
+                new Vector3(-sizeXhalf - thick, -sizeYhalf -thick, 0), 
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, 0),
+                new Vector3(sizeXhalf + thick, -sizeYhalf -thick, 0),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0),
+                new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth),
+                new Vector3(sizeXhalf, -sizeYhalf, depth), 
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, sizeYhalf , depth),
+                new Vector3(-sizeXhalf, -sizeYhalf, dist),
+                new Vector3(-sizeXhalf, -sizeYhalf, dist),  
+                new Vector3(sizeXhalf , -sizeYhalf, dist), 
+                new Vector3(sizeXhalf , -sizeYhalf, dist),  
+                new Vector3(sizeXhalf , sizeYhalf , dist), 
+                new Vector3(sizeXhalf , sizeYhalf , dist),  
+                new Vector3(-sizeXhalf, sizeYhalf , dist),
+                new Vector3(-sizeXhalf, sizeYhalf , dist),
+                new Vector3(-sizeXhalf, -thickHalf, dist),
+                new Vector3(-sizeXhalf, thickHalf, dist),
+                new Vector3(sizeXhalf, -thickHalf, dist),
+                new Vector3(sizeXhalf, thickHalf, dist),
+                new Vector3(-sizeXhalf, -thickHalf, depthInner),
+                new Vector3(-sizeXhalf, -thickHalf, depthInner),
+                new Vector3(-sizeXhalf, thickHalf, depthInner),
+                new Vector3(-sizeXhalf, thickHalf, depthInner),
+                new Vector3(sizeXhalf, -thickHalf, depthInner),
+                new Vector3(sizeXhalf, -thickHalf, depthInner),
+                new Vector3(sizeXhalf, thickHalf, depthInner),
+                new Vector3(sizeXhalf, thickHalf, depthInner),
+                new Vector3(-thickHalf, sizeYhalf, dist),
+                new Vector3(thickHalf, sizeYhalf, dist),
+                new Vector3(-thickHalf, thickHalf, dist),
+                new Vector3(thickHalf, thickHalf, dist),
+                new Vector3(-thickHalf, sizeYhalf, depthInner),
+                new Vector3(-thickHalf, sizeYhalf, depthInner),
+                new Vector3(thickHalf, sizeYhalf, depthInner),
+                new Vector3(thickHalf, sizeYhalf, depthInner),
+                new Vector3(-thickHalf, thickHalf, depthInner),
+                new Vector3(-thickHalf, thickHalf, depthInner),
+                new Vector3(thickHalf, thickHalf, depthInner),
+                new Vector3(thickHalf, thickHalf, depthInner),
+                new Vector3(thickHalf, -sizeYhalf, dist),
+                new Vector3(-thickHalf, -sizeYhalf, dist),
+                new Vector3(thickHalf, -thickHalf, dist),
+                new Vector3(-thickHalf, -thickHalf, dist),
+                new Vector3(thickHalf, -sizeYhalf, depthInner),
+                new Vector3(thickHalf, -sizeYhalf, depthInner),
+                new Vector3(-thickHalf, -sizeYhalf, depthInner),
+                new Vector3(-thickHalf, -sizeYhalf, depthInner),
+                new Vector3(thickHalf, -thickHalf, depthInner),
+                new Vector3(thickHalf, -thickHalf, depthInner),
+                new Vector3(-thickHalf, -thickHalf, depthInner),
+                new Vector3(-thickHalf, -thickHalf, depthInner)  
+            };
+
+            frameMesh.triangles = new int[] {0,20,23,0,23,3, 3,23,26,3,26,6, 6,26,29,6,29,9, 0,9,29,0,29,20, 1,5,14,1,14,13, 4,8,16,4,16,15, 7,11,18,7,18,17, 10,2,12,10,12,19, 22,33,34,22,34,24, 25,35,36,25,36,27, 28,37,38,28,38,30, 21,31,39,21,39,32,
+            40,44,48,40,48,42, 46,41,43,46,43,50, 45,47,51,45,51,49, 52,56,60,52,60,54, 58,53,55,58,55,62, 57,59,63,57,63,61, 64,68,72,64,72,66, 70,65,67,70,67,74, 69,71,75,69,75,73};
+
+            frameMesh.uv = new Vector2[] {
+                new Vector2(0,0), new Vector2(0,0), new Vector2(0,0), 
+                new Vector2(1,0), new Vector2(1,0), new Vector2(1,0), 
+                new Vector2(0,0), new Vector2(0,0), new Vector2(0,0), 
+                new Vector2(1,0), new Vector2(1,0), new Vector2(1,0),
+                new Vector2(0,1), new Vector2(0,1),  
+                new Vector2(1,1), new Vector2(1,1), 
+                new Vector2(0,1), new Vector2(0,1), 
+                new Vector2(1,1), new Vector2(1,1), 
+                new Vector2(0,1), new Vector2(0,1), new Vector2(0,1),
+                new Vector2(1,1), new Vector2(1,1), new Vector2(1,1),
+                new Vector2(0,1), new Vector2(0,1), new Vector2(0,1),
+                new Vector2(1,1), new Vector2(1,1), new Vector2(1,1),
+                new Vector2(0,0), new Vector2(0,0),
+                new Vector2(1,0), new Vector2(1,0),
+                new Vector2(0,0), new Vector2(0,0), 
+                new Vector2(1,0), new Vector2(1,0),
+                new Vector2(0,0),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(0,0),
+                new Vector2(0,1),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(1,0),
+                new Vector2(1,1),
+                new Vector2(1,1),
+                new Vector2(0,0),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(0,0),
+                new Vector2(0,1),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(1,0),
+                new Vector2(1,1),
+                new Vector2(1,1),
+                new Vector2(0,0),
+                new Vector2(0,0),
+                new Vector2(1,0),
+                new Vector2(1,0),
+                new Vector2(0,1),
+                new Vector2(0,0),
+                new Vector2(0,1),
+                new Vector2(0,1),
+                new Vector2(1,1),
+                new Vector2(1,0),
+                new Vector2(1,1),
+                new Vector2(1,1)
+            };
+        }
+
+        frameMesh.RecalculateBounds();
+
+        //Renderer
+        Renderer frameRend = frame.GetComponent<Renderer>();
+        frameRend.material= new Material(Shader.Find("Standard"));
+        frameRend.material.mainTexture = Resources.Load("holz") as Texture;
+
+        frameMesh.RecalculateNormals();
+
+        //Parent Fenster erzeugen
+        window = new GameObject();
+        window.name = "Fenster";
+
+         if(open){
+            window.name = "FensterOffen"; 
+        } 
+    	
+        //Parent setzen
+        pane.transform.parent = window.transform;
+        frame.transform.parent = window.transform;
+
+        window.transform.Translate(-20,0,-20);
+        
+        if(open){
+        //Collider hinzufügen
+        BoxCollider boxCollider = window.AddComponent<BoxCollider>();
+        boxCollider.size = new Vector3(sizeXhalf * 2,sizeYhalf * 2,2);
+        boxCollider.center =  new Vector3(0,0,-1);
+        boxCollider.isTrigger = true;
+        }
+
+    }
+
+    //SCHALTER===========================================================================================================
+
+    static void createDesk(){
+
+         float height = 2;
+
+        //GameObject für Schalter
+        GameObject desk = new GameObject();
+        desk.name = "desk";
+        desk.AddComponent<MeshFilter>();
+        desk.AddComponent<MeshRenderer>();
+
+        //Schaltermesh erzeugen
+        Mesh deskMesh = desk.GetComponent<MeshFilter>().mesh;
+        
+        //Arrays
+        deskMesh.vertices = new Vector3[] {
+            new Vector3(-12.5f,0,-5),
+            new Vector3(-12.5f,0,-5),
+            new Vector3(-12.5f,0,5),
+            new Vector3(-12.5f,0,5),
+            new Vector3(-7.5f,0,5),
+            new Vector3(-7.5f,0,5),
+            new Vector3(-7.5f,0,0),
+            new Vector3(-7.5f,0,0),
+            new Vector3(7.5f,0,0),
+            new Vector3(7.5f,0,0),
+            new Vector3(7.5f,0,5),
+            new Vector3(7.5f,0,5),
+            new Vector3(12.5f,0,5),
+            new Vector3(12.5f,0,5),
+            new Vector3(12.5f,0,-5),
+            new Vector3(12.5f,0,-5),
+            new Vector3(-12.5f,height,-5),
+            new Vector3(-12.5f,height,-5),
+            new Vector3(-12.5f,height,-5),
+            new Vector3(-12.5f,height,5),
+            new Vector3(-12.5f,height,5),
+            new Vector3(-12.5f,height,5),
+            new Vector3(-7.5f,height,5),
+            new Vector3(-7.5f,height,5),
+            new Vector3(-7.5f,height,5),
+            new Vector3(-7.5f,height,0),
+            new Vector3(-7.5f,height,0),
+            new Vector3(-7.5f,height,0),
+            new Vector3(7.5f,height,0),
+            new Vector3(7.5f,height,0),
+            new Vector3(7.5f,height,0),
+            new Vector3(7.5f,height,5),
+            new Vector3(7.5f,height,5),
+            new Vector3(7.5f,height,5),
+            new Vector3(12.5f,height,5),
+            new Vector3(12.5f,height,5),
+            new Vector3(12.5f,height,5),
+            new Vector3(12.5f,height,-5),
+            new Vector3(12.5f,height,-5),
+            new Vector3(12.5f,height,-5)
+        }; 
+
+        deskMesh.triangles = new int[] {1,2,19,1,19,17, 3,4,22,3,22,20, 5,6,25,5,25,23, 7,8,28,7,28,26, 9,10,31,9,31,29, 11,12,34,11,34,32, 13,14,37,13,37,35, 15,0,16,15,16,38, 
+        18,21,24,18,24,27,18,27,30,18,30,39,30,33,36,30,36,39};
+
+        deskMesh.uv = new Vector2[] {
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,0),
+            new Vector2(0,0),
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(0,0),
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(0,2), 
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(1,2), 
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(0,1),
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(1,1),
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(0,2), 
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(1,2),
+            new Vector2(1,1),
+            new Vector2(0,1),
+            new Vector2(1,0)   
+        };
+
+        deskMesh.RecalculateBounds();
+
+        //Renderer
+        Renderer deskRend = desk.GetComponent<Renderer>();
+        deskRend.material= new Material(Shader.Find("Standard"));
+        deskRend.material.mainTexture = Resources.Load("holz") as Texture;
+
+        deskMesh.RecalculateNormals();
+
+        desk.transform.Translate(42.5f,0,0);
+        desk.transform.Rotate(0,90,0);
+
+        BoxCollider boxColliderCenter = desk.AddComponent<BoxCollider>();
+        boxColliderCenter.size = new Vector3(25,2,5);
+        boxColliderCenter.center =  new Vector3(0,1,-2.5f);
+
+        BoxCollider boxColliderLeft = desk.AddComponent<BoxCollider>();
+        boxColliderLeft.size = new Vector3(5,2,5);
+        boxColliderLeft.center =  new Vector3(10,1,2.5f);
+
+        BoxCollider boxColliderRight = desk.AddComponent<BoxCollider>();
+        boxColliderRight.size = new Vector3(5,2,5);
+        boxColliderRight.center =  new Vector3(-10,1,2.5f);
 
     }
 
