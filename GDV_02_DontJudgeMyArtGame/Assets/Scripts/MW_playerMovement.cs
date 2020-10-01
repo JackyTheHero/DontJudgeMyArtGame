@@ -5,8 +5,8 @@ using UnityEngine;
 public class MW_playerMovement : MonoBehaviour
 {
 
-    float speed = 0.1f;
-    float slowSpeed = 0.03f;
+    float speed = 10f;
+    float slowSpeed = 5f;
 
     Vector3 cameraView;
 
@@ -170,7 +170,7 @@ public class MW_playerMovement : MonoBehaviour
         var speed = slowMode ? this.slowSpeed : this.speed;
 
         if (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
-            this.transform.position += this.transform.localRotation * new Vector3(0, 0, -speed);
+            this.transform.position += this.transform.localRotation * new Vector3(0, 0, -speed * Time.deltaTime);
         }
     }
 
