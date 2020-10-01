@@ -5,8 +5,8 @@ using UnityEngine;
 public class MW_playerMovement : MonoBehaviour
 {
 
-    float speed = 10f;
-    float slowSpeed = 5f;
+    float speed = 15f;
+    float slowSpeed = 10f;
 
     Vector3 cameraView;
 
