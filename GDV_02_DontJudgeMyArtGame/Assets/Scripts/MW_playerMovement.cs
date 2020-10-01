@@ -161,15 +161,14 @@ public class MW_playerMovement : MonoBehaviour
     // Funktion, die den Player bei Tastendruck in die jeweilige Blickrichtung laufen lässt
     void Move() {
         // slowMode wird aktiviert, wenn Shift gedrückt wird (links oder rechts)
-        var slowMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        // langsameres Laufen mit Strg
-        // var slowMode = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-
+        var slowMode = MW_playerColliderInteraction.steal == true;
+        // var slowMode = MW_playerColliderInteraction.steal == true || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         // wenn slowMode aktiv ist, nutze slowSpeed, ansonsten "normalen" speed
-        // player läuft also bei gedrückter Shift-Taste langsamer
+        // player läuft also langsamer, wenn er ein Bild gestohlen hat
+
         var speed = slowMode ? this.slowSpeed : this.speed;
 
-        if (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)) {
             this.transform.position += this.transform.localRotation * new Vector3(0, 0, -speed * Time.deltaTime);
         }
     }
