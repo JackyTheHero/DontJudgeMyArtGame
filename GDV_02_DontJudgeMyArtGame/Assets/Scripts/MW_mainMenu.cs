@@ -9,9 +9,17 @@ public class MW_mainMenu : MonoBehaviour
     public GameObject canvas;
     public static bool isInMenu;
 
+    public Button newGame;
+    public Button continueGame;
+
+    public GameObject player;
+    float playerPos;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerPos = player.transform.position.y;
+        
         checkMenu();
         canvas.gameObject.SetActive(true);
     }
@@ -31,6 +39,15 @@ public class MW_mainMenu : MonoBehaviour
             isInMenu = true;
         } else {
             isInMenu = false;
+        }
+
+        // playerPos ist nach direktem Start nicht 5, sondern liegt bei ca. 4.99f
+        if (player.transform.position.y >= playerPos - 0.01f) {
+            continueGame.gameObject.SetActive(false);
+            newGame.gameObject.SetActive(true);
+        } else {
+            continueGame.gameObject.SetActive(true);
+            newGame.gameObject.SetActive(false);
         }
     }
 
