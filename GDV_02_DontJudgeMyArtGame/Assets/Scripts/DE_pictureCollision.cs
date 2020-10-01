@@ -36,7 +36,7 @@ public class DE_pictureCollision : MonoBehaviour
         }
     }
 
-    //Aufruf für Kameraschwenk, sollte woanders stehen ===================================================================
+    //Aufruf für Kameraschwenk
     
     void Update () 
     { 

@@ -17,6 +17,7 @@ public class DE_cameraPan : MonoBehaviour
     //Gemälde Ursprung
     static Vector3 originPosPic; 
     static Quaternion originRotPic;
+    static GameObject originPic;
 
     //Spieler Ursprung
     static Vector3 originPosPlayer;
@@ -35,6 +36,10 @@ public class DE_cameraPan : MonoBehaviour
     
     //Spieler Blickziel 
     static Quaternion lookRotPlayer;
+
+    //Bild Größe
+    static Vector3 originSize;
+    static Vector3 newSize = new Vector3(0.3f,0.3f,0.3f);
 
     //Bools für Ablauf========================================
 
@@ -62,14 +67,18 @@ public class DE_cameraPan : MonoBehaviour
         }
 
         //Start der Bewegung zum Gemälde, nur wenn IN Menü und NICHT in Bewegung
-        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2)) && inMenu && !inMotion) {
+        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Keypad2)) && inMenu && !inMotion) {
             inMotion = true;
             inMenu = false;
         }
 
         //Führt Bewegung weg vom Gemälde durch, nur wenn IN Bewegung und NICHT im Menü, start = false am Ende der Bewegung
         if(inMotion && !inMenu){
-            inMotion = panCameraBack();           
+            if(MW_playerColliderInteraction.steal){
+                stealPic();
+            } 
+            inMotion = panCameraBack();  
+                    
         }
     }
 
@@ -200,5 +209,38 @@ public class DE_cameraPan : MonoBehaviour
             //gibt false zurück bei fertiger Bewegung
             return false;
         }     
-    }     
+    } 
+
+    //Bewegung des Stehlens
+    static void stealPic()
+    {
+        if(time == 0){
+            Destroy(DE_pictureCollision.focusPicture.transform.Find("Plakette").gameObject);
+            originSize = DE_pictureCollision.focusPicture.transform.localScale;
+            originPic = DE_pictureCollision.focusPicture;
+
+        }
+        if(time < duration)
+        {
+            //Mathematische Funktion für weiche Bewegung
+            float t = time/duration;
+            t = t*t*t * (t * (6f*t - 15f) + 10f);
+
+            //Bewegungen
+            originPic.transform.localScale = Vector3.Lerp(originSize, newSize, t);
+
+        } else
+        {
+            //Setzt Spieler als Parent des Gemäldes
+            originPic.transform.parent = GameObject.FindWithTag("Player").transform;
+
+            //Setzt Position und Rotation zum Ziel
+            originPic.transform.position = lookRotPlayer * new Vector3(0,2,1) + GameObject.FindWithTag("Player").transform.position;
+            originPic.transform.rotation = Quaternion.AngleAxis(180f, Vector3.up) * GameObject.FindWithTag("Player").transform.rotation;
+            originPic.transform.rotation *= Quaternion.AngleAxis(18f, Vector3.right);
+            
+
+        }
+
+    }    
 }

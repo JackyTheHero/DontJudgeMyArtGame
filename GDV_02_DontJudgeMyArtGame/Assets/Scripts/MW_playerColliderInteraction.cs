@@ -22,7 +22,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
     GameObject stolenPicture;
 
     // checke, ob ein Bild bereits gestohlen wurde, da man immer nur eines zur gleichen Zeit stehlen können soll
-    bool steal = false;
+    public static bool steal = false;
 
     // prüfe mit dieser Variable, ob es ein eigenes Bild ist
     bool owned = false;
@@ -92,6 +92,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             steal = true;
             // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
             stolenPicture = DE_pictureCollision.focusPicture;
+
         }
     }
 
@@ -102,6 +103,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // zerstöre das stolenPicture und setze Referenz auf null
         Destroy(stolenPicture);
         stolenPicture = null;
+        
         // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
         isInWindowRange = false;
         // erhöhe Punktzahl nach erfolgreichem Zerstören -> true bedeutet, Gemälde wurde gestohlen

@@ -380,6 +380,31 @@ public class DE_pictureCreation : MonoBehaviour
 
             sign.transform.parent = painting.transform;
 
+            //Rückseite erzeugen
+            GameObject back = new GameObject();
+            back.name = "Bild";
+            back.AddComponent<MeshFilter>();
+            back.AddComponent<MeshRenderer>();
+
+            //Bild erzeugen
+            Mesh backMesh = back.GetComponent<MeshFilter>().mesh;
+            
+            //Arrays für Bildfläche
+            backMesh.vertices = new Vector3[] {new Vector3(-sizeXhalf - thick, -sizeYhalf - thick, 0), new Vector3(sizeXhalf + thick, -sizeYhalf - thick, 0), new Vector3(sizeXhalf + thick, sizeYhalf + thick, 0), new Vector3(-sizeXhalf - thick, sizeYhalf + thick, 0)};
+            backMesh.triangles = new int[] {3, 0, 1, 3, 1, 2};
+            backMesh.uv = new Vector2[] {new Vector2(0,0), new Vector2(1,0), new Vector2(1,1), new Vector2(0,1)};
+
+            backMesh.RecalculateBounds();
+
+            //Renderer
+            Renderer backRend = back.GetComponent<Renderer>();
+            backRend.material= new Material(Shader.Find("Standard"));
+            backRend.material.mainTexture = Resources.Load("rückseite") as Texture;
+
+            backMesh.RecalculateNormals();
+
+            back.transform.parent = painting.transform;
+
         }
 
         //Parent setzen
