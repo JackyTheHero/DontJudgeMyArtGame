@@ -9,10 +9,6 @@ public class MW_mainMenu : MonoBehaviour
     public GameObject canvas;
     public static bool isInMenu;
 
-    public Button newGame;
-    public Button continueGame;
-    public Button quitGame;
-
     // Start is called before the first frame update
     void Start()
     {
