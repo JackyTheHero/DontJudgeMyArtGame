@@ -11,6 +11,8 @@ public class MW_mainMenu : MonoBehaviour
 
     public Button newGame;
     public Button continueGame;
+    public Button score;
+    public Button message;
 
     public GameObject player;
     float playerPos;
@@ -22,6 +24,9 @@ public class MW_mainMenu : MonoBehaviour
         
         checkMenu();
         canvas.gameObject.SetActive(true);
+
+        message.gameObject.SetActive(false);
+        score.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,6 +43,9 @@ public class MW_mainMenu : MonoBehaviour
 
         // Funktion, die das Menü aufruft oder schließt
         startMenu();
+
+        // Funktion, die den EndScreen aufruft, wenn das Spiel gewonnen oder verloren wurde
+        endScreen();
     }
 
     // Funktion, die checkt, ob man sich gerade im Menü befindet oder nicht ...
@@ -87,6 +95,25 @@ public class MW_mainMenu : MonoBehaviour
         } else {
             Cursor.visible = false; // Cursor unsichtbar
             Time.timeScale = 1; // Spiel geht weiter
+        }
+    }
+
+    // Funktion, die den EndScreen aufruft, wenn das Spiel gewonnen oder verloren wurde
+    void endScreen() {
+        // JH_scoreMaster.gameover = true;
+        if (JH_scoreMaster.gameover == true) {
+            canvas.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
+            newGame.gameObject.SetActive(false);
+            continueGame.gameObject.SetActive(false);
+
+            message.GetComponentInChildren<Text>().text = "Du hast leider verloren! :(";
+            message.gameObject.SetActive(true);
+
+            score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.generalScore;
+            score.gameObject.SetActive(true);
         }
     }
 }
