@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 707165847e42bdc4c8428186e41e7ff1
+guid: ac6fbc5674c9839408a486fdc47fa18d
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -150,12 +150,7 @@ ModelImporter:
   - first:
       74: -1244269040454031975
     second: L_foot|R_handAction
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.004
-    second: {fileID: 2100000, guid: 102f9a70bda84a745b19cd93c30f772b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
