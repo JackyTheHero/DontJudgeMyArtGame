@@ -1,8 +1,8 @@
-﻿using JetBrains.Annotations;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /* TO-DO:
 - visitor walks around
@@ -27,6 +27,9 @@ public class JH_visitorBehaviour : MonoBehaviour
     float countdown;
     Boolean countsDown;
     Collider otherCollider;
+    NavMeshAgent agent;
+    GameObject[] ownedPaintings;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,12 +49,34 @@ public class JH_visitorBehaviour : MonoBehaviour
         visitRigid = this.GetComponent<Rigidbody>();
         visitRigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        this.gameObject.AddComponent<JH_scoreMaster>();
+        //this.gameObject.AddComponent<JH_scoreMaster>();
 
         countdown = 0;
         countsDown = false;
 
         otherCollider = null;
+
+        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(RatingCoroutine());
+    }
+
+    IEnumerator RatingCoroutine()
+    {
+        //leichte Verzögerung, damit NavMesh zuerst erstellt wird
+        yield return new WaitForSeconds(0.2f);
+        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
+        
+        //Zufälliges Bild des Spielers wird ausgewählt und als Ziel gesetzt
+        int randomOwnedPainting = (int)UnityEngine.Random.Range(0.0f, ownedPaintings.Length);
+        agent.destination = ownedPaintings[randomOwnedPainting].transform.position;
+        Debug.Log(this.gameObject + " is walking to " + agent.destination);
+
+        //Warte so lange, bis der Collider des Bildes aktiviert wurde und warte da dann 20 Sekunden
+        yield return new WaitUntil(() => getCollidedObject() == ownedPaintings[randomOwnedPainting]);
+        yield return new WaitForSeconds(20);
+        
+        //neues Bild zur Bewertung wird gesucht 
+        StartCoroutine(RatingCoroutine());
     }
 
     // Update is called once per frame
@@ -59,34 +84,14 @@ public class JH_visitorBehaviour : MonoBehaviour
     {
         //if no painting, no speechBubble
         //if near painting, speechBubble appears for 10 seconds
-        //after 10 seconds speechBubble disappears and visitor moves on on its rail
-
-        //Debug.Log(countdown);
-
-        if (!countsDown)
-        {
-            countdown = 10f;
-        }
-
-        if (nearPainting) {
-            countsDown = true;
-            speak();
-
-            if (countdown < 0)
-            {
-                countsDown = false;
-                if (otherCollider != null)
-                {
-                    //this.transform.position = new Vector3(14,0,0);
-                    this.transform.position -= new Vector3(6, 0, 6);
-                }
-            }
-        }
+        //after 20 seconds speechBubble disappears and visitor moves on
+        //this.transform.LookAt(agent.destination);
+        if (nearPainting) speak();
     }
 
     public void speak()
     {
-        countdown -= Time.deltaTime;
+        //countdown -= Time.deltaTime;
 
             //constraints to freeze the figure in place
         //visitRigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -216,6 +221,11 @@ public class JH_visitorBehaviour : MonoBehaviour
     
     public GameObject getCollidedObject()
     {
-        return otherCollider.gameObject;
+        if (otherCollider != null)
+        {
+            return otherCollider.gameObject;
+        }
+       
+        return this.gameObject;
     }
 }
