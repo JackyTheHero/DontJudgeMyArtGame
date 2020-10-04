@@ -24,8 +24,6 @@ public class JH_visitorBehaviour : MonoBehaviour
     private Rigidbody visitRigid;
     private int goodOrBad;
     Texture speechTexture;
-    float countdown;
-    Boolean countsDown;
     Collider otherCollider;
     NavMeshAgent agent;
     GameObject[] ownedPaintings;
@@ -49,11 +47,6 @@ public class JH_visitorBehaviour : MonoBehaviour
         visitRigid = this.GetComponent<Rigidbody>();
         visitRigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        //this.gameObject.AddComponent<JH_scoreMaster>();
-
-        countdown = 0;
-        countsDown = false;
-
         otherCollider = null;
 
         agent = GetComponent<NavMeshAgent>();
@@ -73,8 +66,10 @@ public class JH_visitorBehaviour : MonoBehaviour
 
         //Warte so lange, bis der Collider des Bildes aktiviert wurde und warte da dann 20 Sekunden
         yield return new WaitUntil(() => getCollidedObject() == ownedPaintings[randomOwnedPainting]);
+        yield return new WaitForSeconds(0.5f);
+        agent.destination = this.transform.position;
         yield return new WaitForSeconds(20);
-        
+
         //neues Bild zur Bewertung wird gesucht 
         StartCoroutine(RatingCoroutine());
     }
@@ -191,8 +186,8 @@ public class JH_visitorBehaviour : MonoBehaviour
         if (other.gameObject.tag == "ownedPainting") {
             nearPainting = true;
 
-            //random number decides if there is a good or bad review (0 == bad, 1 and 2 == good)
-            goodOrBad = (int) UnityEngine.Random.Range(0f, 3f);
+            //random number decides if there is a good or bad review (0 == bad, 1 == good)
+            goodOrBad = (int) UnityEngine.Random.Range(0f, 2f);
 
             if (goodOrBad >= 1)
             {

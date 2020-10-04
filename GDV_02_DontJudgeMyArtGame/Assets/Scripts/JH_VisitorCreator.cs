@@ -16,7 +16,10 @@ public class JH_VisitorCreator : MonoBehaviour
 
         visitorCount = 1;
         standardVisitor = Instantiate(GameObject.Find("visitorFigure"));
-        standardVisitor.name = "visitor 2";
+        
+        standardVisitor.name = "visitor2";
+        Debug.Log(standardVisitor.transform.GetChild(0).gameObject);
+        //Destroy(standardVisitor.transform.GetChild(0).gameObject);
         ++visitorCount;
         standardVisitor.transform.position = new Vector3(14,0,-9);
         StartCoroutine(VisitorCoroutine());
