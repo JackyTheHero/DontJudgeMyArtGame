@@ -5,10 +5,18 @@ using UnityEngine;
 public class MW_buttonOnClick : MonoBehaviour
 {
     public GameObject canvas;
+
+    public static bool gameStarted = false;
     
+    public void NewGame() {
+        // Menü wird geschlossen, wenn man auf Button "Neues Spiel"
+        canvas.gameObject.SetActive(false);
+        // Spiel wurde gestartet -> true, da danach nur noch Button "Fortsetzen" erscheint
+        gameStarted = true;
+    }
+
     public void ContinueGame() {
-        // Menü wird geschlossen, wenn man auf Button "Fortsetzen" ...
-        // ... oder in unserem Fall ebenso "Neues Spiel" klickt
+        // Menü wird geschlossen, wenn man auf Button "Fortsetzen"
         canvas.gameObject.SetActive(false);
     }
 

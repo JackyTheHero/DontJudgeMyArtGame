@@ -17,6 +17,9 @@ public class MW_mainMenu : MonoBehaviour
     public GameObject player;
     float playerPos;
 
+    // erreicht man diese Punktzahl, gewinnt man das Spiel
+    int scoreWon = 50;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,13 +62,13 @@ public class MW_mainMenu : MonoBehaviour
             isInMenu = false;
         }
 
-        // playerPos ist nach direktem Start nicht 5, sondern liegt bei ca. 4.99f
-        if (player.transform.position.y >= playerPos - 0.01f) {
+        // Spiel wurde noch nicht gestartet -> Button "Neues Spiel"
+        if (MW_buttonOnClick.gameStarted == false) {
             // wenn Anfangsposition nicht abweicht, wurde Spiel noch nicht gestartet -> "Neues Spiel"
             continueGame.gameObject.SetActive(false);
             newGame.gameObject.SetActive(true);
         } else {
-            // wenn Anfangsposition abweicht, wurde Spiel schon gestartet -> "Fortsetzen"
+            // Spiel wurde bereits gestartet -> Button "Fortsetzen"
             continueGame.gameObject.SetActive(true);
             newGame.gameObject.SetActive(false);
         }
@@ -100,7 +103,7 @@ public class MW_mainMenu : MonoBehaviour
 
     // Funktion, die den EndScreen aufruft, wenn das Spiel gewonnen oder verloren wurde
     void endScreen() {
-        // JH_scoreMaster.gameover = true;
+        // JH_scoreMaster.gameover = true; -> zu schlechter Ruf
         if (JH_scoreMaster.gameover == true) {
             canvas.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -109,9 +112,29 @@ public class MW_mainMenu : MonoBehaviour
             newGame.gameObject.SetActive(false);
             continueGame.gameObject.SetActive(false);
 
+            // Message, wenn man verloren hat
             message.GetComponentInChildren<Text>().text = "Du hast leider verloren! :(";
             message.gameObject.SetActive(true);
 
+            // Punkteanzeige
+            score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.generalScore;
+            score.gameObject.SetActive(true);
+        }
+
+        // Spiel gewonnen bei Erreichen von x Punkten (Punktzahl steht in Variable scoreWon)
+        if (JH_scoreMaster.generalScore >= scoreWon) {
+            canvas.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
+            newGame.gameObject.SetActive(false);
+            continueGame.gameObject.SetActive(false);
+
+            // Message, wenn man gewonnen hat
+            message.GetComponentInChildren<Text>().text = "Du hast GEWONNEN! :)";
+            message.gameObject.SetActive(true);
+
+            // Punkteanzeige
             score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.generalScore;
             score.gameObject.SetActive(true);
         }

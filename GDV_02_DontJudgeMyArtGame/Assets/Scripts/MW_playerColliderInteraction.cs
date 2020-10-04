@@ -27,6 +27,9 @@ public class MW_playerColliderInteraction : MonoBehaviour
     // prüfe mit dieser Variable, ob es ein eigenes Bild ist
     bool owned = false;
 
+    // Variable, die speichert, ob Player schon am 
+    public static bool hitGround = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -124,6 +127,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // Player wird bei Zusammenstoß mit Collidern nicht ein Stück zurückgeschleudert
             playerRig.drag = Mathf.Infinity;
             MW_playerMovement.keyboardEnabled = true;
+            hitGround = true;
         }
     }
 
