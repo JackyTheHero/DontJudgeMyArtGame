@@ -121,6 +121,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // Rigidbody des Players erhält position und rotation constraints, sodass er sich auf diesen Achsen nicht verändert
             // constraint für position y wird hier erst eingefügt, da Player zuvor auf dem Boden aufgekommen sein muss
             playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
+            // Player wird bei Zusammenstoß mit Collidern nicht ein Stück zurückgeschleudert
+            playerRig.drag = Mathf.Infinity;
             MW_playerMovement.keyboardEnabled = true;
         }
     }
@@ -128,8 +130,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         // prüfe zunächst, ob der Name des GameObjects größer oder gleich 7 ist, da Fenster 7 Zeichen besitzt
         if (other.gameObject.name.Length >= 7) {
-            // prüfe, ob die ersten 7 Zeichen des Namens "Fenster" ergeben -> wenn ja, wird es erlaubt, das Bild zu löschen
-            if (other.gameObject.name.Substring(0, 7) == "Fenster") {
+            // prüfe, ob "Fenster" im Namen steht, da nur offene Collider haben -> wenn ja, wird es erlaubt, das Bild zu löschen
+            if (other.gameObject.name.Contains("Fenster")) {
                 // Debug.Log(this.name + "is able to interact with " + other.gameObject.name);
                 isInWindowRange = true;
                 // speichere das GameObject, das zum Löschen freigegeben wird, im Gameobject inFocus
@@ -141,8 +143,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
     void OnTriggerExit(Collider other) {
         // prüfe zunächst, ob der Name des GameObjects größer oder gleich 7 ist, da Fenster 7 Zeichen besitzt
         if (other.gameObject.name.Length >= 7) {
-            // prüfe, ob die ersten 7 Zeichen des Namens "Fenster" ergeben -> wenn ja, wird es nun nicht mehr erlaubt, das Bild zu löschen
-            if (other.gameObject.name.Substring(0, 7) == "Fenster") {
+            // prüfe, ob "Fenster" im Namen steht, da nur offene Collider haben -> wenn ja, wird es nun nicht mehr erlaubt, das Bild zu löschen
+            if (other.gameObject.name.Contains("Fenster")) {
                 // Debug.Log(this.name + "is no longer able to interact with " + other.gameObject.name);
                 isInWindowRange = false;
             }
