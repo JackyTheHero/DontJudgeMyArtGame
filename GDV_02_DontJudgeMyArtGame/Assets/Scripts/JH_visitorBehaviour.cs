@@ -27,7 +27,8 @@ public class JH_visitorBehaviour : MonoBehaviour
     Collider otherCollider;
     NavMeshAgent agent;
     GameObject[] ownedPaintings;
-
+    int randomOwnedPainting;
+    int ownedPaintingsLength;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,11 @@ public class JH_visitorBehaviour : MonoBehaviour
 
         otherCollider = null;
 
+        randomOwnedPainting = 0;
+        //ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
+        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
+        ownedPaintingsLength = ownedPaintings.Length;
+
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine(RatingCoroutine());
     }
@@ -57,18 +63,19 @@ public class JH_visitorBehaviour : MonoBehaviour
     {
         //leichte Verzögerung, damit NavMesh zuerst erstellt wird
         yield return new WaitForSeconds(0.2f);
-        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
         
+
         //Zufälliges Bild des Spielers wird ausgewählt und als Ziel gesetzt
-        int randomOwnedPainting = (int)UnityEngine.Random.Range(0.0f, ownedPaintings.Length);
+        randomOwnedPainting = (int)UnityEngine.Random.Range(0.0f, ownedPaintings.Length);
         agent.destination = ownedPaintings[randomOwnedPainting].transform.position;
         Debug.Log(this.gameObject + " is walking to " + agent.destination);
 
         //Warte so lange, bis der Collider des Bildes aktiviert wurde und warte da dann 20 Sekunden
         yield return new WaitUntil(() => getCollidedObject() == ownedPaintings[randomOwnedPainting]);
-        yield return new WaitForSeconds(0.5f);
-        agent.destination = this.transform.position;
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(2f);
+        //visitRigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
+        //agent.destination = this.transform.position;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(7,20));
 
         //neues Bild zur Bewertung wird gesucht 
         StartCoroutine(RatingCoroutine());
@@ -77,10 +84,31 @@ public class JH_visitorBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if no painting, no speechBubble
-        //if near painting, speechBubble appears for 10 seconds
-        //after 20 seconds speechBubble disappears and visitor moves on
-        //this.transform.LookAt(agent.destination);
+        //ownedPaintings is constantly updated to avoid null objects
+        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
+
+        //in case the destination is destroyed, a new painting will be selected
+        if (ownedPaintings.Length < ownedPaintingsLength)
+        {
+            Boolean isDestinationStillThere = false;
+
+            for(int i = 0; i < ownedPaintings.Length; i++)
+            {
+                if(agent.destination == ownedPaintings[i].transform.position)
+                {
+                    isDestinationStillThere = true;
+                }
+            }
+
+            if(!isDestinationStillThere)
+            {
+                StopCoroutine(RatingCoroutine());
+                StartCoroutine(RatingCoroutine());
+            }
+            ownedPaintingsLength = ownedPaintings.Length;
+            Debug.Log("total owned paintings are now: " + ownedPaintingsLength);
+        }
+
         if (nearPainting) speak();
     }
 

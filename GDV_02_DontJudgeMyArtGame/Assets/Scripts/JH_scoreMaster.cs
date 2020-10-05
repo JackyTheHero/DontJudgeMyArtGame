@@ -25,6 +25,8 @@ public class JH_scoreMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        setOwnedPaintings();
+
         if (generalScore <= -10) {
             gameover = true;
             Debug.Log("GAME OVER! You reached a general score of " + getGeneralScore() + " !");
@@ -34,10 +36,12 @@ public class JH_scoreMaster : MonoBehaviour
         {
             Debug.Log("generalScore: " + getGeneralScore());
         }
+
+        //ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
     }
 
     public static void raiseScore(GameObject painting) {
-        generalScore += 3;
+        //generalScore += 3;
 
         int index = getPaintingIndex(painting);
 
@@ -46,7 +50,7 @@ public class JH_scoreMaster : MonoBehaviour
     }
 
     public static void lowerScore(GameObject painting) {
-        generalScore -= 2;
+        //generalScore -= 2;
         
         int index = getPaintingIndex(painting);
 
@@ -56,7 +60,15 @@ public class JH_scoreMaster : MonoBehaviour
 
     public static int getGeneralScore()
     {
-        return generalScore;
+        //only existing paintings are going into the score
+        int generalScorePlus = generalScore;
+
+        for(int i = 0; i < ownedPaintings.Length; i++)
+        {
+            generalScorePlus += paintingScore[i];
+        }
+        
+        return generalScorePlus;
     }
 
     public static int getPaintingScore(GameObject painting) {

@@ -7,6 +7,7 @@ public class JH_VisitorCreator : MonoBehaviour
 {
     GameObject standardVisitor;
     static int visitorCount;
+    private int visitorLimit;
 
     // Start is called before the first frame update
     void Start()
@@ -18,22 +19,30 @@ public class JH_VisitorCreator : MonoBehaviour
         standardVisitor = Instantiate(GameObject.Find("visitorFigure"));
         
         standardVisitor.name = "visitor2";
-        Debug.Log(standardVisitor.transform.GetChild(0).gameObject);
-        //Destroy(standardVisitor.transform.GetChild(0).gameObject);
+        
         ++visitorCount;
-        standardVisitor.transform.position = new Vector3(14,0,-9);
+        standardVisitor.transform.position = new Vector3(14, 0, 0);
+        standardVisitor.AddComponent<JH_visitorBehaviour>();
+
+        visitorLimit = 10;
+
         StartCoroutine(VisitorCoroutine());
     }
 
     IEnumerator VisitorCoroutine()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(10,20));
+        //create new visitors in an interval of 20-30 seconds
+        yield return new WaitForSeconds(UnityEngine.Random.Range(20,30));
         GameObject visitor = Instantiate(standardVisitor);
+        visitor.transform.position = new Vector3(14, 0, 0);
         ++visitorCount;
         visitor.name = "visitor " + visitorCount;
-        visitor.transform.position = new Vector3(14f, 0f, 0);
 
-        if (visitorCount != 10)
+        //destroy first speechbubble of visitor since a new one will be spawned via script
+        Destroy(visitor.transform.GetChild(visitor.transform.childCount - 1).gameObject);
+
+        //routine only continues if visitorLimit is not yet reached
+        if (visitorCount <= visitorLimit)
         {
             StartCoroutine(VisitorCoroutine());
         }
@@ -42,7 +51,10 @@ public class JH_VisitorCreator : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        
+        if (visitorCount > visitorLimit)
+        {
+            StopCoroutine(VisitorCoroutine());
+        }
     }
 
     public void test() { }
