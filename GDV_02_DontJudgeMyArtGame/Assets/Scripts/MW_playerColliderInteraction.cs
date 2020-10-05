@@ -25,7 +25,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
     public static bool steal = false;
 
     // prüfe mit dieser Variable, ob es ein eigenes Bild ist
-    bool owned = false;
+    public static bool owned = false;
 
     // Variable, die speichert, ob Player schon am 
     public static bool hitGround = false;

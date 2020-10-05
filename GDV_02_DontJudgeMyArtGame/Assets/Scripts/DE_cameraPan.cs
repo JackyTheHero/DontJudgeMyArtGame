@@ -53,7 +53,7 @@ public class DE_cameraPan : MonoBehaviour
     public static void checkCameraPan()
     {
         //Start der Bewegung zum Gemälde, nur wenn IN Reichweite, NICHT im Menü und NICHT in Bewegung
-        if ((Input.GetKey(KeyCode.E)) && DE_pictureCollision.isInPictureRange && !inMenu && !inMotion) {
+        if ((Input.GetKeyDown(KeyCode.E)) && DE_pictureCollision.isInPictureRange && !inMenu && !inMotion) {
             inMotion = true;
             inMenu = true;
 
@@ -67,7 +67,7 @@ public class DE_cameraPan : MonoBehaviour
         }
 
         //Start der Bewegung zum Gemälde, nur wenn IN Menü und NICHT in Bewegung
-        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Keypad2)) && inMenu && !inMotion) {
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Keypad2)) && inMenu && !inMotion) {
             inMotion = true;
             inMenu = false;
         }
@@ -206,6 +206,9 @@ public class DE_cameraPan : MonoBehaviour
             //Zeit zurücksetzen
             time = 0;
 
+            //Owned here auf false setzten um Probleme zu verhindern
+            MW_playerColliderInteraction.owned = false;
+
             //gibt false zurück bei fertiger Bewegung
             return false;
         }     
@@ -237,8 +240,7 @@ public class DE_cameraPan : MonoBehaviour
             //Setzt Position und Rotation zum Ziel
             originPic.transform.position = lookRotPlayer * new Vector3(0,2,1) + GameObject.FindWithTag("Player").transform.position;
             originPic.transform.rotation = Quaternion.AngleAxis(180f, Vector3.up) * GameObject.FindWithTag("Player").transform.rotation;
-            originPic.transform.rotation *= Quaternion.AngleAxis(18f, Vector3.right);
-            
+            originPic.transform.rotation *= Quaternion.AngleAxis(18f, Vector3.right); 
 
         }
 
