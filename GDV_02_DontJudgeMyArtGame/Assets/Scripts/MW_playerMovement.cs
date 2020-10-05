@@ -160,7 +160,6 @@ public class MW_playerMovement : MonoBehaviour
 
     // Funktion, die den Player bei Tastendruck in die jeweilige Blickrichtung laufen lässt
     void Move() {
-        // slowMode wird aktiviert, wenn Shift gedrückt wird (links oder rechts)
         var slowMode = MW_playerColliderInteraction.steal == true;
         // var slowMode = MW_playerColliderInteraction.steal == true || Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         // wenn slowMode aktiv ist, nutze slowSpeed, ansonsten "normalen" speed
@@ -177,21 +176,11 @@ public class MW_playerMovement : MonoBehaviour
     // ... zusätzlich kann man die Kamera um den Spieler um 360 Grad herumdrehen, wenn dieser an einer Stelle steht
     void freeLookCamera() {
         float mouseSpeed = 3.0f;
-        /*float minYAngle = 8.0f;
-        float maxYAngle = 8.0f;
-
-        float minXAngle = 10.0f;
-        float maxXAngle = 10.0f;*/
        
         // Drehung um y-Achse (Vector3.up) in Relation zur Drehbewegung der Maus -> Input.GetAxis("Mouse X")
         // mit mouseSpeed multiplizieren, da Bewegung sonst sehr langsam ist
         // Rotation (Quaternion.AngleAxis()) mit cameraView multiplizieren, sodass cameraView neue Position der Kamera speichert
         cameraView = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * mouseSpeed, Vector3.up) * cameraView; // Drehung links/rechts
-
-        // Kamerabewegung nach oben und unten
-        //Camera.main.transform.rotation = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * mouseSpeed, Vector3.forward); // Drehung oben/unten
-        //cameraView.y = Mathf.Clamp(cameraView.y, minXAngle, maxXAngle);
-        // cameraView.y = Mathf.Clamp(cameraView.x, minYAngle, maxYAngle);
 
         // addiere Kameraposition mit cameraView, damit Kamera immer gleichen Abstand zum Player aufweist
         Camera.main.transform.position = this.transform.position + cameraView;

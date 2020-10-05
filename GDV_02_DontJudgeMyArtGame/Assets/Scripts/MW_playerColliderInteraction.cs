@@ -33,7 +33,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         
         // setze Partkelsystem anfangs auf Pause, damit es nicht beim Start des Spiels ebenso startet
         smoke.Pause();
@@ -122,8 +122,9 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // wenn Player mit dem Boden kollidiert und somit der Fall beendet ist, wird Tasteneingabe freigegeben
         if (other.gameObject.name.Contains("Ground")) {
             // Rigidbody des Players erhält position und rotation constraints, sodass er sich auf diesen Achsen nicht verändert
-            // constraint für position y wird hier erst eingefügt, da Player zuvor auf dem Boden aufgekommen sein muss
-            playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
+            // ... wenn z.B. Y nicht gesperrt ist, kann es sein, dass der Player auf die Bänke kommt (position) oder sich nach Interaktion leicht dreht (rotation)
+            // constraint für position Y wird hier erst eingefügt, da Player zuvor auf dem Boden aufgekommen sein muss
+            playerRig.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
             // Player wird bei Zusammenstoß mit Collidern nicht ein Stück zurückgeschleudert
             playerRig.drag = Mathf.Infinity;
             MW_playerMovement.keyboardEnabled = true;

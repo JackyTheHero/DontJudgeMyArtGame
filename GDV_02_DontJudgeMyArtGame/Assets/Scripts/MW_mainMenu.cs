@@ -103,7 +103,7 @@ public class MW_mainMenu : MonoBehaviour
 
     // Funktion, die den EndScreen aufruft, wenn das Spiel gewonnen oder verloren wurde
     void endScreen() {
-        // JH_scoreMaster.gameover = true; -> zu schlechter Ruf
+        // JH_scoreMaster.gameover = true; // -> zu schlechter Ruf
         if (JH_scoreMaster.gameover == true) {
             canvas.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Escape)) {
