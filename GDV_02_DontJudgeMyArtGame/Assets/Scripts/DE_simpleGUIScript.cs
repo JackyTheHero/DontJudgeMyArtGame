@@ -27,19 +27,13 @@ public class DE_simpleGUIScript : MonoBehaviour
         style.font = font;
         style.fontSize = 25;
         style.alignment = TextAnchor.UpperCenter;
-        style.normal.textColor = Color.white;
+        style.normal.textColor = Color.black;
 
         styleChase = new GUIStyle();
         styleChase.font = font;
         styleChase.fontSize = 30;
         styleChase.alignment = TextAnchor.UpperCenter;
         styleChase.normal.textColor = Color.red;
-
-        styleMenu = new GUIStyle();
-        styleMenu.font = font;
-        styleMenu.fontSize = 25;
-        styleMenu.alignment = TextAnchor.UpperCenter;
-        styleMenu.normal.textColor = Color.black;
 
         //Text-Rechteck setzen
         rectText = new Rect(0,0, 50, 50);
@@ -63,7 +57,7 @@ public class DE_simpleGUIScript : MonoBehaviour
         rectPicScore = new Rect(0,0, 50, 50);
         rectPicScore.center = new Vector2(10 * Screen.width / 12, 5 * Screen.height / 12);
 
-        rectPicImage = new Rect(0,0, Screen.width / 10, Screen.width / 10);
+        rectPicImage = new Rect(0,0, Screen.width / 8, Screen.width / 8);
         rectPicImage.center = new Vector2(10 * Screen.width / 12, 5 * Screen.height / 24);
 
     }
@@ -96,23 +90,23 @@ public class DE_simpleGUIScript : MonoBehaviour
             }
         }
 
-        if(DE_cameraPan.inMenu && !DE_cameraPan.inMotion){
-                GUI.Label(rectBack, "'E' - Verlassen", styleMenu);   
+        if(DE_cameraPan.inMenu && !DE_cameraPan.inMotion && !MW_mainMenu.isInMenu){
+                GUI.Label(rectBack, "'E' - Verlassen", style);   
 
             if(MW_playerColliderInteraction.owned){
-                GUI.Label(rectDestroy, "'1' - Zerstören", styleMenu);
-                GUI.Label(rectSteal, "'2' - Stehlen", styleMenu);
+                GUI.Label(rectDestroy, "'1' - Zerstören", style);
+                GUI.Label(rectSteal, "'2' - Stehlen", style);
 
-                GUI.Label(rectPicScore, "Bewertung: " + JH_scoreMaster.getPaintingScore(DE_pictureCollision.focusPicture).ToString(), styleMenu);
+                GUI.Label(rectPicScore, "Bewertung: " + JH_scoreMaster.getPaintingScore(DE_pictureCollision.focusPicture).ToString(), style);
 
                 Texture img;
                 if(JH_scoreMaster.getPaintingScore(DE_pictureCollision.focusPicture) > 0){
                     img = Resources.Load("thumbsUpMenu") as Texture;
-                    GUI.Label(rectPicImage, img, styleMenu);
+                    GUI.Label(rectPicImage, img, style);
                 } 
                 if(JH_scoreMaster.getPaintingScore(DE_pictureCollision.focusPicture) < 0){
                     img = Resources.Load("thumbsDownMenu") as Texture;
-                    GUI.Label(rectPicImage, img, styleMenu);
+                    GUI.Label(rectPicImage, img, style);
                 }
 
             }   
