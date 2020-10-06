@@ -68,6 +68,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
     void destroyPicture() {
         // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste 1 gelöscht werden
         if (DE_pictureCollision.isInPictureRange == true && (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))) {
+            int index = JH_scoreMaster.getPaintingIndex(DE_pictureCollision.focusPicture);
+            JH_scoreMaster.paintingScore[index] = -1000;
             // lösche GameObject, das im Fokus steht
             Destroy(DE_pictureCollision.focusPicture);
             // isInWindowRange wird wieder auf false gesetzt, da das GameObject nicht mehr existiert
@@ -103,6 +105,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // wenn man ein Gemälde bereits unter dem Arm hat und vor einem offenen Fenster steht, kann man es dort hinausschmuggeln
         // setze steal wieder auf false, da das Stehlen erfolgreich war und man nun ein anderes stehlen kann bzw. "darf"
         steal = false;
+        int index = JH_scoreMaster.getPaintingIndex(stolenPicture);
+        JH_scoreMaster.paintingScore[index] = -1000;
         // zerstöre das stolenPicture und setze Referenz auf null
         Destroy(stolenPicture);
         stolenPicture = null;
