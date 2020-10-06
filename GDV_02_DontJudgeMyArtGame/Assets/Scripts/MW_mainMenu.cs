@@ -123,7 +123,7 @@ public class MW_mainMenu : MonoBehaviour
         }
 
         // Spiel gewonnen bei Erreichen von x Punkten (Punktzahl steht in Variable scoreWon)
-        if (JH_scoreMaster.generalScore >= scoreWon) {
+        if (JH_scoreMaster.getGeneralScore() >= scoreWon) {
             canvas.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 Application.Quit();
