@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class JH_scoreMaster : MonoBehaviour
 {
-    public static int generalScore;
+    public static int actionScore;
     public static int[] paintingScore;
     public static Boolean gameover;
     public static GameObject[] ownedPaintings;
@@ -20,13 +20,14 @@ public class JH_scoreMaster : MonoBehaviour
 
         //initializing / resetting the scores
         resetScores();
+
+        Debug.Log(ownedPaintings[0]);
+        Debug.Log(getPaintingScore(ownedPaintings[0]));
     }
 
     // Update is called once per frame
     void Update()
     {
-        setOwnedPaintings();
-
         if (getGeneralScore() <= -10) {
             gameover = true;
             Debug.Log("GAME OVER! You reached a general score of " + getGeneralScore() + " !");
@@ -41,7 +42,6 @@ public class JH_scoreMaster : MonoBehaviour
     }
 
     public static void raiseScore(GameObject painting) {
-        //generalScore += 3;
 
         int index = getPaintingIndex(painting);
 
@@ -50,7 +50,6 @@ public class JH_scoreMaster : MonoBehaviour
     }
 
     public static void lowerScore(GameObject painting) {
-        //generalScore -= 2;
         
         int index = getPaintingIndex(painting);
 
@@ -58,10 +57,24 @@ public class JH_scoreMaster : MonoBehaviour
         paintingScore[index] -= 2;
     }
 
-    public static int getGeneralScore()
+    public static void deleteScore(GameObject painting)
     {
+
+        //Debug.Log("toBeDeleted: " + painting);
+
+        int index = getPaintingIndex(painting);
+
+        //Debug.Log("index found: " + index);
+
+        //use found index in paintingScore
+        paintingScore[index] = -1000;
+
+        
+    }
+
+    public static int getGeneralScore() {
         //only existing paintings are going into the score
-        int generalScorePlus = generalScore;
+        int generalScorePlus = actionScore;
 
         for(int i = 0; i < paintingScore.Length; i++)
         {
@@ -82,7 +95,10 @@ public class JH_scoreMaster : MonoBehaviour
     //if resetScores is called before that, the painting scores are possibly not in the right order
     public static void resetScores() {
         gameover = false;
-        generalScore = 0;
+        actionScore = 0;
+
+        //own array for ownedPainting tagged GameObjects for easy access
+        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
 
         paintingScore = new int[ownedPaintings.Length];
 
@@ -92,7 +108,7 @@ public class JH_scoreMaster : MonoBehaviour
         }
 
         
-        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
+        
     }
 
     //search the index of the right painting in the ownedPaintings array
@@ -101,12 +117,26 @@ public class JH_scoreMaster : MonoBehaviour
         int i = 0;
 
         //the score of the painting on the x index of ownedPaintings has the index x in paintingScore
-        while (i < ownedPaintings.Length && ownedPaintings[i].name != painting.name)
-        {
-            ++i;
-        }
 
-        return i;
+        while (i < ownedPaintings.Length)
+        {
+            if(ownedPaintings[i] == null)
+            {
+                i++;
+
+                //continue to prevent null reference exceptions in other ifs
+                continue;
+            }
+
+            if (ownedPaintings[i].name != painting.name)
+            {
+                i++;
+            }else
+            {
+                return i;
+            }
+         }
+        return -1;
     }
 
     public static void setOwnedPaintings()
@@ -121,18 +151,16 @@ public class JH_scoreMaster : MonoBehaviour
                 gameObjList[i].tag = "ownedPainting";
             }
         }
-
-        //own array for ownedPainting tagged GameObjects for easy access
-        ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
     }
 
     public static void raiseGeneralScore(Boolean stolen)
     {
         if (stolen) {
-            generalScore += 10;
+            actionScore += 10;
         }else
         {
-            generalScore += 5;
+            //generalScore + 5 is outdated, method kinda unneeded now
+            actionScore += 0;
         }
         
     }
