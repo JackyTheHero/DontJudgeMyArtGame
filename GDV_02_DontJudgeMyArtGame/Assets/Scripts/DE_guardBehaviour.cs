@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class DE_guardBehaviour : MonoBehaviour
 {
     //Speichert ob der Wächter gerade verfolgt oder nicht
-    bool chase = false;
+    public static bool chase = false;
 
     //Wird true falls Spieler geschnappt wird, Game Over wenn true
     public static bool caught = false;
@@ -28,7 +28,7 @@ public class DE_guardBehaviour : MonoBehaviour
     bool gotRotation2 = false;
 
     //Reichweite des Wächters
-    float range = 80;
+    float range = 50;
 
     //Agent des Wächters
     NavMeshAgent agent;
@@ -42,11 +42,16 @@ public class DE_guardBehaviour : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         //Spieler holen
         player = GameObject.FindWithTag("Player");
+
+        
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T)){
+        GetComponent<Animator>().SetBool("walking",true);
+
+        //Debug Tastenkombi
+        if(Input.GetKeyDown(KeyCode.T) && Input.GetKeyDown(KeyCode.R)){
             chase = true;
             agent.speed = 11f;
         }
@@ -84,6 +89,13 @@ public class DE_guardBehaviour : MonoBehaviour
                         timer += Time.deltaTime;
                     }
 
+                    //Animation an und Ausschalten
+                    if((timer >  1 * waitTime / 5 && timer < 2 * waitTime / 5) || timer > 3 * waitTime / 5 && timer < 4 * waitTime / 5){
+                         GetComponent<Animator>().SetBool("walking",true);
+                    } else{
+                        GetComponent<Animator>().SetBool("walking",false);
+                    }
+
                     //Erste Drehung nach 20% der Wartezeit, Dauer 20%
                     if (timer > 0 && timer < 3 * waitTime / 5){
                         if(!gotRotation1){
@@ -108,7 +120,7 @@ public class DE_guardBehaviour : MonoBehaviour
                     
                         //Wächter hält Wache (zufällige Rotationsbewegungen)
                         transform.rotation = Quaternion.Lerp(origin, rotation, (timer - 3*waitTime/5) / ( waitTime/5));  
-                    }
+                    } 
                 }
             }
         } 

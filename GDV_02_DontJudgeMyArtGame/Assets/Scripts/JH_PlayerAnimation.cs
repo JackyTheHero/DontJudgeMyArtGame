@@ -16,7 +16,7 @@ public class JH_PlayerAnimation : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))
+        if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || DE_cameraPan.inMotionPlayer)
         {
             animator.SetBool("isWalking", true);
         }
