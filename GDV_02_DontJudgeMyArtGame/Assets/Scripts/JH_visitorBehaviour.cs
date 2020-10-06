@@ -25,7 +25,7 @@ public class JH_visitorBehaviour : MonoBehaviour
     private int goodOrBad;
     Texture speechTexture;
     Collider otherCollider;
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     GameObject[] ownedPaintings;
     int randomOwnedPainting;
     int ownedPaintingsLength;
