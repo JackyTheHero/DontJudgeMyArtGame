@@ -27,7 +27,7 @@ public class JH_scoreMaster : MonoBehaviour
     {
         setOwnedPaintings();
 
-        if (generalScore <= -10) {
+        if (getGeneralScore() <= -10) {
             gameover = true;
             Debug.Log("GAME OVER! You reached a general score of " + getGeneralScore() + " !");
         }
@@ -63,9 +63,12 @@ public class JH_scoreMaster : MonoBehaviour
         //only existing paintings are going into the score
         int generalScorePlus = generalScore;
 
-        for(int i = 0; i < ownedPaintings.Length; i++)
+        for(int i = 0; i < paintingScore.Length; i++)
         {
-            generalScorePlus += paintingScore[i];
+            if (paintingScore[i] != -1000)
+            {
+                generalScorePlus += paintingScore[i];
+            }
         }
         
         return generalScorePlus;
