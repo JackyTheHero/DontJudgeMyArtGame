@@ -15,8 +15,8 @@ public class JH_PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || DE_cameraPan.inMotionPlayer)
+
+        if ((MW_playerMovement.keyboardEnabled && (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))) || DE_cameraPan.inMotionPlayer)
         {
             animator.SetBool("isWalking", true);
         }
