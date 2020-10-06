@@ -22,8 +22,7 @@ public class DE_simpleGUIScript : MonoBehaviour
     
 
     void Start(){
-
-        //Neue Stile anlegen
+        //Neuen Stil anlegen
         style = new GUIStyle();
         style.font = font;
         style.fontSize = 25;
@@ -36,7 +35,7 @@ public class DE_simpleGUIScript : MonoBehaviour
         styleChase.alignment = TextAnchor.UpperCenter;
         styleChase.normal.textColor = Color.red;
 
-        //Text-Rechtecke setzen
+        //Text-Rechteck setzen
         rectText = new Rect(0,0, 50, 50);
         rectText.center = new Vector2(Screen.width / 2, 4 * Screen.height / 12);
 
@@ -65,44 +64,41 @@ public class DE_simpleGUIScript : MonoBehaviour
 
     void OnGUI(){
 
-        //Nur wenn nicht im Hauptmenü
         if (!MW_mainMenu.isInMenu){
             
-            //Score, nicht im Bildmenü)
             if(!DE_cameraPan.inMenu){
                 GUI.Label(rectScore, "Score: " + JH_scoreMaster.getGeneralScore().ToString(), style);
             }
 
-            //Fenster-Hinweis
             if (MW_playerColliderInteraction.isInWindowRange == true && MW_playerColliderInteraction.steal == true){
                 
                 GUI.Label(rectText, "Drücke 'E', um das Bild aus dem Fenster zu schmuggeln", style);
             }
 
-            //Bild-Hinweis
             if (DE_pictureCollision.isInPictureRange == true && DE_cameraPan.inMenu == false && DE_cameraPan.inMotion == false){
                 
                 GUI.Label(rectText, "Drücke 'E', um das Bild zu betrachten", style);
             }
 
-            //Wächter-Warnung
+            if (DE_pictureCollision.isInPictureRange == true && DE_cameraPan.inMenu == false && DE_cameraPan.inMotion == false){
+                
+                GUI.Label(rectText, "Drücke 'E', um das Bild zu betrachten", style);
+            }
+
             if(DE_guardBehaviour.chase){
                 GUI.Label(rectChase, "Ein Wächter Verfolgt Dich!", styleChase);   
             }
         }
 
-        //Bildmenü, nur wenn nicht in Hauptmenü
         if(DE_cameraPan.inMenu && !DE_cameraPan.inMotion && !MW_mainMenu.isInMenu){
                 GUI.Label(rectBack, "'E' - Verlassen", style);   
 
-            //nur wenn Spieler-Bild
             if(MW_playerColliderInteraction.owned){
                 GUI.Label(rectDestroy, "'1' - Zerstören", style);
                 GUI.Label(rectSteal, "'2' - Stehlen", style);
 
                 GUI.Label(rectPicScore, "Bewertung: " + JH_scoreMaster.getPaintingScore(DE_pictureCollision.focusPicture).ToString(), style);
 
-                //Unterschiedliche Grafik je nach positiver und negativer Bewertung, kein Bild bei 0
                 Texture img;
                 if(JH_scoreMaster.getPaintingScore(DE_pictureCollision.focusPicture) > 0){
                     img = Resources.Load("thumbsUpMenu") as Texture;

@@ -7,7 +7,6 @@ TagManager:
   - ownedPainting
   - Guard
   - Music
-  - Sound
   layers:
   - Default
   - TransparentFX
