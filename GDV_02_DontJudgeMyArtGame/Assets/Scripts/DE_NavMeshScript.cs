@@ -15,8 +15,8 @@ public class DE_NavMeshScript : MonoBehaviour
         JH_propScript.createAllStatues();
         DE_pictureCreation.pictureCreation();
         DE_propsCreation.propsCreation();
+        JH_LightCreator.AddWindowLighting();
         surface.BuildNavMesh();
-        
     }
 
 }
