@@ -113,9 +113,16 @@ public class MW_mainMenu : MonoBehaviour
             newGame.gameObject.SetActive(false);
             continueGame.gameObject.SetActive(false);
 
-            // Message, wenn man verloren hat
-            message.GetComponentInChildren<Text>().text = "Du hast leider verloren! :(";
-            message.gameObject.SetActive(true);
+            if (JH_scoreMaster.gameover == true) {
+                // Message, wenn man zu wenig Punkte hat
+                message.GetComponentInChildren<Text>().text = "Du hast leider verloren! :(";
+                message.gameObject.SetActive(true);
+            }
+            if (DE_guardBehaviour.caught == true) {
+                // Message, wenn man erwischt wurde
+                message.GetComponentInChildren<Text>().text = "Du wurdest erwischt! :(";
+                message.gameObject.SetActive(true);
+            }
 
             // Punkteanzeige
             score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.generalScore;
