@@ -29,6 +29,7 @@ public class JH_visitorBehaviour : MonoBehaviour
     GameObject[] ownedPaintings;
     int randomOwnedPainting;
     int ownedPaintingsLength;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,8 @@ public class JH_visitorBehaviour : MonoBehaviour
         ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
         ownedPaintingsLength = ownedPaintings.Length;
 
+        animator = this.GetComponent<Animator>();
+
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine(RatingCoroutine());
     }
@@ -70,8 +73,11 @@ public class JH_visitorBehaviour : MonoBehaviour
         agent.destination = ownedPaintings[randomOwnedPainting].transform.position;
         Debug.Log(this.gameObject + " is walking to " + agent.destination);
 
+        animator.SetBool("walking", true);
+
         //Warte so lange, bis der Collider des Bildes aktiviert wurde und warte da dann 20 Sekunden
         yield return new WaitUntil(() => getCollidedObject() == ownedPaintings[randomOwnedPainting]);
+        animator.SetBool("walking", false);
         yield return new WaitForSeconds(2f);
         //visitRigid.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
         //agent.destination = this.transform.position;
