@@ -89,6 +89,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
             DE_pictureCollision.isInPictureRange = false;
             // erhöhe Punktzahl nach erfolgreichem Zerstören -> false bedeutet, Gemälde wurde zerstört
             JH_scoreMaster.raiseGeneralScore(false);
+
+            DE_pictureCollision.focusPicture = null;
         }
     }
 
@@ -113,6 +115,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // zerstöre das stolenPicture und setze Referenz auf null
         Destroy(stolenPicture);
         stolenPicture = null;
+        DE_pictureCollision.focusPicture = null;
         
         // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
         isInWindowRange = false;
