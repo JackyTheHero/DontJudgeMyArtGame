@@ -30,6 +30,11 @@ public class MW_playerColliderInteraction : MonoBehaviour
     // Variable, die speichert, ob Player schon am 
     public static bool hitGround = false;
 
+    AudioSource sound;
+    AudioClip wood;
+    AudioClip throwing;
+    AudioClip stealing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +44,12 @@ public class MW_playerColliderInteraction : MonoBehaviour
         smoke.Pause();
         splinter1.Pause();
         splinter2.Pause();
+
+        //Audio-Daten holen
+        sound = GameObject.FindWithTag("Sound").GetComponent<AudioSource>();  
+        wood = Resources.Load("wood") as AudioClip;
+        throwing = Resources.Load("throw") as AudioClip;
+        stealing = Resources.Load("steal") as AudioClip;
     }
 
     // Update is called once per frame
@@ -84,6 +95,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // setze PartikelSystem zurück und spiele es danach von vorne ab
             smoke.Clear(); splinter1.Clear(); splinter2.Clear();
             smoke.Play(); splinter1.Play(); splinter2.Play();
+
+            sound.PlayOneShot(wood, 1.0F);
             
             // setze isInPictureRange zurück auf false, da das Gemälde nicht länger existiert
             DE_pictureCollision.isInPictureRange = false;
@@ -99,6 +112,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
             steal = true;
             // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
             stolenPicture = DE_pictureCollision.focusPicture;
+
+            sound.PlayOneShot(stealing, 1.0F);
         }
     }
 
@@ -113,6 +128,8 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // zerstöre das stolenPicture und setze Referenz auf null
         Destroy(stolenPicture);
         stolenPicture = null;
+
+        sound.PlayOneShot(throwing, 0.5F);
         
         // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
         isInWindowRange = false;
@@ -205,3 +222,17 @@ public class MW_playerColliderInteraction : MonoBehaviour
     }
     */
 }
+
+
+//wood hit by VitaWrap
+//Licensed under Creative Commons: By Attribution 3.0
+//https://freesound.org/people/VitaWrap/sounds/345679/
+
+//cartoon-long-throw by copyc4t
+//Licensed under Creative Commons: By Attribution 3.0
+//https://freesound.org/people/copyc4t/sounds/482735/
+
+//FX swanee whistle down by v0idation
+//Licensed under Creative Commons: By CC0 1.0
+//https://freesound.org/people/v0idation/sounds/497093/
+
