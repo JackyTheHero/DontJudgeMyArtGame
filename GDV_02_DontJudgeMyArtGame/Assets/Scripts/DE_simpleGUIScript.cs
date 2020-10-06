@@ -86,7 +86,7 @@ public class DE_simpleGUIScript : MonoBehaviour
             }
 
             if(DE_guardBehaviour.chase){
-                GUI.Label(rectBack, "Ein Wächter Verfolgt Dich!", style);   
+                GUI.Label(rectChase, "Ein Wächter Verfolgt Dich!", styleChase);   
             }
         }
 

@@ -30,7 +30,6 @@ public class DE_propsCreation : MonoBehaviour
         GameObject vaseParent = new GameObject();
         vaseParent.name = "vaseParent";
         createVase();
-        Instantiate(vase, new Vector3(29, 0, 54), Quaternion.identity, vaseParent.transform);
         Instantiate(vase, new Vector3(-8, 0, -12), Quaternion.identity, vaseParent.transform);
         Instantiate(vase, new Vector3(-8, 0, 12), Quaternion.identity, vaseParent.transform);
         Instantiate(vase, new Vector3(75, 0, -36), Quaternion.identity, vaseParent.transform);

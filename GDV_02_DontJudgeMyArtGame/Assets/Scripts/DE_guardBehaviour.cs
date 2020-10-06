@@ -36,6 +36,9 @@ public class DE_guardBehaviour : MonoBehaviour
     //Spieler
     GameObject player;
 
+    //Musikplayer
+    AudioSource music;
+
     void Start()
     {
         //Agent holen
@@ -43,7 +46,7 @@ public class DE_guardBehaviour : MonoBehaviour
         //Spieler holen
         player = GameObject.FindWithTag("Player");
 
-        
+        music = GameObject.FindWithTag("Music").GetComponent<AudioSource>();       
     }
 
     void Update()
@@ -143,6 +146,10 @@ public class DE_guardBehaviour : MonoBehaviour
                 Debug.Log("Escaped!");
                 chase = false;
                 agent.speed = 5;
+
+                //Musik ändern
+                IEnumerator fade = Fade();
+                StartCoroutine (fade);
             }
         }
 
@@ -174,10 +181,41 @@ public class DE_guardBehaviour : MonoBehaviour
                         hasDest = false;
                         timer = 0;
 
+                        //Musik ändern
+                        music.clip = Resources.Load("FasterDoesIt") as AudioClip;
+                        music.Play();
+
                         Debug.Log("OHHHHHHHHH! NOW YOU FUCKED UP!");
                     }
                 }                 
             }           
         }   
+    }
+
+    IEnumerator Fade() {
+        float originVolume = music.volume;
+
+        float fadeTime = 2;
+ 
+        while (music.volume > 0) {
+            music.volume -= originVolume * Time.deltaTime / fadeTime;
+ 
+            yield return null;
+        }
+
+        music.clip = Resources.Load("AirportLounge") as AudioClip;
+        music.Play();
+
+        while (music.volume < originVolume) {
+            music.volume += originVolume * Time.deltaTime / fadeTime;
+ 
+            yield return null;
+        }
+ 
+        music.volume = originVolume;
+
+        
+
+       
     }
 }
