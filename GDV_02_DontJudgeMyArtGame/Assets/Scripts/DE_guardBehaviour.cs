@@ -10,7 +10,7 @@ public class DE_guardBehaviour : MonoBehaviour
     bool chase = false;
 
     //Wird true falls Spieler geschnappt wird, Game Over wenn true
-    bool caught = false;
+    public static bool caught = false;
 
     //Speichert ob der Wächter bereits ein Ziel hat
     bool hasDest = false;
