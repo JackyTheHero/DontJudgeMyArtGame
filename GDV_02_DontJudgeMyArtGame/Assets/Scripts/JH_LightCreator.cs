@@ -41,8 +41,7 @@ public class JH_LightCreator : MonoBehaviour
                 light.GetComponent<Light>().intensity = 0.04f;
                 light.GetComponent<Light>().color = new Color(253, 224, 116);
 
-                //Licht leicht vor das Fenster verschieben
-                light.transform.position = closedWindows[i].transform.position + closedWindows[i].transform.rotation * new Vector3(0, 0, -1);
+                
                 light.transform.parent = closedWindows[i].transform;
 
                 switch (j)
@@ -73,12 +72,10 @@ public class JH_LightCreator : MonoBehaviour
                 light.AddComponent<Light>();
                 light.name = "OpenWindowLight " + j + " of window " + i;
                 light.transform.position = openWindows[i].transform.position;
-                light.GetComponent<Light>().range = 10;
-                light.GetComponent<Light>().intensity = 0.1f;
+                light.GetComponent<Light>().range = 7.6f;
+                light.GetComponent<Light>().intensity = 0.04f;
                 light.GetComponent<Light>().color = new Color(253, 224, 116);
-
-                //Licht leicht vor das Fenster verschieben
-                light.transform.position = openWindows[i].transform.position + openWindows[i].transform.rotation * new Vector3(0, 0, -1);
+                
                 light.transform.parent = openWindows[i].transform;
 
                 switch (j)
