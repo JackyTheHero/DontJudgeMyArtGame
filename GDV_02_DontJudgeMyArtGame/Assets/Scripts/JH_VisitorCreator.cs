@@ -24,8 +24,8 @@ public class JH_VisitorCreator : MonoBehaviour
 
     IEnumerator VisitorCoroutine()
     {
-        //create new visitors in an interval of 20-30 seconds
-        yield return new WaitForSeconds(UnityEngine.Random.Range(20,30));
+        //create new visitors in an interval of 10-15 seconds
+        yield return new WaitForSeconds(UnityEngine.Random.Range(10,15));
         GameObject visitor = Instantiate(GameObject.Find("visitorFigure"));
         visitor.transform.position = new Vector3(-7, 0, 0);
         visitor.transform.rotation = new Quaternion(0, 0, 0, 0);

@@ -72,8 +72,7 @@ public class JH_visitorBehaviour : MonoBehaviour
         //Zufälliges Bild des Spielers wird ausgewählt und als Ziel gesetzt
         randomOwnedPainting = (int)UnityEngine.Random.Range(0.0f, ownedPaintings.Length);
 
-        //bugfix
-        
+        //bugfix index ownedPaintings
         while(ownedPaintings[randomOwnedPainting] == null)
         {
             Debug.Log("ownedPaintings noch null");
