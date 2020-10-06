@@ -125,7 +125,7 @@ public class MW_mainMenu : MonoBehaviour
             }
 
             // Punkteanzeige
-            score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.generalScore;
+            score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.getGeneralScore();
             score.gameObject.SetActive(true);
         }
 
@@ -143,7 +143,7 @@ public class MW_mainMenu : MonoBehaviour
             message.gameObject.SetActive(true);
 
             // Punkteanzeige
-            score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.generalScore;
+            score.GetComponentInChildren<Text>().text = "Deine Punkte: " + JH_scoreMaster.getGeneralScore();
             score.gameObject.SetActive(true);
         }
     }
