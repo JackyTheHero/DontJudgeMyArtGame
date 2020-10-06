@@ -96,7 +96,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             smoke.Clear(); splinter1.Clear(); splinter2.Clear();
             smoke.Play(); splinter1.Play(); splinter2.Play();
 
-            sound.PlayOneShot(wood, 1.0F);
+            sound.PlayOneShot(wood, 0.8F);
             
             // setze isInPictureRange zurück auf false, da das Gemälde nicht länger existiert
             DE_pictureCollision.isInPictureRange = false;
@@ -115,7 +115,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
             // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
             stolenPicture = DE_pictureCollision.focusPicture;
 
-            sound.PlayOneShot(stealing, 1.0F);
+            sound.PlayOneShot(stealing, 0.3F);
         }
     }
 
@@ -133,7 +133,7 @@ public class MW_playerColliderInteraction : MonoBehaviour
 
         DE_pictureCollision.focusPicture = null;
 
-        sound.PlayOneShot(throwing, 0.1F);
+        sound.PlayOneShot(throwing, 0.5F);
         
         // isInWindowRange wird wieder auf false gesetzt, da man kein gestohlenes Objekt mehr hat
         isInWindowRange = false;
