@@ -105,7 +105,7 @@ public class MW_mainMenu : MonoBehaviour
     void endScreen() {
         // JH_scoreMaster.gameover = true; // -> zu schlechter Ruf
         // DE_guardBehaviour.caught = true // -> Wächter hat den Player geschnappt
-        if (JH_scoreMaster.gameover == true || DE_guardBehaviour.caught == true) {
+        if (JH_scoreMaster.gameover == true || DE_guardBehaviour.caught == true || DE_guardBehaviour1.caught == true || DE_guardBehaviour2.caught == true) {
             canvas.gameObject.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 Application.Quit();
@@ -118,7 +118,7 @@ public class MW_mainMenu : MonoBehaviour
                 message.GetComponentInChildren<Text>().text = "Du hast leider verloren! :(";
                 message.gameObject.SetActive(true);
             }
-            if (DE_guardBehaviour.caught == true) {
+            if (DE_guardBehaviour.caught == true || DE_guardBehaviour1.caught == true || DE_guardBehaviour2.caught == true) {
                 // Message, wenn man erwischt wurde
                 message.GetComponentInChildren<Text>().text = "Du wurdest erwischt! :(";
                 message.gameObject.SetActive(true);
