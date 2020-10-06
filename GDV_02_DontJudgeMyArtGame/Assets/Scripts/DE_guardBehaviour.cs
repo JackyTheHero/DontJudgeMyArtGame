@@ -39,6 +39,13 @@ public class DE_guardBehaviour : MonoBehaviour
     //Musikplayer
     AudioSource music;
 
+    AudioClip normal;
+    AudioClip chasing;
+
+    //Soundplayer
+    AudioSource sound;
+    AudioClip alert;
+
     void Start()
     {
         //Agent holen
@@ -46,7 +53,13 @@ public class DE_guardBehaviour : MonoBehaviour
         //Spieler holen
         player = GameObject.FindWithTag("Player");
 
-        music = GameObject.FindWithTag("Music").GetComponent<AudioSource>();       
+        music = GameObject.FindWithTag("Music").GetComponent<AudioSource>();
+        chasing = Resources.Load("FasterDoesIt") as AudioClip; 
+        normal = Resources.Load("AirportLounge") as AudioClip;
+
+        //Audio-Daten holen
+        sound = GameObject.FindWithTag("Sound").GetComponent<AudioSource>();  
+        alert = Resources.Load("alarm") as AudioClip;
     }
 
     void Update()
@@ -181,9 +194,11 @@ public class DE_guardBehaviour : MonoBehaviour
                         hasDest = false;
                         timer = 0;
 
+                        sound.PlayOneShot(alert, 1.0F); 
+
                         //Musik ändern
-                        music.clip = Resources.Load("FasterDoesIt") as AudioClip;
-                        music.Play();
+                        music.clip = chasing;
+                        music.PlayDelayed(1);
 
                         Debug.Log("OHHHHHHHHH! NOW YOU FUCKED UP!");
                     }
@@ -203,7 +218,7 @@ public class DE_guardBehaviour : MonoBehaviour
             yield return null;
         }
 
-        music.clip = Resources.Load("AirportLounge") as AudioClip;
+        music.clip = normal;
         music.Play();
 
         while (music.volume < originVolume) {
@@ -224,3 +239,7 @@ public class DE_guardBehaviour : MonoBehaviour
 //Faster Does It Kevin MacLeod (incompetech.com)
 //Licensed under Creative Commons: By Attribution 3.0
 //http://creativecommons.org/licenses/by/3.0/
+
+//Metal Gear Solid Inspired Alert Surprise SFX by djlprojects
+//Licensed under Creative Commons: By CC0 1.0
+//https://freesound.org/people/djlprojects/sounds/413641/
