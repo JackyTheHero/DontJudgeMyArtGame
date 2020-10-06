@@ -39,9 +39,9 @@ public class JH_LightCreator : MonoBehaviour
                 light.transform.position = closedWindows[i].transform.position;
                 light.GetComponent<Light>().range = 7.6f;
                 light.GetComponent<Light>().intensity = 0.04f;
-                light.GetComponent<Light>().color = new Color(253, 224, 116);
+                light.GetComponent<Light>().color = new Color(243, 238, 201);
 
-                
+
                 light.transform.parent = closedWindows[i].transform;
 
                 switch (j)
@@ -74,7 +74,7 @@ public class JH_LightCreator : MonoBehaviour
                 light.transform.position = openWindows[i].transform.position;
                 light.GetComponent<Light>().range = 7.6f;
                 light.GetComponent<Light>().intensity = 0.04f;
-                light.GetComponent<Light>().color = new Color(253, 224, 116);
+                light.GetComponent<Light>().color = new Color(243, 238, 201);
                 
                 light.transform.parent = openWindows[i].transform;
 
