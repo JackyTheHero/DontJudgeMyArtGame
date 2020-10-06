@@ -81,10 +81,10 @@ public class JH_LightCreator : MonoBehaviour
                 switch (j)
                 {
                     case 0:
-                        light.transform.position += new Vector3(-2, 2, 0);
+                        light.transform.position = openWindows[i].transform.position + openWindows[i].transform.rotation * new Vector3(-2, 2, -0.5f);
                         break;
                     case 1:
-                        light.transform.position += new Vector3(2, 2, 0);
+                        light.transform.position = openWindows[i].transform.position + openWindows[i].transform.rotation * new Vector3(2, 2, -0.5f);
                         break;
                 }
             }
