@@ -8,6 +8,9 @@ public class DE_cameraPan : MonoBehaviour
     static float duration = 2f;
     static float time = 0f;
 
+    //Spieler
+    static GameObject player;
+
     //Positionen und Rotationen============================
 
     //Kamera Ursprung
@@ -46,8 +49,15 @@ public class DE_cameraPan : MonoBehaviour
     //Speicher ob Bewegung startet
     public static bool inMotion = false;
 
+    public static bool inMotionPlayer = false;
+
     //Speichert ob Auswahl getätigt
     public static bool inMenu = false;
+
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
 
     //Checkt ob Bewegung gestartet werden kann und führt diese dann aus, läuft durch alle vier Schritte, setzt sich selbst zurück
     public static void checkCameraPan()
@@ -63,13 +73,14 @@ public class DE_cameraPan : MonoBehaviour
 
         //Führt Bewegung zum Gemälde durch, nur wenn IN Bewegung und IN Menü, start = false am Ende der Bewegung
         if(inMotion && inMenu){
-            inMotion = panCamera();
+            inMotionPlayer = true;
+            inMotion = panCamera();            
         }
 
         //Start der Bewegung zum Gemälde, nur wenn IN Menü und NICHT in Bewegung
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Keypad2)) && inMenu && !inMotion) {
             inMotion = true;
-            inMenu = false;
+            inMenu = false;          
         }
 
         //Führt Bewegung weg vom Gemälde durch, nur wenn IN Bewegung und NICHT im Menü, start = false am Ende der Bewegung
@@ -77,8 +88,7 @@ public class DE_cameraPan : MonoBehaviour
             if(MW_playerColliderInteraction.steal){
                 stealPic();
             } 
-            inMotion = panCameraBack();  
-                    
+            inMotion = panCameraBack();                   
         }
     }
 
@@ -91,10 +101,10 @@ public class DE_cameraPan : MonoBehaviour
         
         //Verhindert Kamerazittern
         Camera.main.transform.parent = null;
-        //rückgängig: Camera.main.transform.parent = GameObject.FindWithTag("Player").transform;
+        //rückgängig: Camera.main.transform.parent = player.transform;
 
         //Verhindert Kollisionsbewegung am Ende
-        GameObject.FindWithTag("Player").GetComponent<Rigidbody>().isKinematic = true;
+        player.GetComponent<Rigidbody>().isKinematic = true;
         //================================================================================================
 
         //Initialisiert Positionen und Rotationen
@@ -105,8 +115,8 @@ public class DE_cameraPan : MonoBehaviour
         originPosPic = DE_pictureCollision.focusPicture.transform.position;
         originRotPic = DE_pictureCollision.focusPicture.transform.rotation;
 
-        originPosPlayer= GameObject.FindWithTag("Player").transform.position;
-        originRotPlayer = GameObject.FindWithTag("Player").transform.rotation;
+        originPosPlayer= player.transform.position;
+        originRotPlayer = player.transform.rotation;
 
         //Berechnet Abstände und Rotationen
         targetPosCam = originPosPic + originRotPic * new Vector3(-0.5f,-0.3f,-5.7f);
@@ -140,18 +150,18 @@ public class DE_cameraPan : MonoBehaviour
             //Interpoliert Position und Rotation der Kamera zum Gemälde
             Camera.main.transform.position = Vector3.Lerp(originPosCam, targetPosCam, t);
             Camera.main.transform.rotation = Quaternion.Lerp(originRotCam, targetRotCam, t);
-
+            
             //Interpoliert Position des Spielers zur Zielposition, Beginn: 25% der Gesamtdauer, Dauer: 50% der Gesamtdauer
-            GameObject.FindWithTag("Player").transform.position = Vector3.Lerp(originPosPlayer, targetPosPlayer, (time - duration/4) / (duration/2));
+            player.transform.position = Vector3.Lerp(originPosPlayer, targetPosPlayer, (time - duration/4) / (duration/2));
 
             //Wechselt nach 50% der Gesamtdauer auf zweite Rotation um Konflikt zu vermeiden
             if(time < duration/2){
                 //Interpoliert Rotation des Spielers zur Zielposition, Beginn: 0% der Gesamtdauer, Dauer: 25% der Gesamtdauer
-                GameObject.FindWithTag("Player").transform.rotation = Quaternion.Lerp(originRotPlayer, targetRotPlayer, time/(duration/4));
+                player.transform.rotation = Quaternion.Lerp(originRotPlayer, targetRotPlayer, time/(duration/4));
                 
             } else{
                 //Interpoliert Rotation des Spielers zum Gemälde, Beginn: 75% der Gesamtdauer, Dauer: 25% der Gesamtdauer
-                GameObject.FindWithTag("Player").transform.rotation = Quaternion.Lerp(targetRotPlayer, lookRotPlayer, (time - 3*duration/4) / (duration/4));    
+                player.transform.rotation = Quaternion.Lerp(targetRotPlayer, lookRotPlayer, (time - 3*duration/4) / (duration/4));    
             }
 
             //gibt true zurück, damit Bewegung weiter geht
@@ -161,11 +171,13 @@ public class DE_cameraPan : MonoBehaviour
             //Setzt Position und Rotation zum Ziel, falls float Ungenauigkeiten
             Camera.main.transform.position = targetPosCam;
             Camera.main.transform.rotation = targetRotCam;
-            GameObject.FindWithTag("Player").transform.position = targetPosPlayer;
-            GameObject.FindWithTag("Player").transform.rotation = lookRotPlayer;
+            player.transform.position = targetPosPlayer;
+            player.transform.rotation = lookRotPlayer;
 
             //Zeit zurücksetzen
             time = 0;
+
+            inMotionPlayer = false;
 
             //gibt false zurück bei fertiger Bewegung
             return false;
@@ -198,8 +210,8 @@ public class DE_cameraPan : MonoBehaviour
             Camera.main.transform.rotation = originRotCam;
 
             //UMKEHRUNG!=================================================================================
-            GameObject.FindWithTag("Player").GetComponent<Rigidbody>().isKinematic = false;
-            Camera.main.transform.parent = GameObject.FindWithTag("Player").transform;
+            player.GetComponent<Rigidbody>().isKinematic = false;
+            Camera.main.transform.parent = player.transform;
             MW_playerMovement.keyboardEnabled = true;
             //===========================================================================================
 
@@ -235,11 +247,11 @@ public class DE_cameraPan : MonoBehaviour
         } else
         {
             //Setzt Spieler als Parent des Gemäldes
-            originPic.transform.parent = GameObject.FindWithTag("Player").transform;
+            originPic.transform.parent = player.transform;
 
             //Setzt Position und Rotation zum Ziel
-            originPic.transform.position = lookRotPlayer * new Vector3(0,2,1) + GameObject.FindWithTag("Player").transform.position;
-            originPic.transform.rotation = Quaternion.AngleAxis(180f, Vector3.up) * GameObject.FindWithTag("Player").transform.rotation;
+            originPic.transform.position = lookRotPlayer * new Vector3(0,2,1.3f) + player.transform.position;
+            originPic.transform.rotation = Quaternion.AngleAxis(180f, Vector3.up) * player.transform.rotation;
             originPic.transform.rotation *= Quaternion.AngleAxis(18f, Vector3.right); 
 
         }
