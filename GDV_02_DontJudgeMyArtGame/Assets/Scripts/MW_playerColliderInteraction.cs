@@ -68,7 +68,9 @@ public class MW_playerColliderInteraction : MonoBehaviour
     void destroyPicture() {
         // wenn das bestimmte GameObject in der Reichweite ist, kann es durch Drücken der Taste 1 gelöscht werden
         if (DE_pictureCollision.isInPictureRange == true && (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))) {
+            // speichere Index des focusPicture
             int index = JH_scoreMaster.getPaintingIndex(DE_pictureCollision.focusPicture);
+            // setze Score dieses Paintings auf -1000, damit es in JH_scoreMaster nicht berücksichtigt wird
             JH_scoreMaster.paintingScore[index] = -1000;
             // lösche GameObject, das im Fokus steht
             Destroy(DE_pictureCollision.focusPicture);
@@ -97,7 +99,6 @@ public class MW_playerColliderInteraction : MonoBehaviour
             steal = true;
             // speichere gestohlenes Gemälde in stolenPicture, damit sich Variable nicht mehr ändern kann
             stolenPicture = DE_pictureCollision.focusPicture;
-
         }
     }
 
@@ -105,7 +106,9 @@ public class MW_playerColliderInteraction : MonoBehaviour
         // wenn man ein Gemälde bereits unter dem Arm hat und vor einem offenen Fenster steht, kann man es dort hinausschmuggeln
         // setze steal wieder auf false, da das Stehlen erfolgreich war und man nun ein anderes stehlen kann bzw. "darf"
         steal = false;
+        // speichere Index des focusPicture
         int index = JH_scoreMaster.getPaintingIndex(stolenPicture);
+        // setze Score dieses Paintings auf -1000, damit es in JH_scoreMaster nicht berücksichtigt wird
         JH_scoreMaster.paintingScore[index] = -1000;
         // zerstöre das stolenPicture und setze Referenz auf null
         Destroy(stolenPicture);
