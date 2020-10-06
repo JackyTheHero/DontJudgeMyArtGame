@@ -64,12 +64,23 @@ public class JH_visitorBehaviour : MonoBehaviour
 
     IEnumerator RatingCoroutine()
     {
+        Debug.Log("neue Routine");
         //leichte Verzögerung, damit NavMesh zuerst erstellt wird
         yield return new WaitForSeconds(0.2f);
         
 
         //Zufälliges Bild des Spielers wird ausgewählt und als Ziel gesetzt
         randomOwnedPainting = (int)UnityEngine.Random.Range(0.0f, ownedPaintings.Length);
+
+        //bugfix
+        
+        while(ownedPaintings[randomOwnedPainting] == null)
+        {
+            Debug.Log("ownedPaintings noch null");
+            randomOwnedPainting = (int)UnityEngine.Random.Range(0.0f, ownedPaintings.Length);
+        }
+        
+
         agent.destination = ownedPaintings[randomOwnedPainting].transform.position;
         Debug.Log(this.gameObject + " is walking to " + agent.destination);
 
@@ -90,6 +101,7 @@ public class JH_visitorBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //ownedPaintings is constantly updated to avoid null objects
         ownedPaintings = GameObject.FindGameObjectsWithTag("ownedPainting");
 
@@ -114,17 +126,19 @@ public class JH_visitorBehaviour : MonoBehaviour
             ownedPaintingsLength = ownedPaintings.Length;
             Debug.Log("total owned paintings are now: " + ownedPaintingsLength);
         }
+        */
+        
+        if (ownedPaintings[randomOwnedPainting] == null)
+        {
+            StopCoroutine(RatingCoroutine());
+            StartCoroutine(RatingCoroutine());
+        }
 
         if (nearPainting) speak();
     }
 
     public void speak()
     {
-        //countdown -= Time.deltaTime;
-
-            //constraints to freeze the figure in place
-        //visitRigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
         //move up speechbubble until it reaches its position at y = 5.0f
         speechBubble.SetActive(true);
         if (speechBubble.transform.position.y < 5.0f) {
