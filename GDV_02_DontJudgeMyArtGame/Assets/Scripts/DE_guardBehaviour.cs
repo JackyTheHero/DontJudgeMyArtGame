@@ -149,7 +149,7 @@ public class DE_guardBehaviour : MonoBehaviour
             agent.destination = dest.position;
             
             //Falls Weg nur noch 4.2 (Abstand wenn Wächter Spieler am Rücken klebt) -> geschnappt
-            if(agent.remainingDistance < 4.2f){
+            if(agent.remainingDistance < 4.2f && Vector3.Distance(transform.position, player.transform.position) < 4.2f ){
                 caught = true;
                 Debug.Log("Caught!");
             }

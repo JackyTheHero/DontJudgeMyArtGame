@@ -149,9 +149,9 @@ public class DE_guardBehaviour1 : MonoBehaviour
             agent.destination = dest.position;
             
             //Falls Weg nur noch 4.2 (Abstand wenn Wächter Spieler am Rücken klebt) -> geschnappt
-            if(agent.remainingDistance < 4.2f){
+            if(agent.remainingDistance < 4.2f && Vector3.Distance(transform.position, player.transform.position) < 4.2f ){
                 caught = true;
-                Debug.Log("Caught!");
+                Debug.Log("Caught! 1");
             }
 
             //Falls Weg größer als Reichweite und nicht nur gerade kein Weg berechnet -> entkommen
@@ -200,7 +200,7 @@ public class DE_guardBehaviour1 : MonoBehaviour
                         music.clip = chasing;
                         music.PlayDelayed(1);
 
-                        Debug.Log("OHHHHHHHHH! NOW YOU FUCKED UP!");
+                        Debug.Log("OHHHHHHHHH! NOW YOU FUCKED UP! 1");
                     }
                 }                 
             }           
